@@ -1,6 +1,11 @@
+[workspace]
+members = ["access_file"]
+resolver = "2"
+
 [package]
 name = "simple-svg"
 version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+
