@@ -1,4 +1,4 @@
-pub fn add(left: u64, right: u64) -> u64 {
+pub fn svg-out(width: u32, right: u32) -> u32 {
     left + right
 }
 
