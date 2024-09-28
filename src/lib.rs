@@ -1,5 +1,9 @@
-pub fn svg-out(width: u32, right: u32) -> u32 {
-    left + right
+use crate::defines::svg::Svg;
+
+pub mod defines;
+
+pub fn svg_out(width: u32, height: u32) -> u32 {
+    width + height
 }
 
 #[cfg(test)]
@@ -8,7 +12,7 @@ mod tests {
 
     #[test]
     fn it_works() {
-        let result = add(2, 2);
+        let result = svg_out(2, 2);
         assert_eq!(result, 4);
     }
 }
