@@ -4,16 +4,13 @@ pub struct Svg {
 }
 
 pub fn build_svg(width: u64, height: u64) -> Svg {
-    Svg {
-        width,
-        height,
-    }
+    Svg { width, height }
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn check_svg() {
         let svg = build_svg(640, 480);
