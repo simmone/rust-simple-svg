@@ -1,6 +1,6 @@
 pub struct Svg {
-    width: u64,
-    height: u64,
+    pub width: u64,
+    pub height: u64,
 }
 
 pub fn build_svg(width: u64, height: u64) -> Svg {
