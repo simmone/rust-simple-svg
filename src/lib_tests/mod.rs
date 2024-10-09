@@ -1,9 +1,10 @@
-use super::*;
 use crate::defines::svg::*;
 
 #[cfg(test)]
 pub mod tests {
     use super::*;
+    use pretty_assertions::assert_eq;
+    use crate::svg_out;
 
     #[test]
     fn void_svg_out_test() {
