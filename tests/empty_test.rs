@@ -4,7 +4,7 @@ use simple_svg::svg_out;
 
 #[test]
 fn void_svg_out_test() {
-    let svg = svg_out(build_svg(2, 3));
+    let svg = svg_out(build_svg(20, 20));
 
     let contents = include_str!("../showcase/basic/empty.svg");
 
