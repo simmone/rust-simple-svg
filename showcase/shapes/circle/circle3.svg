@@ -1,0 +1,15 @@
+<svg
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    width="200" height="200"
+    >
+  <defs>
+    <circle id="s1" r="50" />
+  </defs>
+
+  <use xlink:href="#s1" x="50" y="50" fill="red" />
+  <use xlink:href="#s1" x="150" y="50" fill="yellow" />
+  <use xlink:href="#s1" x="50" y="150" fill="blue" />
+  <use xlink:href="#s1" x="150" y="150" fill="green" />
+</svg>

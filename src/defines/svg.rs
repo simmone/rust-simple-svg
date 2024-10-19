@@ -3,7 +3,7 @@ pub struct Svg {
     pub height: u64,
 }
 
-pub fn build_svg(width: u64, height: u64) -> Svg {
+pub fn new_svg(width: u64, height: u64) -> Svg {
     Svg { width, height }
 }
 
@@ -13,7 +13,7 @@ mod tests {
 
     #[test]
     fn check_svg() {
-        let svg = build_svg(640, 480);
+        let svg = new_svg(640, 480);
         assert_eq!(svg.width, 640);
         assert_eq!(svg.height, 480);
     }
