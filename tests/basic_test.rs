@@ -1,6 +1,6 @@
 use pretty_assertions::assert_eq;
-use simple_svg::*;
 use simple_svg::defines::svg::new_svg;
+use simple_svg::*;
 
 #[test]
 fn empty_svg_out_test() {
