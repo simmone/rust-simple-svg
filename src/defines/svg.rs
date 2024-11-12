@@ -1,5 +1,5 @@
-use std::collections::HashMap;
 use crate::defines::shape::Shape;
+use std::collections::HashMap;
 
 pub struct Svg {
     pub width: f64,
