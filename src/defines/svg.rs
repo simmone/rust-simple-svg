@@ -22,7 +22,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn check_svg() {
+    fn check_new_svg() {
         let svg = new_svg(640.0, 480.0);
         assert_eq!(svg.width, 640.0);
         assert_eq!(svg.height, 480.0);
