@@ -1,3 +1,3 @@
 pub trait Shape {
-    fn format(&self) -> String;
+    fn format(shape_id:String, &self) -> String;
 }

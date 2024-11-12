@@ -2,13 +2,13 @@ use std::collections::HashMap;
 use crate::defines::shape::Shape;
 
 pub struct Svg {
-    pub width: u32,
-    pub height: u32,
-    pub widget_id_count: u32,
+    pub width: f64,
+    pub height: f64,
+    pub widget_id_count: f64,
     pub shape_define_map: HashMap<String, &'static dyn Shape>,
 }
 
-pub fn new_svg(width: u32, height: u32) -> Svg {
+pub fn new_svg(width: f64, height: f64) -> Svg {
     Svg {
         width,
         height,
