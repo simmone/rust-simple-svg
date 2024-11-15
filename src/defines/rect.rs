@@ -46,9 +46,20 @@ mod tests {
             radius_x: Some(10),
             radius_y: Some(5),
         };
+
         assert_eq!(rect.width, 30.0);
         assert_eq!(rect.height, 20.0);
         assert_eq!(rect.radius_x.unwrap(), 10);
         assert_eq!(rect.radius_y.unwrap(), 5);
+    }
+    
+    #[test]
+    fn check_build_rect() {
+        let rect = build_rect(30.0, 20.0);
+
+        assert_eq!(rect.width, 30.0);
+        assert_eq!(rect.height, 20.0);
+        assert!(rect.radius_x.is_none());
+        assert!(rect.radius_y.is_none());
     }
 }
