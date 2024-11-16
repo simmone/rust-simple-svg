@@ -1,13 +1,13 @@
 use crate::defines::shape::Shape;
 
-pub struct Rect {
-    pub width: f64,
-    pub height: f64,
+pub struct Rect<T, U> {
+    pub width: T,
+    pub height: U,
     pub radius_x: Option<i32>,
     pub radius_y: Option<i32>,
 }
 
-pub fn build_rect(width: f64, height: f64) -> Rect {
+pub fn build_rect<T, U>(width: T, height: U) -> Rect<T, U> {
     Rect {
         width,
         height,
@@ -16,7 +16,7 @@ pub fn build_rect(width: f64, height: f64) -> Rect {
     }
 }
 
-impl Shape for Rect {
+impl<T: std::fmt::Display, U: std::fmt::Display> Shape for Rect<T, U> {
     fn format(&self, shape_id: String) -> String {
         format!("    <rect id=\"{}\" {} />\n", shape_id, {
             let mut shape_str = format!("width=\"{}\" height=\"{}\"", self.width, self.height);
@@ -55,10 +55,10 @@ mod tests {
     
     #[test]
     fn check_build_rect() {
-        let rect = build_rect(30.0, 20.0);
+        let rect = build_rect(30, 20);
 
-        assert_eq!(rect.width, 30.0);
-        assert_eq!(rect.height, 20.0);
+        assert_eq!(rect.width as f64, 30.0);
+        assert_eq!(rect.height as f64, 20.0);
         assert!(rect.radius_x.is_none());
         assert!(rect.radius_y.is_none());
     }
