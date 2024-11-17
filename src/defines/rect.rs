@@ -61,5 +61,12 @@ mod tests {
         assert_eq!(rect.height as f64, 20.0);
         assert!(rect.radius_x.is_none());
         assert!(rect.radius_y.is_none());
+
+        let rect = build_rect(30.0, 20);
+
+        assert_eq!(rect.width as f64, 30.0);
+        assert_eq!(rect.height as f64, 20.0);
+        assert!(rect.radius_x.is_none());
+        assert!(rect.radius_y.is_none());
     }
 }
