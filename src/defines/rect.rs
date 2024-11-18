@@ -16,7 +16,12 @@ pub fn build_rect<T, U, W, Y>(width: T, height: U) -> Rect<T, U, W, Y> {
     }
 }
 
-impl<T: std::fmt::Display, U: std::fmt::Display, W: std::fmt::Display, Y: std::fmt::Display> Shape for Rect<T, U, W, Y> {
+impl<T, U, W, Y> Shape for Rect<T, U, W, Y> where
+    T: std::fmt::Display,
+    U: std::fmt::Display,
+    W: std::fmt::Display,
+    Y: std::fmt::Display,
+{
     fn format(&self, shape_id: String) -> String {
         format!("    <rect id=\"{}\" {} />\n", shape_id, {
             let mut shape_str = format!("width=\"{}\" height=\"{}\"", self.width, self.height);
@@ -24,8 +29,8 @@ impl<T: std::fmt::Display, U: std::fmt::Display, W: std::fmt::Display, Y: std::f
             if self.radius_x.is_some() && self.radius_y.is_some() {
                 shape_str.push_str(&format!(
                     " rx=\"{}\" ry=\"{}\"",
-                    self.radius_x.unwrap(),
-                    self.radius_y.unwrap(),
+                    self.radius_x.as_ref().unwrap(),
+                    self.radius_y.as_ref().unwrap(),
                 ));
             }
 
@@ -49,8 +54,8 @@ mod tests {
 
         assert_eq!(rect.width, 30.0);
         assert_eq!(rect.height, 20.0);
-        assert_eq!(rect.radius_x.unwrap(), 10.0);
-        assert_eq!(rect.radius_y.unwrap(), 5.0);
+        assert_eq!(rect.radius_x.unwrap() as f64, 10.0);
+        assert_eq!(rect.radius_y.unwrap() as f64, 5.0);
     }
     
     #[test]
