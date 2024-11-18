@@ -3,8 +3,8 @@ use crate::defines::shape::Shape;
 pub struct Rect<T, U> {
     pub width: T,
     pub height: U,
-    pub radius_x: Option<i32>,
-    pub radius_y: Option<i32>,
+    pub radius_x: Option<f64>,
+    pub radius_y: Option<f64>,
 }
 
 pub fn build_rect<T, U>(width: T, height: U) -> Rect<T, U> {
@@ -25,7 +25,7 @@ impl<T: std::fmt::Display, U: std::fmt::Display> Shape for Rect<T, U> {
                 shape_str.push_str(&format!(
                     " rx=\"{}\" ry=\"{}\"",
                     self.radius_x.unwrap(),
-                    self.radius_y.unwrap()
+                    self.radius_y.unwrap(),
                 ));
             }
 
@@ -49,8 +49,8 @@ mod tests {
 
         assert_eq!(rect.width, 30.0);
         assert_eq!(rect.height, 20.0);
-        assert_eq!(rect.radius_x.unwrap(), 10);
-        assert_eq!(rect.radius_y.unwrap(), 5);
+        assert_eq!(rect.radius_x.unwrap(), 10.0);
+        assert_eq!(rect.radius_y.unwrap(), 5.0);
     }
     
     #[test]

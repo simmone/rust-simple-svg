@@ -18,20 +18,23 @@ pub enum LineJoin {
 }
 
 pub struct Sstyle {
-    pub fill: String,
-    pub fill-ruler: FillRule,
-    pub fill-opacity: f32,
-    pub stroke: String,
-    pub stroke-width: f32,
-    pub stroke-linecap: LineCap,
-    pub stroke-linejoin: LineJoin,
-    pub stroke-miterlimit: f32,
-    pub stroke-dasharray: String,
-    pub stroke-dashoffset: f32,
-    pub translate: (f32, f32),
-    pub rotate: f32,
-    pub scale: (f32, f32),
-    pub skewX: f32,
-    pub skewY: f32,
-    pub fill-gradient: String,
+    pub fill: Option<String>,
+    pub fill_ruler: Option<FillRule>,
+    pub fill_opacity: Option<f64>,
+    pub stroke: Option<String>,
+    pub stroke_width: Option<f64>,
+    pub stroke_linecap: Option<LineCap>,
+    pub stroke_linejoin: Option<LineJoin>,
+    pub stroke_miterlimit: Option<f64>,
+    pub stroke_dasharray: Option<String>,
+    pub stroke_dashoffset: Option<f64>,
+    pub translate: Option<(f64, f64)>,
+    pub rotate: Option<f64>,
+    pub scale: Option<(f64, f64)>,
+    pub skewX: Option<f64>,
+    pub skewY: Option<f64>,
+    pub fill_gradient: Option<String>,
+}
+
+pub build_sstyle() -> Sstyle {
 }
