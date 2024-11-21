@@ -54,7 +54,7 @@ mod tests {
         assert_eq!(rect.radius_x.unwrap(), 10.0);
         assert_eq!(rect.radius_y.unwrap(), 5.0);
     }
-    
+
     #[test]
     fn check_new() {
         let rect = Rect::new(30f64, 20f64);
@@ -63,11 +63,29 @@ mod tests {
         assert!(rect.radius_x.is_none());
         assert!(rect.radius_y.is_none());
     }
-    
+
     #[test]
-    fn check_format() {
+    fn check_format1() {
         let rect = Rect::new(30.0, 20.0);
-        
-        assert_eq!(Rect::format(&rect, "1".to_string()), "    <rect id=\"1\" width=\"30\" height=\"20\" />\n");
+
+        assert_eq!(
+            Rect::format(&rect, "1".to_string()),
+            "    <rect id=\"1\" width=\"30\" height=\"20\" />\n"
+        );
+    }
+
+    #[test]
+    fn check_format2() {
+        let rect = Rect {
+            width: 30.0,
+            height: 20.0,
+            radius_x: Some(10.0),
+            radius_y: Some(5.0),
+        };
+
+        assert_eq!(
+            Rect::format(&rect, "1".to_string()),
+            "    <rect id=\"1\" width=\"30\" height=\"20\" rx=\"10\" ry=\"5\" />\n"
+        );
     }
 }
