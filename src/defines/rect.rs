@@ -63,4 +63,11 @@ mod tests {
         assert!(rect.radius_x.is_none());
         assert!(rect.radius_y.is_none());
     }
+    
+    #[test]
+    fn check_format() {
+        let rect = Rect::new(30.0, 20.0);
+        
+        assert_eq!(Rect::format(&rect, "1".to_string()), "    <rect id=\"1\" width=\"30\" height=\"20\" />\n");
+    }
 }
