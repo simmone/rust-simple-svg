@@ -1,20 +1,20 @@
 pub enum FillRule {
-    nonzero,
-    evenodd,
-    inerit,
+    Nonzero,
+    Evenodd,
+    Inerit,
 }
 
 pub enum LineCap {
-    butt,
-    round,
-    square,
-    inherit,
+    Butt,
+    Round,
+    Square,
+    Inherit,
 }
 
 pub enum LineJoin {
-    miter,
-    round,
-    bevel,
+    Miter,
+    Round,
+    Bevel,
 }
 
 pub struct Sstyle {
@@ -36,25 +36,54 @@ pub struct Sstyle {
     pub fill_gradient: Option<String>,
 }
 
-impl Sstye {
-    pub new() -> Self {
+impl Sstyle {
+    pub fn new() -> Self {
         Sstyle {
-            None, None, None, None, None, None, None, None, None, None,
-            None, None, None, None, None, None
+            fill: None, fill_ruler: None, fill_opacity: None, stroke: None, stroke_width: None, stroke_linecap: None, stroke_linejoin: None, stroke_miterlimit: None, stroke_dasharray: None, stroke_dashoffset: None,
+            translate: None, rotate: None, scale: None, skewX: None, skewY: None, fill_gradient: None
         }
     }
     
-    pub format() -> String {
+    pub fn format(&self) -> String {
         let mut format_str = String::new();
         
         if self.fill_gradient.is_some() {
-            format_str.push_str(&format!(" fill=\"url(#{})\"" self.fill_gradient));
-            
+            format_str.push_str(&format!(" fill=\"url(#{})\"", self.fill_gradient.unwrap()));
+        } else {
             if self.fill.is_some() {
-                format_str.push_str(&format!(" fill=\"{}\"" self.fill));
+                format_str.push_str(&format!(" fill=\"{}\"", self.fill.unwrap()));
             } else {
                 format_str.push_str(" fill=\"none\"");
             }
         }
+
+        if self.fill_ruler.is_some() {
+            format_str.push_str(&format!(" fill-rule=\"{}\"", self.fill_ruler.unwrap()));
+        }
+
+        if self.fill_opacity.is_some() {
+            format_str.push_str(&format!(" fill-opacity=\"{}\"", self.fill_opacity.unwrap()));
+        }
+        
+        format_str
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    
+    #[test]
+    fn check_format() {
+        let mut sstyle = Sstyle::new();
+        
+        sstyle.fill = "red";
+        sstyle.fill_ruler = FillRule.nonzero;
+        sstyle.gradient = "s1";
+        sstyle.opacity = 30.0;
+        
+        assert_eq!(
+            Sstyle::format(&sstyle),
+            "");
     }
 }
