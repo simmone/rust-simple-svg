@@ -23,10 +23,31 @@ pub enum LineCap {
     Inherit,
 }
 
+impl fmt::Display for LineCap {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match *self {
+            LineCap::Butt => write!(f, "butt"),
+            LineCap::Round => write!(f, "round"),
+            LineCap::Square => write!(f, "square"),
+            LineCap::Inherit => write!(f, "inherit"),
+        }
+    }
+}
+
 pub enum LineJoin {
     Miter,
     Round,
     Bevel,
+}
+
+impl fmt::Display for LineJoin {
+    fn fmt(&self, f:&mut fmt::Formatter) -> fmt::Result {
+        match *self {
+            LineJoin::Miter => write!(f, "miter"),
+            LineJoin::Round => write!(f, "round"),
+            LineJoin::Bevel => write!(f, "bevel"),
+        }
+    }
 }
 
 pub struct Sstyle {
@@ -77,6 +98,34 @@ impl Sstyle {
             format_str.push_str(&format!(" fill-opacity=\"{}\"", self.fill_opacity.as_ref().unwrap()));
         }
         
+        if self.stroke_width.is_some() {
+            format_str.push_str(&format!(" stroke-width=\"{}\"", self.stroke_width.as_ref().unwrap()));
+        }
+
+        if self.stroke.is_some() {
+            format_str.push_str(&format!(" stroke=\"{}\"", self.stroke.as_ref().unwrap()));
+        }
+
+        if self.stroke_linejoin.is_some() {
+            format_str.push_str(&format!(" stroke-linejoin=\"{}\"", self.stroke_linejoin.as_ref().unwrap()));
+        }
+
+        if self.stroke_linecap.is_some() {
+            format_str.push_str(&format!(" stroke-linecap=\"{}\"", self.stroke_linecap.as_ref().unwrap()));
+        }
+
+        if self.stroke_miterlimit.is_some() {
+            format_str.push_str(&format!(" stroke-miterlimit=\"{}\"", self.stroke_miterlimit.as_ref().unwrap()));
+        }
+
+        if self.stroke_dasharray.is_some() {
+            format_str.push_str(&format!(" stroke-dasharray=\"{}\"", self.stroke_dasharray.as_ref().unwrap()));
+        }
+
+        if self.stroke_dashoffset.is_some() {
+            format_str.push_str(&format!(" stroke-dashoffset=\"{}\"", self.stroke_dashoffset.as_ref().unwrap()));
+        }
+        
         format_str
     }
 }
@@ -86,7 +135,7 @@ mod tests {
     use super::*;
     
     #[test]
-    fn check_format1() {
+    fn check_format_fill1() {
         let mut sstyle = Sstyle::new();
         
         sstyle.fill_ruler = Some(FillRule::Nonzero);
@@ -99,7 +148,7 @@ mod tests {
     }
 
     #[test]
-    fn check_format2() {
+    fn check_format_fill2() {
         let mut sstyle = Sstyle::new();
         
         sstyle.fill = Some("red".to_string());
@@ -111,4 +160,21 @@ mod tests {
             " fill=\"red\" fill-rule=\"nonzero\" fill-opacity=\"30\"");
     }
 
+    #[test]
+    fn check_format_stroke() {
+        let mut sstyle = Sstyle::new();
+        
+        sstyle.stroke_width = Some(5.0);
+        sstyle.stroke = Some("#ABABAB".to_string());
+        sstyle.stroke_linejoin = Some(LineJoin::Round);
+        sstyle.stroke_linecap = Some(LineCap::Square);
+        sstyle.stroke_miterlimit = Some(2.0);
+        sstyle.stroke_dasharray = Some("40,10".to_string());
+        sstyle.stroke_dashoffset = Some(5.0);
+        
+        assert_eq!(
+            Sstyle::format(&sstyle),
+            " fill=\"none\" stroke-width=\"5\" stroke=\"#ABABAB\" stroke-linejoin=\"round\" stroke-linecap=\"square\" stroke-miterlimit=\"2\" stroke-dasharray=\"40,10\" stroke-dashoffset=\"5\""
+        );
+    }
 }
