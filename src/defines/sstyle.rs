@@ -126,6 +126,46 @@ impl Sstyle {
             format_str.push_str(&format!(" stroke-dashoffset=\"{}\"", self.stroke_dashoffset.as_ref().unwrap()));
         }
         
+        if self.translate.is_some() || self.rotate.is_some() || self.scale.is_some() || self.skew_x.is_some() || self.skew_y.is_some() {
+            format_str.push_str(" transform=\"{".to_string());
+            
+            if self.translate.is_some() {
+                format_str.push_str(&format!(" translate({} {}", self.translate.as_ref().unwrap().0, self.translate.1));
+            }
+            
+            if self.rotate.is_some() {
+                format_str.push_str(&format!(" rotate({})", self.rotate.unwrap));
+            }
+                
+
+        (printf " transform=\"~a\""
+                (string-join
+                 (filter
+                  (lambda (a) (not (string=? a "")))
+                  (list
+                   (if (SSTYLE-translate _sstyle)
+                       (format "translate(~a ~a)"
+                               (~r (car (SSTYLE-translate _sstyle)))
+                               (~r (cdr (SSTYLE-translate _sstyle))))
+                       "")
+                   (if (SSTYLE-rotate _sstyle)
+                       (format "rotate(~a)" (~r (SSTYLE-rotate _sstyle)))
+                       "")
+                   (if (SSTYLE-scale _sstyle)
+                       (if (pair? (SSTYLE-scale _sstyle))
+                           (format "scale(~a ~a)"
+                                   (~r (car (SSTYLE-scale _sstyle)))
+                                   (~r (cdr (SSTYLE-scale _sstyle))))
+                           (format "scale(~a)" (~r (SSTYLE-scale _sstyle))))
+                       "")
+                   (if (SSTYLE-skewX _sstyle)
+                       (format "skewX(~a)" (~r (SSTYLE-skewX _sstyle)))
+                       "")
+                   (if (SSTYLE-skewY _sstyle)
+                       (format "skewY(~a)" (~r (SSTYLE-skewY _sstyle)))
+                       ""))))))
+
+        
         format_str
     }
 }
