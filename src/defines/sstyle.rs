@@ -63,7 +63,8 @@ pub struct Sstyle {
     pub stroke_dashoffset: Option<f64>,
     pub translate: Option<(f64, f64)>,
     pub rotate: Option<f64>,
-    pub scale: Option<(f64, f64)>,
+    pub scale_all: Option<f64>,
+    pub scale_xy: Option<(f64, f64)>,
     pub skew_x: Option<f64>,
     pub skew_y: Option<f64>,
     pub fill_gradient: Option<String>,
@@ -73,7 +74,7 @@ impl Sstyle {
     pub fn new() -> Self {
         Sstyle {
             fill: None, fill_ruler: None, fill_opacity: None, stroke: None, stroke_width: None, stroke_linecap: None, stroke_linejoin: None, stroke_miterlimit: None, stroke_dasharray: None, stroke_dashoffset: None,
-            translate: None, rotate: None, scale: None, skew_x: None, skew_y: None, fill_gradient: None
+            translate: None, rotate: None, scale_all: None, scale_xy: None, skew_x: None, skew_y: None, fill_gradient: None
         }
     }
     
@@ -126,45 +127,35 @@ impl Sstyle {
             format_str.push_str(&format!(" stroke-dashoffset=\"{}\"", self.stroke_dashoffset.as_ref().unwrap()));
         }
         
-        if self.translate.is_some() || self.rotate.is_some() || self.scale.is_some() || self.skew_x.is_some() || self.skew_y.is_some() {
-            format_str.push_str(" transform=\"{".to_string());
+        if self.translate.is_some() || self.rotate.is_some() || self.scale_all.is_some() || self.scale_xy.is_some() || self.skew_x.is_some() || self.skew_y.is_some() {
+            format_str.push_str(" transform=\"{");
             
             if self.translate.is_some() {
-                format_str.push_str(&format!(" translate({} {}", self.translate.as_ref().unwrap().0, self.translate.1));
+                format_str.push_str(&format!(" translate({} {})", self.translate.as_ref().unwrap().0, self.translate.as_ref().unwrap().1));
             }
             
             if self.rotate.is_some() {
-                format_str.push_str(&format!(" rotate({})", self.rotate.unwrap));
+                format_str.push_str(&format!(" rotate({})", self.rotate.as_ref().unwrap()));
             }
-                
+            
+            if self.scale_all.is_some() || self.scale_xy.is_some() {
+                if self.scale_all.is_some() {
+                    format_str.push_str(&format!(" scale({})", self.scale_all.as_ref().unwrap()));
+                } else {
+                    format_str.push_str(&format!(" scale({} {})", self.scale_xy.as_ref().unwrap().0, self.scale_xy.as_ref().unwrap().1));
+                }
+            }
+            
+            if self.skew_x.is_some() {
+                format_str.push_str(&format!(" skewX({})", self.skew_x.as_ref().unwrap()));
+            }
 
-        (printf " transform=\"~a\""
-                (string-join
-                 (filter
-                  (lambda (a) (not (string=? a "")))
-                  (list
-                   (if (SSTYLE-translate _sstyle)
-                       (format "translate(~a ~a)"
-                               (~r (car (SSTYLE-translate _sstyle)))
-                               (~r (cdr (SSTYLE-translate _sstyle))))
-                       "")
-                   (if (SSTYLE-rotate _sstyle)
-                       (format "rotate(~a)" (~r (SSTYLE-rotate _sstyle)))
-                       "")
-                   (if (SSTYLE-scale _sstyle)
-                       (if (pair? (SSTYLE-scale _sstyle))
-                           (format "scale(~a ~a)"
-                                   (~r (car (SSTYLE-scale _sstyle)))
-                                   (~r (cdr (SSTYLE-scale _sstyle))))
-                           (format "scale(~a)" (~r (SSTYLE-scale _sstyle))))
-                       "")
-                   (if (SSTYLE-skewX _sstyle)
-                       (format "skewX(~a)" (~r (SSTYLE-skewX _sstyle)))
-                       "")
-                   (if (SSTYLE-skewY _sstyle)
-                       (format "skewY(~a)" (~r (SSTYLE-skewY _sstyle)))
-                       ""))))))
+            if self.skew_y.is_some() {
+                format_str.push_str(&format!(" skewX({})", self.skew_y.as_ref().unwrap()));
+            }
 
+            format_str.push_str("}\"");
+        }
         
         format_str
     }
