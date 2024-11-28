@@ -227,11 +227,11 @@ mod tests {
 
         sstyle.fill_ruler = Some(FillRule::Nonzero);
         sstyle.fill_gradient = Some("s1".to_string());
-        sstyle.fill_opacity = Some(30.0);
+        sstyle.fill_opacity = Some(0.5);
 
         assert_eq!(
             Sstyle::format(&sstyle),
-            " fill=\"url(#s1)\" fill-rule=\"nonzero\" fill-opacity=\"30\""
+            " fill=\"url(#s1)\" fill-rule=\"nonzero\" fill-opacity=\"0.5\""
         );
     }
 
@@ -279,7 +279,7 @@ mod tests {
 
         assert_eq!(
             Sstyle::format(&sstyle),
-            " fill=\"none\" transform=\"{ translate(0.1 0.2) rotate(30) scale(1) skewX(2) skewY(3)}\"");
+            " fill=\"none\" transform=\"translate(0.1 0.2) rotate(30) scale(1) skewX(2) skewY(3)\"");
     }
 
     #[test]
@@ -290,7 +290,7 @@ mod tests {
 
         assert_eq!(
             Sstyle::format(&sstyle),
-            " fill=\"none\" transform=\"{ scale(2 3)}\""
+            " fill=\"none\" transform=\"scale(2 3)\""
         );
     }
 }
