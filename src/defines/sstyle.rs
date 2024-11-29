@@ -94,6 +94,8 @@ impl Sstyle {
     }
 
     pub fn format(&self) -> String {
+        let mut transforms = vec![];
+
         if self.fill_gradient.is_some() {
             transforms.push(format!(
                 "fill=\"url(#{})\"",
@@ -103,66 +105,66 @@ impl Sstyle {
             if self.fill.is_some() {
                 transforms.push(format!("fill=\"{}\"", self.fill.as_ref().unwrap()));
             } else {
-                transforms.push("fill=\"none\"");
+                transforms.push("fill=\"none\"".to_string());
             }
         }
 
         if self.fill_ruler.is_some() {
             transforms.push(format!(
-                " fill-rule=\"{}\"",
+                "fill-rule=\"{}\"",
                 self.fill_ruler.as_ref().unwrap()
             ));
         }
 
         if self.fill_opacity.is_some() {
             transforms.push(format!(
-                " fill-opacity=\"{}\"",
+                "fill-opacity=\"{}\"",
                 self.fill_opacity.as_ref().unwrap()
             ));
         }
 
         if self.stroke_width.is_some() {
             transforms.push(format!(
-                " stroke-width=\"{}\"",
+                "stroke-width=\"{}\"",
                 self.stroke_width.as_ref().unwrap()
             ));
         }
 
         if self.stroke.is_some() {
-            transforms.push(format!(" stroke=\"{}\"", self.stroke.as_ref().unwrap()));
+            transforms.push(format!("stroke=\"{}\"", self.stroke.as_ref().unwrap()));
         }
 
         if self.stroke_linejoin.is_some() {
             transforms.push(format!(
-                " stroke-linejoin=\"{}\"",
+                "stroke-linejoin=\"{}\"",
                 self.stroke_linejoin.as_ref().unwrap()
             ));
         }
 
         if self.stroke_linecap.is_some() {
             transforms.push(format!(
-                " stroke-linecap=\"{}\"",
+                "stroke-linecap=\"{}\"",
                 self.stroke_linecap.as_ref().unwrap()
             ));
         }
 
         if self.stroke_miterlimit.is_some() {
             transforms.push(format!(
-                " stroke-miterlimit=\"{}\"",
+                "stroke-miterlimit=\"{}\"",
                 self.stroke_miterlimit.as_ref().unwrap()
             ));
         }
 
         if self.stroke_dasharray.is_some() {
             transforms.push(format!(
-                " stroke-dasharray=\"{}\"",
+                "stroke-dasharray=\"{}\"",
                 self.stroke_dasharray.as_ref().unwrap()
             ));
         }
 
         if self.stroke_dashoffset.is_some() {
             transforms.push(format!(
-                " stroke-dashoffset=\"{}\"",
+                "stroke-dashoffset=\"{}\"",
                 self.stroke_dashoffset.as_ref().unwrap()
             ));
         }
@@ -174,26 +176,26 @@ impl Sstyle {
             || self.skew_x.is_some()
             || self.skew_y.is_some()
         {
-            transforms.push_str(" transform=\"");
+            let mut translates = vec![];
 
             if self.translate.is_some() {
-                transforms.push(format!(
-                    " translate({} {})",
+                translates.push(format!(
+                    "translate({} {})",
                     self.translate.as_ref().unwrap().0,
                     self.translate.as_ref().unwrap().1
                 ));
             }
 
             if self.rotate.is_some() {
-                transforms.push_str(format!(" rotate({})", self.rotate.as_ref().unwrap()));
+                translates.push(format!("rotate({})", self.rotate.as_ref().unwrap()));
             }
 
             if self.scale_all.is_some() || self.scale_xy.is_some() {
                 if self.scale_all.is_some() {
-                    transforms.push(format!(" scale({})", self.scale_all.as_ref().unwrap()));
+                    translates.push(format!("scale({})", self.scale_all.as_ref().unwrap()));
                 } else {
-                    transforms.push(format!(
-                        " scale({} {})",
+                    translates.push(format!(
+                        "scale({} {})",
                         self.scale_xy.as_ref().unwrap().0,
                         self.scale_xy.as_ref().unwrap().1
                     ));
@@ -201,15 +203,17 @@ impl Sstyle {
             }
 
             if self.skew_x.is_some() {
-                transforms.push(format!(" skewX({})", self.skew_x.as_ref().unwrap()));
+                translates.push(format!("skewX({})", self.skew_x.as_ref().unwrap()));
             }
 
             if self.skew_y.is_some() {
-                transforms.push(format!(" skewY({})", self.skew_y.as_ref().unwrap()));
+                translates.push(format!("skewY({})", self.skew_y.as_ref().unwrap()));
             }
+            
+            transforms.push(format!("transform=\"{}\"", translates.join(" ")));
         }
 
-        format!("transforms=\"{}\"", transforms.join(" "))
+        transforms.join(" ")
     }
 }
 
@@ -227,7 +231,7 @@ mod tests {
 
         assert_eq!(
             Sstyle::format(&sstyle),
-            " fill=\"url(#s1)\" fill-rule=\"nonzero\" fill-opacity=\"0.5\""
+            "fill=\"url(#s1)\" fill-rule=\"nonzero\" fill-opacity=\"0.5\""
         );
     }
 
@@ -241,7 +245,7 @@ mod tests {
 
         assert_eq!(
             Sstyle::format(&sstyle),
-            " fill=\"red\" fill-rule=\"nonzero\" fill-opacity=\"30\""
+            "fill=\"red\" fill-rule=\"nonzero\" fill-opacity=\"30\""
         );
     }
 
@@ -259,7 +263,7 @@ mod tests {
 
         assert_eq!(
             Sstyle::format(&sstyle),
-            " fill=\"none\" stroke-width=\"5\" stroke=\"#ABABAB\" stroke-linejoin=\"round\" stroke-linecap=\"square\" stroke-miterlimit=\"2\" stroke-dasharray=\"40,10\" stroke-dashoffset=\"5\""
+            "fill=\"none\" stroke-width=\"5\" stroke=\"#ABABAB\" stroke-linejoin=\"round\" stroke-linecap=\"square\" stroke-miterlimit=\"2\" stroke-dasharray=\"40,10\" stroke-dashoffset=\"5\""
         );
     }
 
@@ -275,7 +279,7 @@ mod tests {
 
         assert_eq!(
             Sstyle::format(&sstyle),
-            " fill=\"none\" transform=\"translate(0.1 0.2) rotate(30) scale(1) skewX(2) skewY(3)\"");
+            "fill=\"none\" transform=\"translate(0.1 0.2) rotate(30) scale(1) skewX(2) skewY(3)\"");
     }
 
     #[test]
@@ -286,7 +290,7 @@ mod tests {
 
         assert_eq!(
             Sstyle::format(&sstyle),
-            " fill=\"none\" transform=\"scale(2 3)\""
+            "fill=\"none\" transform=\"scale(2 3)\""
         );
     }
 }
