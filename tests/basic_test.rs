@@ -1,12 +1,9 @@
 use pretty_assertions::assert_eq;
-use simple_svg::defines::svg::new_svg;
 use simple_svg::*;
 
 #[test]
 fn empty_svg_out_test() {
-    let svg = new_svg(30.0, 20.0);
-
-    let svg_str = svg_out(svg);
+    let svg_str = svg_out(30.0, 20.0);
 
     let contents = include_str!("../showcase/basic/empty.svg");
 

@@ -1,8 +1,10 @@
-use crate::defines::svg::Svg;
+use crate::defines::svg::new_svg;
 
 pub mod defines;
 
-pub fn svg_out(svg: Svg) -> String {
+pub fn svg_out(width: f64, height: f64) -> String {
+    let svg = new_svg(width, height);
+
     let mut svg_out_str = String::new();
 
     svg_out_str.push_str("<svg\n");
