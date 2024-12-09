@@ -8,7 +8,7 @@ pub struct Svg {
     pub shape_define_map: HashMap<String, &'static dyn Shape>,
 }
 
-pub fn new_svg(width: f64, height: f64) -> Svg {
+pub fn build_svg(width: f64, height: f64) -> Svg {
     Svg {
         width,
         height,
@@ -23,7 +23,7 @@ mod tests {
 
     #[test]
     fn check_new_svg() {
-        let svg = new_svg(640.0, 480.0);
+        let svg = build_svg(640.0, 480.0);
         assert_eq!(svg.width, 640.0);
         assert_eq!(svg.height, 480.0);
         assert_eq!(svg.widget_id_count, 0);
