@@ -1,9 +1,9 @@
-pub use crate::defines::svg::Svg;
 pub use crate::defines::svg::build_svg;
+pub use crate::defines::svg::Svg;
 
 pub mod defines;
 
-pub fn svg_out(svg: Svg) -> String {
+pub fn svg_out<T>(svg: Svg<T>) -> String {
     let mut svg_out_str = String::new();
 
     svg_out_str.push_str("<svg\n");

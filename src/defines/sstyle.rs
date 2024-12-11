@@ -209,7 +209,7 @@ impl Sstyle {
             if self.skew_y.is_some() {
                 translates.push(format!("skewY({})", self.skew_y.as_ref().unwrap()));
             }
-            
+
             transforms.push(format!("transform=\"{}\"", translates.join(" ")));
         }
 
@@ -279,7 +279,8 @@ mod tests {
 
         assert_eq!(
             Sstyle::format(&sstyle),
-            "fill=\"none\" transform=\"translate(0.1 0.2) rotate(30) scale(1) skewX(2) skewY(3)\"");
+            "fill=\"none\" transform=\"translate(0.1 0.2) rotate(30) scale(1) skewX(2) skewY(3)\""
+        );
     }
 
     #[test]
