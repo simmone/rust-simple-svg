@@ -1,4 +1,4 @@
-use crate::defines::shape::Shape;
+use crate::defines::format::Format;
 
 #[derive(Debug)]
 pub struct Rect {
@@ -17,7 +17,7 @@ pub fn build_rect(width: f64, height: f64) -> Rect {
     }
 }
 
-impl Shape for Rect {
+impl Format for Rect {
     fn format(&self, shape_id: String) -> String {
         format!("    <rect id=\"{}\" {} />\n", shape_id, {
             let mut shape_str = format!("width=\"{}\" height=\"{}\"", self.width, self.height);

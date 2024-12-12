@@ -1,3 +1,5 @@
-pub trait Shape {
-    fn format(&self, shape_id: String) -> String;
+use crate::defines::rect::Rect;
+
+pub enum Shape {
+    Rect(Rect),
 }

@@ -3,14 +3,14 @@ use crate::defines::rect::Rect;
 use crate::defines::shape::Shape;
 use std::collections::HashMap;
 
-pub struct Svg<'a, T> {
+pub struct Svg {
     pub width: f64,
     pub height: f64,
     pub widget_id_count: u32,
-    pub shape_define_map: HashMap<String, &'a T>,
+    pub shape_define_map: HashMap<String, Shape>,
 }
 
-pub fn build_svg<'a, T>(width: f64, height: f64) -> Svg<'a, T> {
+pub fn build_svg(width: f64, height: f64) -> Svg {
     Svg {
         width,
         height,
@@ -19,8 +19,8 @@ pub fn build_svg<'a, T>(width: f64, height: f64) -> Svg<'a, T> {
     }
 }
 
-impl<'a, T> Svg<'a, T> {
-    pub fn def_shape(&mut self, shape: &'a T) -> String {
+impl Svg {
+    pub fn def_shape(&mut self, shape: Shape) -> String {
         self.widget_id_count += 1;
         let shape_id = format!("s{}", self.widget_id_count);
         self.shape_define_map.insert(shape_id.clone(), shape);
@@ -33,8 +33,8 @@ mod tests {
     use super::*;
 
     #[test]
-    fn check_new_svg<T>() {
-        let svg:Svg<T> = build_svg::<T>(640.0, 480.0);
+    fn check_new_svg() {
+        let svg:Svg = build_svg(640.0, 480.0);
         assert_eq!(svg.width, 640.0);
         assert_eq!(svg.height, 480.0);
         assert_eq!(svg.widget_id_count, 0);
@@ -43,16 +43,26 @@ mod tests {
 
     #[test]
     fn check_def_shape() {
-        let mut svg:Svg<_,_> = build_svg(640.0, 480.0);
+        let mut svg:Svg = build_svg(640.0, 480.0);
 
         let rect1 = build_rect(30.0, 20.0);
-        let _rect_id = svg.def_shape(&rect1);
+        let shape1 = Shape::Rect(rect1);
+        let _rect_id = svg.def_shape(shape1);
         assert_eq!(svg.widget_id_count, 1);
-        assert_eq!(svg.shape_define_map.get("s1").unwrap().width, 30.0);
+        match svg.shape_define_map.get("s1").unwrap() {
+            Shape::Rect(s1) => {
+                assert_eq!(s1.width, 30.0);
+            }
+        }
 
         let rect2 = build_rect(10.0, 5.0);
-        let _rect_id = svg.def_shape(&rect2);
+        let shape2 = Shape::Rect(rect2);
+        let _rect_id = svg.def_shape(shape2);
         assert_eq!(svg.widget_id_count, 2);
-        assert_eq!(svg.shape_define_map.get("s2").unwrap().width, 10.0);
+        match svg.shape_define_map.get("s2").unwrap() {
+            Shape::Rect(s2) => {
+                assert_eq!(s2.width, 10.0);
+            }
+        }
     }
 }
