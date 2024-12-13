@@ -8,12 +8,14 @@ pub struct Rect {
     pub radius_y: Option<f64>,
 }
 
-pub fn build_rect(width: f64, height: f64) -> Rect {
-    Rect {
-        width,
-        height,
-        radius_x: None,
-        radius_y: None,
+impl Rect {
+    pub fn new(width: f64, height: f64) -> Self {
+        Rect {
+            width,
+            height,
+            radius_x: None,
+            radius_y: None,
+        }
     }
 }
 
@@ -56,7 +58,7 @@ mod tests {
 
     #[test]
     fn check_new() {
-        let rect = build_rect(30f64, 20f64);
+        let rect = Rect::new(30f64, 20f64);
         assert_eq!(rect.width, 30.0);
         assert_eq!(rect.height, 20.0);
         assert!(rect.radius_x.is_none());
@@ -65,7 +67,7 @@ mod tests {
 
     #[test]
     fn check_format1() {
-        let rect = build_rect(30.0, 20.0);
+        let rect = Rect::new(30.0, 20.0);
 
         assert_eq!(
             Rect::format(&rect, "1".to_string()),

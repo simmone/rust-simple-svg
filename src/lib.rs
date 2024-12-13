@@ -1,4 +1,3 @@
-pub use crate::defines::svg::build_svg;
 pub use crate::defines::svg::Svg;
 
 pub mod defines;

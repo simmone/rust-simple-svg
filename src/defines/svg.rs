@@ -1,5 +1,3 @@
-use crate::defines::rect::build_rect;
-use crate::defines::rect::Rect;
 use crate::defines::shape::Shape;
 use std::collections::HashMap;
 
@@ -10,16 +8,16 @@ pub struct Svg {
     pub shape_define_map: HashMap<String, Shape>,
 }
 
-pub fn build_svg(width: f64, height: f64) -> Svg {
-    Svg {
-        width,
-        height,
-        widget_id_count: 0,
-        shape_define_map: HashMap::new(),
-    }
-}
-
 impl Svg {
+    pub fn new(width: f64, height: f64) -> Self {
+        Svg {
+            width,
+            height,
+            widget_id_count: 0,
+            shape_define_map: HashMap::new(),
+        }
+    }
+
     pub fn def_shape(&mut self, shape: Shape) -> String {
         self.widget_id_count += 1;
         let shape_id = format!("s{}", self.widget_id_count);
@@ -32,9 +30,11 @@ impl Svg {
 mod tests {
     use super::*;
 
+    use crate::defines::rect::Rect;
+
     #[test]
     fn check_new_svg() {
-        let svg:Svg = build_svg(640.0, 480.0);
+        let svg: Svg = Svg::new(640.0, 480.0);
         assert_eq!(svg.width, 640.0);
         assert_eq!(svg.height, 480.0);
         assert_eq!(svg.widget_id_count, 0);
@@ -43,9 +43,9 @@ mod tests {
 
     #[test]
     fn check_def_shape() {
-        let mut svg:Svg = build_svg(640.0, 480.0);
+        let mut svg: Svg = Svg::new(640.0, 480.0);
 
-        let rect1 = build_rect(30.0, 20.0);
+        let rect1 = Rect::new(30.0, 20.0);
         let shape1 = Shape::Rect(rect1);
         let _rect_id = svg.def_shape(shape1);
         assert_eq!(svg.widget_id_count, 1);
@@ -55,7 +55,7 @@ mod tests {
             }
         }
 
-        let rect2 = build_rect(10.0, 5.0);
+        let rect2 = Rect::new(10.0, 5.0);
         let shape2 = Shape::Rect(rect2);
         let _rect_id = svg.def_shape(shape2);
         assert_eq!(svg.widget_id_count, 2);
