@@ -10,7 +10,28 @@ pub struct Widget {
     pub marker_end_id: Option<String>,
 }
 
+impl Widget {
+    pub fn new(id: String) -> Self {
+        Widget {
+            id,
+            at: None,
+            style: None,
+            filter_id: None,
+            marker_start_id: None,
+            marker_mid_id: None,
+            marker_end_id: None,
+        }
+    }
+}
+
 #[cfg(test)]
 mod tests {
+    use super::*;
     
+    #[test]
+    fn check_new() {
+        let widget = Widget::new("s1".to_string());
+        
+        assert_eq!(widget.id, "s1");
+    }
 }
