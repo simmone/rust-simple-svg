@@ -12,7 +12,7 @@ fn rect_svg_out_test() {
     let rect_sstyle = Sstyle::new();
     rect_sstyle.fill = Some("#BBC42A".to_string());
 
-    svg.place_widget(rect_id, 
+    svg.place_widget(rect_id, PlaceWidget{fill: rect_sstyle, ..});
 
     let svg_str = svg_out(svg);
 
@@ -20,10 +20,3 @@ fn rect_svg_out_test() {
 
     assert_eq!(svg_str, contents);
 }
-
-            (lambda ()
-              (let ([rec_id (svg-def-shape (new-rect 100 100))]
-                    [_sstyle (sstyle-new)])
-                (set-SSTYLE-fill! _sstyle "#BBC42A")
-                (svg-place-widget rec_id #:style _sstyle))))])
-
