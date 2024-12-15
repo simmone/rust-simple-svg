@@ -1,21 +1,11 @@
 use crate::defines::shape::Shape;
 use std::collections::HashMap;
-use crate::defines::sstyle::Sstyle;
 
 pub struct Svg {
     pub width: f64,
     pub height: f64,
     pub widget_id_count: u32,
     pub shape_define_map: HashMap<String, Shape>,
-}
-
-pub struct PlaceWidget {
-    pub style Option<Sstyle>,
-    pub at Option<(f64, f64)>,
-    pub filter_id Option<String>,
-    pub marker_start_id Option<String>,
-    pub marker_mid_id Option<String>,
-    pub marker_end_id Option<String>,
 }
 
 impl Svg {
@@ -33,10 +23,6 @@ impl Svg {
         let shape_id = format!("s{}", self.widget_id_count);
         self.shape_define_map.insert(shape_id.clone(), shape);
         shape_id
-    }
-    
-    pub fn place_widget(&mut self, shape_id: String, arguments: PlaceWidget) {
-        
     }
 }
 
@@ -76,25 +62,6 @@ mod tests {
         match svg.shape_define_map.get("s2").unwrap() {
             Shape::Rect(s2) => {
                 assert_eq!(s2.width, 10.0);
-            }
-        }
-    }
-    
-    #[test]
-    fn check_place_widget() {
-        let mut svg: Svg = Svg::new(640.0, 480.0);
-
-        let shape_id = svg.add_shape(Shape::Rect(Rect::new(30.0, 20.0)));
-
-        let rect_sstyle = Sstyle::new();
-        rect_sstyle.fill = Some("#BBC42A".to_string());
-        
-        svg.place_widget(shape_id, PlaceWidget{sstyle: rect_sstyle, ..});
-
-        assert_eq!(svg.widget_id_count, 1);
-        match svg.shape_define_map.get("s1").unwrap() {
-            Shape::Rect(s1) => {
-                assert_eq!(s1.width, 30.0);
             }
         }
     }

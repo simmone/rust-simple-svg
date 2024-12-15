@@ -3,16 +3,15 @@ use simple_svg::*;
 
 #[test]
 fn rect_svg_out_test() {
-    let svg = Svg::new(30.0, 20.0);
+    let mut svg = Svg::new(30.0, 20.0);
     
-    let rect = Shape::Rect(Rect::new(100.0, 100.0));
-
-    let rect_id = svg.add_shape(rect);
+    let rect_id = svg.add_shape(Shape::Rect(Rect::new(100.0, 100.0)));
     
-    let rect_sstyle = Sstyle::new();
+    let mut rect_sstyle = Sstyle::new();
     rect_sstyle.fill = Some("#BBC42A".to_string());
 
-    svg.place_widget(rect_id, PlaceWidget{fill: rect_sstyle, ..});
+    let mut group = Group::new();        
+    group.place_widget(Widget{shape_id: rect_id, style: Some(rect_sstyle), ..Default::default()});
 
     let svg_str = svg_out(svg);
 
