@@ -1,4 +1,6 @@
 use crate::defines::shape::Shape;
+use crate::defines::group::Group;
+use crate::defines::widget::Widget;
 use std::collections::HashMap;
 
 pub struct Svg {
@@ -6,6 +8,8 @@ pub struct Svg {
     pub height: f64,
     pub widget_id_count: u32,
     pub shape_define_map: HashMap<String, Shape>,
+    pub group_define_map: HashMap<String, Group>,
+    pub group_show_list: Vec<Group>,
 }
 
 impl Svg {
@@ -15,6 +19,8 @@ impl Svg {
             height,
             widget_id_count: 0,
             shape_define_map: HashMap::new(),
+            group_define_map: HashMap::new(),
+            group_show_list: Vec::new(),
         }
     }
 
@@ -23,6 +29,13 @@ impl Svg {
         let shape_id = format!("s{}", self.widget_id_count);
         self.shape_define_map.insert(shape_id.clone(), shape);
         shape_id
+    }
+    
+    pub fn add_group(&mut self, group: Group) -> String {
+        self.widget_id_count += 1;
+        let group_id = format!("g{}", self.widget_id_count);
+        self.group_define_map.insert(group_id.clone(), group);
+        group_id
     }
 }
 
@@ -64,5 +77,19 @@ mod tests {
                 assert_eq!(s2.width, 10.0);
             }
         }
+    }
+    
+    #[test]
+    fn check_add_group() {
+        let mut svg: Svg = Svg::new(640.0, 480.0);
+        let shape_id = svg.add_shape(Shape::Rect(Rect::new(30.0, 20.0)));
+
+        let mut group = Group::new();
+        group.place_widget(Widget{shape_id: shape_id, ..Default::default()});
+        
+        let group_id = svg.add_group(group);
+
+        assert_eq!(svg.group_define_map.len(), 1);
+        assert_eq!(svg.group_define_map.get("g2").unwrap().widget_list[0].shape_id, "s1".to_string());
     }
 }
