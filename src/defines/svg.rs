@@ -1,6 +1,7 @@
 use crate::defines::shape::Shape;
 use crate::defines::group::Group;
 use crate::defines::widget::Widget;
+use crate::defines::sstyle::Sstyle;
 use std::collections::HashMap;
 
 pub struct Svg {
@@ -36,6 +37,16 @@ impl Svg {
         let group_id = format!("g{}", self.widget_id_count);
         self.group_define_map.insert(group_id.clone(), group);
         group_id
+    }
+    
+    pub fn flush_data(&self) -> String {
+        let mut svg_str = String::new();
+        
+        if self.shape_define_map.len() > 0 {
+            svg_str.push_str("  <defs>\n");
+        }
+        
+        svg_str
     }
 }
 
@@ -91,5 +102,27 @@ mod tests {
 
         assert_eq!(svg.group_define_map.len(), 1);
         assert_eq!(svg.group_define_map.get("g2").unwrap().widget_list[0].shape_id, "s1".to_string());
+    }
+    
+    #[test]
+    fn check_flush_data() {
+        let mut svg: Svg = Svg::new(100.0, 100.0);
+        let shape_id = svg.add_shape(Shape::Rect(Rect::new(100.0, 100.0)));
+
+        let mut rect_sstyle = Sstyle::new();
+        rect_sstyle.fill = Some("#BBC42A".to_string());
+
+        let mut group = Group::new();
+        group.place_widget(Widget{shape_id: shape_id, style: Some(rect_sstyle), ..Default::default()});
+        
+        let group_id = svg.add_group(group);
+        
+        let mut expected_str = String::new();
+        expected_str.push_str("  <defs>\n");
+        expected_str.push_str("    <rect id=\"s1\" width=\"100.0\" height=\"100.00\" />\n");
+        expected_str.push_str("  </defs>\n\n");
+        expected_str.push_str("<use xlink:href=\"#s1\" fill=\"#BBC42A\" />\n");
+        
+        assert_eq!(svg.flush_data(), expected_str);
     }
 }
