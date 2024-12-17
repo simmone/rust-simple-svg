@@ -1,5 +1,3 @@
-use crate::defines::format::Format;
-
 #[derive(Debug)]
 pub struct Rect {
     pub width: f64,
@@ -17,10 +15,8 @@ impl Rect {
             radius_y: None,
         }
     }
-}
-
-impl Format for Rect {
-    fn format(&self, shape_id: String) -> String {
+    
+    pub fn format(&self, shape_id: String) -> String {
         format!("    <rect id=\"{}\" {} />\n", shape_id, {
             let mut shape_str = format!("width=\"{}\" height=\"{}\"", self.width, self.height);
 
