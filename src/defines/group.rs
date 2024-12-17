@@ -1,8 +1,4 @@
 use crate::defines::widget::Widget;
-use crate::defines::sstyle::Sstyle;
-use crate::defines::svg::Svg;
-use crate::defines::shape::Shape;
-use crate::defines::rect::Rect;
 
 pub struct Group {
     pub widget_list: Vec<Widget>,
@@ -23,6 +19,11 @@ impl Group {
 #[cfg(test)]
 mod tests {
     use super::*;
+    
+    use crate::defines::svg::Svg;
+    use crate::defines::shape::Shape;
+    use crate::defines::rect::Rect;
+    use crate::defines::sstyle::Sstyle;
     
     #[test]
     fn check_new() {
