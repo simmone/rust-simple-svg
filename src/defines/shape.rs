@@ -6,6 +6,8 @@ pub enum Shape {
 
 impl Shape {
     pub fn format(&self, shape_id: String) -> String {
-        "".to_string()
+        match self {
+            Shape::Rect(rect) => rect.format(shape_id),
+        }
     }
 }
