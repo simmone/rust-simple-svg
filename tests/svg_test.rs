@@ -33,7 +33,7 @@ fn check_add_group() {
     let mut group = Group::new();
     group.place_widget(Widget{shape_id: shape_id, ..Default::default()});
     
-    let group_id = svg.add_group(group);
+    svg.add_group(group);
 
     assert_eq!(svg.group_define_map.len(), 1);
     assert_eq!(svg.group_define_map.get("g2").unwrap().widget_list[0].shape_id, "s1".to_string());
@@ -42,19 +42,23 @@ fn check_add_group() {
 #[test]
 fn check_flush_data() {
     let mut svg: Svg = Svg::new(100.0, 100.0);
-    let shape_id = svg.add_shape(Shape::Rect(Rect::new(100.0, 100.0)));
+    let shape1_id = svg.add_shape(Shape::Rect(Rect::new(100.0, 100.0)));
 
     let mut rect_sstyle = Sstyle::new();
     rect_sstyle.fill = Some("#BBC42A".to_string());
 
     let mut group = Group::new();
-    group.place_widget(Widget{shape_id: shape_id, style: Some(rect_sstyle), ..Default::default()});
+    group.place_widget(Widget{shape_id: shape1_id, style: Some(rect_sstyle), ..Default::default()});
+
+    let shape2_id = svg.add_shape(Shape::Rect(Rect::new(100.0, 100.0)));
+    group.place_widget(Widget{shape_id: shape2_id, style: Some(rect_sstyle), ..Default::default()});
     
-    let group_id = svg.add_group(group);
+    svg.add_group(group);
     
     let mut expected_str = String::new();
     expected_str.push_str("  <defs>\n");
     expected_str.push_str("    <rect id=\"s1\" width=\"100\" height=\"100\" />\n");
+    expected_str.push_str("    <rect id=\"s2\" width=\"100\" height=\"100\" />\n");
     expected_str.push_str("  </defs>\n\n");
     expected_str.push_str("  <use xlink:href=\"#s1\" fill=\"#BBC42A\" />\n");
     

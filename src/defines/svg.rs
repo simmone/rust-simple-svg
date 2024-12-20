@@ -58,10 +58,6 @@ impl Svg {
 mod tests {
     use super::*;
 
-    use crate::defines::rect::Rect;
-    use crate::defines::widget::Widget;
-    use crate::defines::sstyle::Sstyle;
-
     #[test]
     fn check_new_svg() {
         let svg: Svg = Svg::new(640.0, 480.0);
