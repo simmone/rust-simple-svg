@@ -43,7 +43,8 @@ impl<'a> Svg<'a> {
         if self.shape_define_map.len() > 0 {
             svg_str.push_str("  <defs>\n");
             
-            let mut shape_ids: Vec<String> = self.shape_define_map.into_keys().collect();
+            let shape_define_map_c = self.shape_define_map.clone();
+            let mut shape_ids: Vec<String> = shape_define_map_c.into_keys().collect();
 
             shape_ids.sort();
             

@@ -1,4 +1,4 @@
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Rect {
     pub width: f64,
     pub height: f64,

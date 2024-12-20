@@ -1,5 +1,6 @@
 use crate::defines::rect::Rect;
 
+#[derive(Clone)]
 pub enum Shape {
     Rect(Rect),
 }
