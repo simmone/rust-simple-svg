@@ -48,10 +48,19 @@ fn check_flush_data() {
     rect_sstyle.fill = Some("#BBC42A".to_string());
 
     let mut group = Group::new();
-    group.place_widget(Widget{shape_id: shape1_id, style: Some(rect_sstyle), ..Default::default()});
+    group.place_widget(Widget{shape_id: shape1_id, style: Some(&rect_sstyle), ..Default::default()});
 
     let shape2_id = svg.add_shape(Shape::Rect(Rect::new(100.0, 100.0)));
-    group.place_widget(Widget{shape_id: shape2_id, style: Some(rect_sstyle), ..Default::default()});
+    group.place_widget(Widget{shape_id: shape2_id, style: Some(&rect_sstyle), ..Default::default()});
+
+    let shape3_id = svg.add_shape(Shape::Rect(Rect::new(100.0, 100.0)));
+    group.place_widget(Widget{shape_id: shape3_id, style: Some(&rect_sstyle), ..Default::default()});
+
+    let shape4_id = svg.add_shape(Shape::Rect(Rect::new(100.0, 100.0)));
+    group.place_widget(Widget{shape_id: shape4_id, style: Some(&rect_sstyle), ..Default::default()});
+
+    let shape5_id = svg.add_shape(Shape::Rect(Rect::new(100.0, 100.0)));
+    group.place_widget(Widget{shape_id: shape5_id, style: Some(&rect_sstyle), ..Default::default()});
     
     svg.add_group(group);
     
@@ -59,6 +68,9 @@ fn check_flush_data() {
     expected_str.push_str("  <defs>\n");
     expected_str.push_str("    <rect id=\"s1\" width=\"100\" height=\"100\" />\n");
     expected_str.push_str("    <rect id=\"s2\" width=\"100\" height=\"100\" />\n");
+    expected_str.push_str("    <rect id=\"s3\" width=\"100\" height=\"100\" />\n");
+    expected_str.push_str("    <rect id=\"s4\" width=\"100\" height=\"100\" />\n");
+    expected_str.push_str("    <rect id=\"s5\" width=\"100\" height=\"100\" />\n");
     expected_str.push_str("  </defs>\n\n");
     expected_str.push_str("  <use xlink:href=\"#s1\" fill=\"#BBC42A\" />\n");
     

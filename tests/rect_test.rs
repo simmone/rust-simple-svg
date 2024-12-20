@@ -11,7 +11,7 @@ fn rect_svg_out_test() {
     rect_sstyle.fill = Some("#BBC42A".to_string());
 
     let mut group = Group::new();        
-    group.place_widget(Widget{shape_id: rect_id, style: Some(rect_sstyle), ..Default::default()});
+    group.place_widget(Widget{shape_id: rect_id, style: Some(&rect_sstyle), ..Default::default()});
 
     let svg_str = svg_out(svg);
 

@@ -2,16 +2,16 @@ use crate::defines::shape::Shape;
 use crate::defines::group::Group;
 use std::collections::HashMap;
 
-pub struct Svg {
+pub struct Svg<'a> {
     pub width: f64,
     pub height: f64,
     pub widget_id_count: usize,
     pub shape_define_map: HashMap<String, Shape>,
-    pub group_define_map: HashMap<String, Group>,
-    pub group_show_list: Vec<Group>,
+    pub group_define_map: HashMap<String, Group<'a>>,
+    pub group_show_list: Vec<Group<'a>>,
 }
 
-impl Svg {
+impl<'a> Svg<'a> {
     pub fn new(width: f64, height: f64) -> Self {
         Svg {
             width,
@@ -30,7 +30,7 @@ impl Svg {
         shape_id
     }
     
-    pub fn add_group(&mut self, group: Group) -> String {
+    pub fn add_group(&mut self, group: Group<'a>) -> String {
         self.widget_id_count += 1;
         let group_id = format!("g{}", self.widget_id_count);
         self.group_define_map.insert(group_id.clone(), group);

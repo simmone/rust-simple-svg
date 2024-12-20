@@ -1,17 +1,17 @@
 use crate::defines::widget::Widget;
 
-pub struct Group {
-    pub widget_list: Vec<Widget>,
+pub struct Group<'a> {
+    pub widget_list: Vec<Widget<'a>>,
 }
 
-impl Group {
+impl<'a> Group<'a> {
     pub fn new() -> Self {
         Group {
             widget_list: Vec::new(),
         }
     }
 
-    pub fn place_widget(&mut self, widget: Widget) {
+    pub fn place_widget(&mut self, widget: Widget<'a>) {
         self.widget_list.push(widget);
     }
 }
@@ -41,7 +41,7 @@ mod tests {
         rect_sstyle.fill = Some("#BBC42A".to_string());
 
         let mut group = Group::new();        
-        group.place_widget(Widget{shape_id: shape_id, style: Some(rect_sstyle), ..Default::default()});
+        group.place_widget(Widget{shape_id: shape_id, style: Some(&rect_sstyle), ..Default::default()});
 
         assert_eq!(group.widget_list.len(), 1);
         assert_eq!(group.widget_list[0].shape_id, "s1".to_string());
