@@ -19,16 +19,16 @@ impl<'a> Group<'a> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
-    use crate::defines::svg::Svg;
-    use crate::defines::shape::Shape;
+
     use crate::defines::rect::Rect;
+    use crate::defines::shape::Shape;
     use crate::defines::sstyle::Sstyle;
-    
+    use crate::defines::svg::Svg;
+
     #[test]
     fn check_new() {
         let group = Group::new();
-        
+
         assert_eq!(group.widget_list.len(), 0);
     }
 
@@ -40,8 +40,12 @@ mod tests {
         let mut rect_sstyle = Sstyle::new();
         rect_sstyle.fill = Some("#BBC42A".to_string());
 
-        let mut group = Group::new();        
-        group.place_widget(Widget{shape_id: shape_id, style: Some(&rect_sstyle), ..Default::default()});
+        let mut group = Group::new();
+        group.place_widget(Widget {
+            shape_id: shape_id,
+            style: Some(&rect_sstyle),
+            ..Default::default()
+        });
 
         assert_eq!(group.widget_list.len(), 1);
         assert_eq!(group.widget_list[0].shape_id, "s1".to_string());

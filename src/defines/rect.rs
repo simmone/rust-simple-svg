@@ -15,7 +15,7 @@ impl Rect {
             radius_y: None,
         }
     }
-    
+
     pub fn format(&self, shape_id: String) -> String {
         format!("    <rect id=\"{}\" {} />\n", shape_id, {
             let mut shape_str = format!("width=\"{}\" height=\"{}\"", self.width, self.height);

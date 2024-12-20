@@ -1,5 +1,5 @@
-use crate::defines::shape::Shape;
 use crate::defines::group::Group;
+use crate::defines::shape::Shape;
 use std::collections::HashMap;
 
 pub struct Svg<'a> {
@@ -29,25 +29,24 @@ impl<'a> Svg<'a> {
         self.shape_define_map.insert(shape_id.clone(), shape);
         shape_id
     }
-    
+
     pub fn add_group(&mut self, group: Group<'a>) -> String {
         self.widget_id_count += 1;
         let group_id = format!("g{}", self.widget_id_count);
         self.group_define_map.insert(group_id.clone(), group);
         group_id
     }
-    
+
     pub fn flush_data(&self) -> String {
         let mut svg_str = String::new();
-        
+
         if self.shape_define_map.len() > 0 {
             svg_str.push_str("  <defs>\n");
-            
+
             let shape_define_map_c = self.shape_define_map.clone();
             let mut shape_ids: Vec<String> = shape_define_map_c.into_keys().collect();
-
             shape_ids.sort();
-            
+
             for shape_id in shape_ids {
                 let shape = self.shape_define_map.get(&shape_id).unwrap();
 
@@ -56,7 +55,7 @@ impl<'a> Svg<'a> {
 
             svg_str.push_str("  </defs>\n\n");
         }
-        
+
         svg_str
     }
 }
