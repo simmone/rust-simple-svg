@@ -43,7 +43,13 @@ impl<'a> Svg<'a> {
         if self.shape_define_map.len() > 0 {
             svg_str.push_str("  <defs>\n");
             
-            for (shape_id, shape) in &self.shape_define_map {
+            let mut shape_ids: Vec<String> = self.shape_define_map.into_keys().collect();
+
+            shape_ids.sort();
+            
+            for shape_id in shape_ids {
+                let shape = self.shape_define_map.get(&shape_id).unwrap();
+
                 svg_str.push_str(&format!("{}", shape.format(shape_id.to_string())));
             }
 
