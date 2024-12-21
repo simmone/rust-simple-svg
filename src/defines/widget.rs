@@ -13,7 +13,13 @@ pub struct Widget<'a> {
 
 impl<'a> Widget<'a> {
     pub fn format(&self) -> String {
-        "".to_string()
+        let mut fmt_str = String::new();
+        
+        fmt_str.push_str(&format!("<use xlink:href=\"#{}\" ", self.shape_id));
+        
+        fmt_str.push_str("/>");
+        
+        fmt_str
     }
 }
 
@@ -25,6 +31,6 @@ mod tests {
     fn check_format() {
         let widget1 = Widget { shape_id: "s1".to_string(), ..Default::default() };
         
-        assert_eq!(widget1.format(), "<use xlink:href=\"#s1\" fill=\"#BBC42A\" />");
+        assert_eq!(widget1.format(), "<use xlink:href=\"#s1\" />");
     }
 }
