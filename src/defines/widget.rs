@@ -10,3 +10,21 @@ pub struct Widget<'a> {
     pub marker_mid_id: Option<String>,
     pub marker_end_id: Option<String>,
 }
+
+impl<'a> Widget<'a> {
+    pub fn format(&self) -> String {
+        "".to_string()
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    
+    #[test]
+    fn check_format() {
+        let widget1 = Widget { shape_id: "s1".to_string(), ..Default::default() };
+        
+        assert_eq!(widget1.format(), "<use xlink:href=\"#s1\" fill=\"#BBC42A\" />");
+    }
+}
