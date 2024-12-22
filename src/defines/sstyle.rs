@@ -230,7 +230,7 @@ mod tests {
         sstyle.fill_opacity = Some(0.5);
 
         assert_eq!(
-            Sstyle::format(&sstyle),
+            sstyle.format(),
             "fill=\"url(#s1)\" fill-rule=\"nonzero\" fill-opacity=\"0.5\""
         );
     }
@@ -244,7 +244,7 @@ mod tests {
         sstyle.fill_opacity = Some(30.0);
 
         assert_eq!(
-            Sstyle::format(&sstyle),
+            sstyle.format(),
             "fill=\"red\" fill-rule=\"nonzero\" fill-opacity=\"30\""
         );
     }
@@ -278,7 +278,7 @@ mod tests {
         sstyle.skew_y = Some(3.0);
 
         assert_eq!(
-            Sstyle::format(&sstyle),
+            sstyle.format(),
             "fill=\"none\" transform=\"translate(0.1 0.2) rotate(30) scale(1) skewX(2) skewY(3)\""
         );
     }
@@ -290,7 +290,7 @@ mod tests {
         sstyle.scale_xy = Some((2.0, 3.0));
 
         assert_eq!(
-            Sstyle::format(&sstyle),
+            sstyle.format(),
             "fill=\"none\" transform=\"scale(2 3)\""
         );
     }
