@@ -289,9 +289,6 @@ mod tests {
 
         sstyle.scale_xy = Some((2.0, 3.0));
 
-        assert_eq!(
-            sstyle.format(),
-            "fill=\"none\" transform=\"scale(2 3)\""
-        );
+        assert_eq!(sstyle.format(), "fill=\"none\" transform=\"scale(2 3)\"");
     }
 }
