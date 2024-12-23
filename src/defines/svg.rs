@@ -2,6 +2,9 @@ use crate::defines::group::Group;
 use crate::defines::shape::Shape;
 use std::collections::HashMap;
 
+static DEFAULT_GROUP_ID: &str = "d0";
+//static BACKGROUND_GROUP_ID: &str = "b0";
+
 pub struct Svg<'a> {
     pub width: f64,
     pub height: f64,
@@ -33,8 +36,16 @@ impl<'a> Svg<'a> {
     pub fn add_group(&mut self, group: Group<'a>) -> String {
         self.widget_id_count += 1;
         let group_id = format!("g{}", self.widget_id_count);
+        self.add_name_group(group_id, group)
+    }
+    
+    pub fn add_name_group(&mut self, group_id: String, group: Group<'a>) -> String {
         self.group_define_map.insert(group_id.clone(), group);
         group_id
+    }
+    
+    pub fn add_default_group(&mut self, group: Group<'a>) -> String {
+        self.add_name_group(DEFAULT_GROUP_ID.to_string(), group)
     }
 
     pub fn flush_data(&self) -> String {
