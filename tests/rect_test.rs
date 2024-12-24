@@ -3,7 +3,7 @@ use simple_svg::*;
 
 #[test]
 fn rect_svg_out_test() {
-    let mut svg = Svg::new(30.0, 20.0);
+    let mut svg = Svg::new(100.0, 80.0);
 
     let rect_id = svg.add_shape(Shape::Rect(Rect::new(100.0, 100.0)));
 
@@ -16,6 +16,8 @@ fn rect_svg_out_test() {
         style: Some(&rect_sstyle),
         ..Default::default()
     });
+
+    svg.add_default_group(group);
 
     let svg_str = svg_out(svg);
 

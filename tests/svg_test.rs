@@ -100,6 +100,10 @@ fn check_flush_data() {
     expected_str.push_str("    <rect id=\"s5\" width=\"100\" height=\"100\" />\n");
     expected_str.push_str("  </defs>\n\n");
     expected_str.push_str("  <use xlink:href=\"#s1\" fill=\"#BBC42A\" />\n");
+    expected_str.push_str("  <use xlink:href=\"#s2\" fill=\"#BBC42A\" />\n");
+    expected_str.push_str("  <use xlink:href=\"#s3\" fill=\"#BBC42A\" />\n");
+    expected_str.push_str("  <use xlink:href=\"#s4\" fill=\"#BBC42A\" />\n");
+    expected_str.push_str("  <use xlink:href=\"#s5\" fill=\"#BBC42A\" />\n");
 
     assert_eq!(svg.flush_data(), expected_str);
 }
