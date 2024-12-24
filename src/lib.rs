@@ -20,6 +20,9 @@ pub fn svg_out(svg: Svg) -> String {
         svg.height.to_string()
     ));
     svg_out_str.push_str("    >\n");
+
+    svg_out_str.push_str(&svg.flush_data());
+
     svg_out_str.push_str("</svg>\n");
 
     svg_out_str
