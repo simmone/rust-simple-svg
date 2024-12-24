@@ -89,7 +89,7 @@ fn check_flush_data() {
         ..Default::default()
     });
 
-    svg.add_group(group);
+    svg.add_default_group(group);
 
     let mut expected_str = String::new();
     expected_str.push_str("  <defs>\n");
