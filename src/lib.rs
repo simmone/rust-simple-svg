@@ -1,3 +1,7 @@
+//! A library to generate SVG format file
+//!
+//! This is rewrite from Racket library: racket-simple-svg
+
 pub use crate::defines::group::Group;
 pub use crate::defines::rect::Rect;
 pub use crate::defines::shape::Shape;
