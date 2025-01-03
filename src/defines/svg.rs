@@ -38,16 +38,16 @@ impl<'a> Svg<'a> {
         let group_id = format!("g{}", self.widget_id_count);
         self.add_name_group(group_id, group)
     }
-    
+
     pub fn add_name_group(&mut self, group_id: String, group: Group<'a>) -> String {
         self.group_define_map.insert(group_id.clone(), group);
         group_id
     }
-    
+
     pub fn add_default_group(&mut self, group: Group<'a>) -> String {
         self.add_name_group(DEFAULT_GROUP_ID.to_string(), group)
     }
-    
+
     pub fn show_group_widgets(&self, group_id: String, prefix: String) -> String {
         let group = self.group_define_map.get(&group_id);
 
@@ -59,7 +59,7 @@ impl<'a> Svg<'a> {
                 group_str.push_str("\n");
             }
         }
-        
+
         group_str
     }
 
@@ -81,11 +81,13 @@ impl<'a> Svg<'a> {
 
             svg_str.push_str("  </defs>\n\n");
         }
-        
+
         let default_group = self.group_define_map.get(DEFAULT_GROUP_ID);
         if default_group.is_some() {
             if default_group.unwrap().widget_list.len() > 0 {
-                svg_str.push_str(&self.show_group_widgets(DEFAULT_GROUP_ID.to_string(), "  ".to_string()));
+                svg_str.push_str(
+                    &self.show_group_widgets(DEFAULT_GROUP_ID.to_string(), "  ".to_string()),
+                );
             }
         }
 

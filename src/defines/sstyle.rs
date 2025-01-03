@@ -52,7 +52,7 @@ impl fmt::Display for LineJoin {
 
 pub struct Sstyle {
     pub fill: Option<String>,
-    pub fill_ruler: Option<FillRule>,
+    pub fill_rule: Option<FillRule>,
     pub fill_opacity: Option<f64>,
     pub stroke: Option<String>,
     pub stroke_width: Option<f64>,
@@ -74,7 +74,7 @@ impl Sstyle {
     pub fn new() -> Self {
         Sstyle {
             fill: None,
-            fill_ruler: None,
+            fill_rule: None,
             fill_opacity: None,
             stroke: None,
             stroke_width: None,
@@ -109,10 +109,10 @@ impl Sstyle {
             }
         }
 
-        if self.fill_ruler.is_some() {
+        if self.fill_rule.is_some() {
             transforms.push(format!(
                 "fill-rule=\"{}\"",
-                self.fill_ruler.as_ref().unwrap()
+                self.fill_rule.as_ref().unwrap()
             ));
         }
 
@@ -225,7 +225,7 @@ mod tests {
     fn check_format_fill1() {
         let mut sstyle = Sstyle::new();
 
-        sstyle.fill_ruler = Some(FillRule::Nonzero);
+        sstyle.fill_rule = Some(FillRule::Nonzero);
         sstyle.fill_gradient = Some("s1".to_string());
         sstyle.fill_opacity = Some(0.5);
 
@@ -240,7 +240,7 @@ mod tests {
         let mut sstyle = Sstyle::new();
 
         sstyle.fill = Some("red".to_string());
-        sstyle.fill_ruler = Some(FillRule::Nonzero);
+        sstyle.fill_rule = Some(FillRule::Nonzero);
         sstyle.fill_opacity = Some(30.0);
 
         assert_eq!(
