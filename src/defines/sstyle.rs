@@ -281,14 +281,13 @@ mod tests {
             sstyle.format(),
             "fill=\"none\" transform=\"translate(0.1 0.2) rotate(30) scale(1) skewX(2) skewY(3)\""
         );
-    }
 
-    #[test]
-    fn check_format_transform2() {
-        let mut sstyle = Sstyle::new();
-
+        sstyle.scale_all = None;
         sstyle.scale_xy = Some((2.0, 3.0));
 
-        assert_eq!(sstyle.format(), "fill=\"none\" transform=\"scale(2 3)\"");
+        assert_eq!(
+            sstyle.format(),
+            "fill=\"none\" transform=\"translate(0.1 0.2) rotate(30) scale(2 3) skewX(2) skewY(3)\""
+        );
     }
 }
