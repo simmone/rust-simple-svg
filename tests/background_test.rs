@@ -1,0 +1,14 @@
+use pretty_assertions::assert_eq;
+use simple_svg::*;
+
+#[test]
+fn background_svg_out_test() {
+    let mut svg = Svg::new(100.0, 100.0);
+    svg.background = "#BBC42A";
+
+    let svg_str = svg_out(svg);
+
+    let contents = include_str!("../showcase/basic/background.svg");
+
+    assert_eq!(svg_str, contents);
+}
