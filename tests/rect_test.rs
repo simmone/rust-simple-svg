@@ -13,7 +13,7 @@ fn rect_svg_out_test() {
     let mut group = Group::new();
     group.place_widget(Widget {
         shape_id: rect_id,
-        style: Some(&rect_sstyle),
+        style: Some(rect_sstyle),
         ..Default::default()
     });
 

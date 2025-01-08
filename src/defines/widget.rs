@@ -1,24 +1,24 @@
 use crate::defines::sstyle::Sstyle;
 
 #[derive(Default)]
-pub struct Widget<'a> {
+pub struct Widget {
     pub shape_id: String,
     pub at: Option<(f64, f64)>,
-    pub style: Option<&'a Sstyle>,
+    pub style: Option<Sstyle>,
     pub filter_id: Option<String>,
     pub marker_start_id: Option<String>,
     pub marker_mid_id: Option<String>,
     pub marker_end_id: Option<String>,
 }
 
-impl<'a> Widget<'a> {
+impl Widget {
     pub fn format(&self) -> String {
         let mut format_items = vec![];
 
         format_items.push(format!("<use xlink:href=\"#{}\"", self.shape_id));
 
         if self.style.is_some() {
-            format_items.push(self.style.unwrap().format());
+            format_items.push(self.style.as_ref().unwrap().format());
         }
 
         if self.at.is_some() && self.at.unwrap() != (0.0, 0.0) {
@@ -84,7 +84,7 @@ mod tests {
 
         let widget = Widget {
             shape_id: "s1".to_string(),
-            style: Some(&rect_sstyle),
+            style: Some(rect_sstyle),
             ..Default::default()
         };
 

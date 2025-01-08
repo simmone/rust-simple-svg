@@ -1,17 +1,17 @@
 use crate::defines::widget::Widget;
 
-pub struct Group<'a> {
-    pub widget_list: Vec<Widget<'a>>,
+pub struct Group {
+    pub widget_list: Vec<Widget>,
 }
 
-impl<'a> Group<'a> {
+impl Group {
     pub fn new() -> Self {
         Group {
             widget_list: Vec::new(),
         }
     }
 
-    pub fn place_widget(&mut self, widget: Widget<'a>) {
+    pub fn place_widget(&mut self, widget: Widget) {
         self.widget_list.push(widget);
     }
 }
@@ -43,7 +43,7 @@ mod tests {
         let mut group = Group::new();
         group.place_widget(Widget {
             shape_id: shape_id,
-            style: Some(&rect_sstyle),
+            style: Some(rect_sstyle),
             ..Default::default()
         });
 

@@ -1,5 +1,6 @@
 use std::fmt;
 
+#[derive(Clone)]
 pub enum FillRule {
     Nonzero,
     Evenodd,
@@ -16,6 +17,7 @@ impl fmt::Display for FillRule {
     }
 }
 
+#[derive(Clone)]
 pub enum LineCap {
     Butt,
     Round,
@@ -34,6 +36,7 @@ impl fmt::Display for LineCap {
     }
 }
 
+#[derive(Clone)]
 pub enum LineJoin {
     Miter,
     Round,
@@ -50,6 +53,7 @@ impl fmt::Display for LineJoin {
     }
 }
 
+#[derive(Clone)]
 pub struct Sstyle {
     pub fill: Option<String>,
     pub fill_rule: Option<FillRule>,

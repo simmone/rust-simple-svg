@@ -5,17 +5,17 @@ use std::collections::HashMap;
 pub static DEFAULT_GROUP_ID: &str = "d0";
 pub static BACKGROUND_GROUP_ID: &str = "b0";
 
-pub struct Svg<'a> {
+pub struct Svg {
     pub width: f64,
     pub height: f64,
     pub background: Option<String>,
     pub widget_id_count: usize,
     pub shape_define_map: HashMap<String, Shape>,
-    pub group_define_map: HashMap<String, Group<'a>>,
-    pub group_show_list: Vec<Group<'a>>,
+    pub group_define_map: HashMap<String, Group>,
+    pub group_show_list: Vec<Group>,
 }
 
-impl<'a> Svg<'a> {
+impl Svg {
     pub fn new(width: f64, height: f64) -> Self {
         Svg {
             width,
@@ -35,18 +35,18 @@ impl<'a> Svg<'a> {
         shape_id
     }
 
-    pub fn add_group(&mut self, group: Group<'a>) -> String {
+    pub fn add_group(&mut self, group: Group) -> String {
         self.widget_id_count += 1;
         let group_id = format!("g{}", self.widget_id_count);
         self.add_name_group(group_id, group)
     }
 
-    pub fn add_name_group(&mut self, group_id: String, group: Group<'a>) -> String {
+    pub fn add_name_group(&mut self, group_id: String, group: Group) -> String {
         self.group_define_map.insert(group_id.clone(), group);
         group_id
     }
 
-    pub fn add_default_group(&mut self, group: Group<'a>) -> String {
+    pub fn add_default_group(&mut self, group: Group) -> String {
         self.add_name_group(DEFAULT_GROUP_ID.to_string(), group)
     }
 
