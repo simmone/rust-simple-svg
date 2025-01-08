@@ -27,16 +27,15 @@ pub fn svg_out(mut svg: Svg) -> String {
     ));
     svg_out_str.push_str("    >\n");
 
-    let mut background_sstyle = None;
     if svg.background.is_some() {
         let rect_id = svg.add_shape(Shape::Rect(Rect::new(svg.width, svg.height)));
-        background_sstyle = Some(Sstyle::new());
-        background_sstyle.unwrap().fill = svg.background.clone();
+        let mut background_sstyle = Sstyle::new();
+        background_sstyle.fill = Some(svg.background.as_ref().unwrap().clone());
 
         let mut group = Group::new();
         group.place_widget(Widget {
             shape_id: rect_id,
-            style: Some(&background_sstyle.unwrap()),
+            style: Some(&background_sstyle),
             ..Default::default()
         });
 
