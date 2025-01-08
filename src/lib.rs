@@ -27,9 +27,9 @@ pub fn svg_out(mut svg: Svg) -> String {
     ));
     svg_out_str.push_str("    >\n");
 
+    let mut background_sstyle = Sstyle::new();
     if svg.background.is_some() {
         let rect_id = svg.add_shape(Shape::Rect(Rect::new(svg.width, svg.height)));
-        let mut background_sstyle = Sstyle::new();
         background_sstyle.fill = Some(svg.background.as_ref().unwrap().clone());
 
         let mut group = Group::new();
