@@ -2,12 +2,13 @@ use crate::defines::group::Group;
 use crate::defines::shape::Shape;
 use std::collections::HashMap;
 
-static DEFAULT_GROUP_ID: &str = "d0";
-//static BACKGROUND_GROUP_ID: &str = "b0";
+pub static DEFAULT_GROUP_ID: &str = "d0";
+pub static BACKGROUND_GROUP_ID: &str = "b0";
 
 pub struct Svg<'a> {
     pub width: f64,
     pub height: f64,
+    pub background: Option<String>,
     pub widget_id_count: usize,
     pub shape_define_map: HashMap<String, Shape>,
     pub group_define_map: HashMap<String, Group<'a>>,
@@ -19,6 +20,7 @@ impl<'a> Svg<'a> {
         Svg {
             width,
             height,
+            background: None,
             widget_id_count: 0,
             shape_define_map: HashMap::new(),
             group_define_map: HashMap::new(),
