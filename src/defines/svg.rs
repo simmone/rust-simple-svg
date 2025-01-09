@@ -12,7 +12,7 @@ pub struct Svg {
     pub widget_id_count: usize,
     pub shape_define_map: HashMap<String, Shape>,
     pub group_define_map: HashMap<String, Group>,
-    pub group_show_list: Vec<Group>,
+    pub group_show_list: Vec<String>,
 }
 
 impl Svg {

@@ -42,12 +42,24 @@ pub fn svg_out(mut svg: Svg) -> String {
         });
 
         svg.add_name_group(BACKGROUND_GROUP_ID.to_string(), group);
+        svg.group_show_list.push(BACKGROUND_GROUP_ID.to_string());
+    }
+    
+    let mut group_ids: Vec<String> = svg.group_define_map.into_keys().collect();
+    group_ids.remove(&(DEFAULT_GROUP_ID.to_string()));
+    group_ids.sort();
+    
+    for group_id in group_ids {
+        svg_out_str.push_str("\n");
+        svg_out_str.push_str("  <symbol id=\"{}\">\n", group_id);
+        svg_out_str.push_str(svg.show_group_widgets(group_id, "    "));
+        svg_out_str.push_str("  </symbol>\n");
     }
 
     if svg.group_define_map.contains_key(DEFAULT_GROUP_ID) {
-        let mut widget_list = svg.group_define_map.get(DEFAULT_GROUP_ID).unwrap();
-        if widget_list.length > 0 {
-            svg.group_show_list.push(
+        let widget_list = &svg.group_define_map.get(DEFAULT_GROUP_ID).unwrap().widget_list;
+        if widget_list.len() > 0 {
+            svg.group_show_list.push(DEFAULT_GROUP_ID.to_string());
         }
     }
 
@@ -57,15 +69,3 @@ pub fn svg_out(mut svg: Svg) -> String {
 
     svg_out_str
 }
-
-              (let ([default_not_null (> (length (GROUP-widget_list (hash-ref (SVG-group_define_map (*SVG*)) DEFAULT_GROUP_ID))) 0)])
-                (set-SVG-group_show_list!
-                 (*SVG*)
-                 (append
-                  (if background
-                      (list (cons BACKGROUND_GROUP_ID (cons 0 0)))
-                      '())
-                  (if default_not_null
-                      (list (cons DEFAULT_GROUP_ID (cons 0 0)))
-                      '())))))
-
