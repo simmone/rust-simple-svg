@@ -47,7 +47,7 @@ pub fn svg_out(mut svg: Svg) -> String {
     if svg.group_define_map.contains_key(DEFAULT_GROUP_ID) {
         let mut widget_list = svg.group_define_map.get(DEFAULT_GROUP_ID).unwrap();
         if widget_list.length > 0 {
-            widget_list.push(
+            svg.group_show_list.push(
         }
     }
 
