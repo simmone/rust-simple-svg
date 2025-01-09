@@ -10,6 +10,7 @@ pub use crate::defines::svg::Svg;
 pub use crate::defines::widget::Widget;
 
 use crate::defines::svg::BACKGROUND_GROUP_ID;
+use crate::defines::svg::DEFAULT_GROUP_ID;
 
 pub mod defines;
 
@@ -43,9 +44,28 @@ pub fn svg_out(mut svg: Svg) -> String {
         svg.add_name_group(BACKGROUND_GROUP_ID.to_string(), group);
     }
 
+    if svg.group_define_map.contains_key(DEFAULT_GROUP_ID) {
+        let mut widget_list = svg.group_define_map.get(DEFAULT_GROUP_ID).unwrap();
+        if widget_list.length > 0 {
+            widget_list.push(
+        }
+    }
+
     svg_out_str.push_str(&svg.flush_data());
 
     svg_out_str.push_str("</svg>\n");
 
     svg_out_str
 }
+
+              (let ([default_not_null (> (length (GROUP-widget_list (hash-ref (SVG-group_define_map (*SVG*)) DEFAULT_GROUP_ID))) 0)])
+                (set-SVG-group_show_list!
+                 (*SVG*)
+                 (append
+                  (if background
+                      (list (cons BACKGROUND_GROUP_ID (cons 0 0)))
+                      '())
+                  (if default_not_null
+                      (list (cons DEFAULT_GROUP_ID (cons 0 0)))
+                      '())))))
+
