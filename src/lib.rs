@@ -45,14 +45,15 @@ pub fn svg_out(mut svg: Svg) -> String {
         svg.group_show_list.push(BACKGROUND_GROUP_ID.to_string());
     }
     
-    let mut group_ids: Vec<String> = svg.group_define_map.into_keys().collect();
-    group_ids.remove(&(DEFAULT_GROUP_ID.to_string()));
+    svg_out_str.push_str(&svg.flush_data());
+
+    let mut group_ids: Vec<String> = svg.group_define_map.clone().into_keys().filter(|group_id| group_id != DEFAULT_GROUP_ID).collect();
     group_ids.sort();
     
     for group_id in group_ids {
         svg_out_str.push_str("\n");
-        svg_out_str.push_str("  <symbol id=\"{}\">\n", group_id);
-        svg_out_str.push_str(svg.show_group_widgets(group_id, "    "));
+        svg_out_str.push_str(&format!("  <symbol id=\"{}\">\n", group_id));
+        svg_out_str.push_str(&svg.show_group_widgets(group_id, "    ".to_string()));
         svg_out_str.push_str("  </symbol>\n");
     }
 
@@ -62,8 +63,6 @@ pub fn svg_out(mut svg: Svg) -> String {
             svg.group_show_list.push(DEFAULT_GROUP_ID.to_string());
         }
     }
-
-    svg_out_str.push_str(&svg.flush_data());
 
     svg_out_str.push_str("</svg>\n");
 

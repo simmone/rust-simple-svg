@@ -1,6 +1,6 @@
 use crate::defines::sstyle::Sstyle;
 
-#[derive(Default)]
+#[derive(Default, Clone)]
 pub struct Widget {
     pub shape_id: String,
     pub at: Option<(f64, f64)>,

@@ -7,8 +7,10 @@ fn background_svg_out_test() {
     svg.background = Some("#BBC42A".to_string());
 
     let svg_str = svg_out(svg);
+    
+    println!("{}", svg_str);
 
     let contents = include_str!("../showcase/basic/background.svg");
-
+    
     assert_eq!(svg_str, contents);
 }

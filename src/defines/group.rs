@@ -1,5 +1,6 @@
 use crate::defines::widget::Widget;
 
+#[derive(Clone)]
 pub struct Group {
     pub widget_list: Vec<Widget>,
 }

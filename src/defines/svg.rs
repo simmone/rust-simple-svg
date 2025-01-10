@@ -81,7 +81,7 @@ impl Svg {
                 svg_str.push_str(&format!("{}", shape.format(shape_id.to_string())));
             }
 
-            svg_str.push_str("  </defs>\n\n");
+            svg_str.push_str("  </defs>\n");
         }
 
         let default_group = self.group_define_map.get(DEFAULT_GROUP_ID);
