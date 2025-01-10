@@ -42,27 +42,23 @@ pub fn svg_out(mut svg: Svg) -> String {
         });
 
         svg.add_name_group(BACKGROUND_GROUP_ID.to_string(), group);
-        svg.group_show_list.push(BACKGROUND_GROUP_ID.to_string());
-    }
-    
-    svg_out_str.push_str(&svg.flush_data());
-
-    let mut group_ids: Vec<String> = svg.group_define_map.clone().into_keys().filter(|group_id| group_id != DEFAULT_GROUP_ID).collect();
-    group_ids.sort();
-    
-    for group_id in group_ids {
-        svg_out_str.push_str("\n");
-        svg_out_str.push_str(&format!("  <symbol id=\"{}\">\n", group_id));
-        svg_out_str.push_str(&svg.show_group_widgets(group_id, "    ".to_string()));
-        svg_out_str.push_str("  </symbol>\n");
+        svg.group_show_list
+            .push((BACKGROUND_GROUP_ID.to_string(), (0.0, 0.0)));
     }
 
     if svg.group_define_map.contains_key(DEFAULT_GROUP_ID) {
-        let widget_list = &svg.group_define_map.get(DEFAULT_GROUP_ID).unwrap().widget_list;
+        let widget_list = &svg
+            .group_define_map
+            .get(DEFAULT_GROUP_ID)
+            .unwrap()
+            .widget_list;
         if widget_list.len() > 0 {
-            svg.group_show_list.push(DEFAULT_GROUP_ID.to_string());
+            svg.group_show_list
+                .push((DEFAULT_GROUP_ID.to_string(), (0.0, 0.0)));
         }
     }
+
+    svg_out_str.push_str(&svg.flush_data());
 
     svg_out_str.push_str("</svg>\n");
 

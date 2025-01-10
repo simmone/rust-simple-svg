@@ -12,7 +12,7 @@ pub struct Svg {
     pub widget_id_count: usize,
     pub shape_define_map: HashMap<String, Shape>,
     pub group_define_map: HashMap<String, Group>,
-    pub group_show_list: Vec<String>,
+    pub group_show_list: Vec<(String, (f64, f64))>,
 }
 
 impl Svg {
@@ -71,8 +71,7 @@ impl Svg {
         if self.shape_define_map.len() > 0 {
             svg_str.push_str("  <defs>\n");
 
-            let shape_define_map_c = self.shape_define_map.clone();
-            let mut shape_ids: Vec<String> = shape_define_map_c.into_keys().collect();
+            let mut shape_ids: Vec<String> = self.shape_define_map.clone().into_keys().collect();
             shape_ids.sort();
 
             for shape_id in shape_ids {
@@ -84,13 +83,50 @@ impl Svg {
             svg_str.push_str("  </defs>\n");
         }
 
+        let mut group_ids: Vec<String> = self
+            .group_define_map
+            .clone()
+            .into_keys()
+            .filter(|group_id| group_id != DEFAULT_GROUP_ID)
+            .collect();
+        group_ids.sort();
+
+        for group_id in group_ids {
+            svg_str.push_str("\n");
+            svg_str.push_str(&format!("  <symbol id=\"{}\">\n", group_id));
+            svg_str.push_str(&self.show_group_widgets(group_id, "    ".to_string()));
+            svg_str.push_str("  </symbol>\n");
+        }
+
         let default_group = self.group_define_map.get(DEFAULT_GROUP_ID);
         if default_group.is_some() {
             if default_group.unwrap().widget_list.len() > 0 {
+                svg_str.push_str("\n");
                 svg_str.push_str(
                     &self.show_group_widgets(DEFAULT_GROUP_ID.to_string(), "  ".to_string()),
                 );
             }
+        }
+
+        let group_shows: Vec<(String, (f64, f64))> = self
+            .group_show_list
+            .clone()
+            .into_iter()
+            .filter(|group_show| group_show.0 != DEFAULT_GROUP_ID.to_string())
+            .collect();
+
+        for group_show in group_shows {
+            let group_id = group_show.0;
+            let group_pos = group_show.1;
+
+            svg_str.push_str("\n");
+            svg_str.push_str(&format!("  <use xlink:href=\"#{group_id}\" "));
+
+            if group_pos != (0.0, 0.0) {
+                svg_str.push_str(&format!("x=\"{}\" y=\"{}\" ", group_pos.0, group_pos.1));
+            }
+
+            svg_str.push_str("/>\n");
         }
 
         svg_str
