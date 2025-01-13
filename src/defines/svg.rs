@@ -8,7 +8,6 @@ pub static BACKGROUND_GROUP_ID: &str = "b0";
 pub struct Svg {
     pub width: f64,
     pub height: f64,
-    pub background: Option<String>,
     pub widget_id_count: usize,
     pub shape_define_map: HashMap<String, Shape>,
     pub group_define_map: HashMap<String, Group>,
@@ -20,7 +19,6 @@ impl Svg {
         Svg {
             width,
             height,
-            background: None,
             widget_id_count: 0,
             shape_define_map: HashMap::new(),
             group_define_map: HashMap::new(),
@@ -33,6 +31,25 @@ impl Svg {
         let shape_id = format!("s{}", self.widget_id_count);
         self.shape_define_map.insert(shape_id.clone(), shape);
         shape_id
+    }
+    
+    pub fn set_background(&mut self, shape: Shape) {
+        let rect_id = add_shape(Shape::Rect(Rect::new(width, height)));
+        
+        let mut background_sstyle = Sstyle::new();
+        background_sstyle.fill = Some(background.as_ref().unwrap().clone());
+
+        let mut group = Group::new();
+        group.place_widget(Widget {
+            shape_id: rect_id,
+            style: Some(background_sstyle),
+            ..Default::default()
+        });
+
+        add_name_group(BACKGROUND_GROUP_ID.to_string(), group);
+        group_show_list
+            .push((BACKGROUND_GROUP_ID.to_string(), (0.0, 0.0)));
+
     }
 
     pub fn add_group(&mut self, group: Group) -> String {

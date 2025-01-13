@@ -28,24 +28,6 @@ pub fn svg_out(mut svg: Svg) -> String {
     ));
     svg_out_str.push_str("    >\n");
 
-    if svg.background.is_some() {
-        let rect_id = svg.add_shape(Shape::Rect(Rect::new(svg.width, svg.height)));
-
-        let mut background_sstyle = Sstyle::new();
-        background_sstyle.fill = Some(svg.background.as_ref().unwrap().clone());
-
-        let mut group = Group::new();
-        group.place_widget(Widget {
-            shape_id: rect_id,
-            style: Some(background_sstyle),
-            ..Default::default()
-        });
-
-        svg.add_name_group(BACKGROUND_GROUP_ID.to_string(), group);
-        svg.group_show_list
-            .push((BACKGROUND_GROUP_ID.to_string(), (0.0, 0.0)));
-    }
-
     if svg.group_define_map.contains_key(DEFAULT_GROUP_ID) {
         let widget_list = &svg
             .group_define_map

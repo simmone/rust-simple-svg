@@ -2,7 +2,7 @@ use pretty_assertions::assert_eq;
 use simple_svg::*;
 
 #[test]
-fn background_svg_out_test() {
+fn background_test() {
     let mut svg = Svg::new(100.0, 100.0);
     svg.background = Some("#BBC42A".to_string());
 
