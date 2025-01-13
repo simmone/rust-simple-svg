@@ -114,12 +114,16 @@ impl Svg {
             .into_iter()
             .filter(|group_show| group_show.0 != DEFAULT_GROUP_ID.to_string())
             .collect();
+        
+        if group_shows.len() > 0 {
+            svg_str.push_str("\n");
+        }
 
         for group_show in group_shows {
             let group_id = group_show.0;
             let group_pos = group_show.1;
 
-            svg_str.push_str("\n");
+
             svg_str.push_str(&format!("  <use xlink:href=\"#{group_id}\" "));
 
             if group_pos != (0.0, 0.0) {
