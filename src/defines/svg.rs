@@ -1,4 +1,7 @@
 use crate::defines::group::Group;
+use crate::defines::widget::Widget;
+use crate::defines::sstyle::Sstyle;
+use crate::defines::rect::Rect;
 use crate::defines::shape::Shape;
 use std::collections::HashMap;
 
@@ -33,11 +36,11 @@ impl Svg {
         shape_id
     }
     
-    pub fn set_background(&mut self, shape: Shape) {
-        let rect_id = add_shape(Shape::Rect(Rect::new(width, height)));
+    pub fn set_background(&mut self, background: String) {
+        let rect_id = self.add_shape(Shape::Rect(Rect::new(self.width, self.height)));
         
         let mut background_sstyle = Sstyle::new();
-        background_sstyle.fill = Some(background.as_ref().unwrap().clone());
+        background_sstyle.fill = Some(background);
 
         let mut group = Group::new();
         group.place_widget(Widget {
@@ -46,8 +49,8 @@ impl Svg {
             ..Default::default()
         });
 
-        add_name_group(BACKGROUND_GROUP_ID.to_string(), group);
-        group_show_list
+        self.add_name_group(BACKGROUND_GROUP_ID.to_string(), group);
+        self.group_show_list
             .push((BACKGROUND_GROUP_ID.to_string(), (0.0, 0.0)));
 
     }

@@ -4,7 +4,7 @@ use simple_svg::*;
 #[test]
 fn rect_in_background_test() {
     let mut svg = Svg::new(100.0, 100.0);
-    svg.background = Some("#BBC42A".to_string());
+    svg.set_background("#BBC42A".to_string());
 
     let rect_id = svg.add_shape(Shape::Rect(Rect::new(50.0, 50.0)));
 
