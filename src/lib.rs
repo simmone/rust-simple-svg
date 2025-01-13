@@ -28,12 +28,18 @@ pub fn svg_out(mut svg: Svg) -> String {
     ));
     svg_out_str.push_str("    >\n");
 
+    if svg.background != None {
+        svg.group_show_list
+            .push((BACKGROUND_GROUP_ID.to_string(), (0.0, 0.0)));
+    }
+
     if svg.group_define_map.contains_key(DEFAULT_GROUP_ID) {
         let widget_list = &svg
             .group_define_map
             .get(DEFAULT_GROUP_ID)
             .unwrap()
             .widget_list;
+
         if widget_list.len() > 0 {
             svg.group_show_list
                 .push((DEFAULT_GROUP_ID.to_string(), (0.0, 0.0)));
