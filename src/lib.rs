@@ -2,16 +2,23 @@
 //!
 //! This is rewrite from Racket library: racket-simple-svg
 
+#[doc(hidden)]
 pub use crate::defines::group::Group;
+#[doc(hidden)]
 pub use crate::defines::rect::Rect;
+#[doc(hidden)]
 pub use crate::defines::shape::Shape;
+#[doc(hidden)]
 pub use crate::defines::sstyle::Sstyle;
+#[doc(hidden)]
 pub use crate::defines::svg::Svg;
+#[doc(hidden)]
 pub use crate::defines::widget::Widget;
 
 use crate::defines::svg::BACKGROUND_GROUP_ID;
 use crate::defines::svg::DEFAULT_GROUP_ID;
 
+#[doc(hidden)]
 pub mod defines;
 
 pub fn svg_out(mut svg: Svg) -> String {
