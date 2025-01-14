@@ -7,7 +7,7 @@ fn background_test() {
     svg.set_background("#BBC42A".to_string());
 
     let svg_str = svg_out(svg);
-    
+
     println!("{}", svg_str);
 
     let contents = include_str!("../showcase/basic/background.svg");

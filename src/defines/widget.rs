@@ -17,16 +17,16 @@ impl Widget {
 
         format_items.push(format!("<use xlink:href=\"#{}\"", self.shape_id));
 
-        if self.style.is_some() {
-            format_items.push(self.style.as_ref().unwrap().format());
-        }
-
         if self.at.is_some() && self.at.unwrap() != (0.0, 0.0) {
             format_items.push(format!(
                 "x=\"{}\" y=\"{}\"",
                 self.at.unwrap().0,
                 self.at.unwrap().1
             ));
+        }
+
+        if self.style.is_some() {
+            format_items.push(self.style.as_ref().unwrap().format());
         }
 
         if self.filter_id.is_some() {

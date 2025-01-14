@@ -1,8 +1,8 @@
 use crate::defines::group::Group;
-use crate::defines::widget::Widget;
-use crate::defines::sstyle::Sstyle;
 use crate::defines::rect::Rect;
 use crate::defines::shape::Shape;
+use crate::defines::sstyle::Sstyle;
+use crate::defines::widget::Widget;
 use std::collections::HashMap;
 
 pub static DEFAULT_GROUP_ID: &str = "d0";
@@ -37,12 +37,12 @@ impl Svg {
         self.shape_define_map.insert(shape_id.clone(), shape);
         shape_id
     }
-    
+
     pub fn set_background(&mut self, background: String) {
         self.background = Some(background.clone());
 
         let rect_id = self.add_shape(Shape::Rect(Rect::new(self.width, self.height)));
-        
+
         let mut background_sstyle = Sstyle::new();
         background_sstyle.fill = Some(background);
 
@@ -89,6 +89,7 @@ impl Svg {
     pub fn flush_data(&self) -> String {
         let mut svg_str = String::new();
 
+        // defs
         if self.shape_define_map.len() > 0 {
             svg_str.push_str("  <defs>\n");
 
@@ -104,6 +105,7 @@ impl Svg {
             svg_str.push_str("  </defs>\n");
         }
 
+        // group defines
         let mut group_ids: Vec<String> = self
             .group_define_map
             .clone()
@@ -119,23 +121,14 @@ impl Svg {
             svg_str.push_str("  </symbol>\n");
         }
 
-        let default_group = self.group_define_map.get(DEFAULT_GROUP_ID);
-        if default_group.is_some() {
-            if default_group.unwrap().widget_list.len() > 0 {
-                svg_str.push_str("\n");
-                svg_str.push_str(
-                    &self.show_group_widgets(DEFAULT_GROUP_ID.to_string(), "  ".to_string()),
-                );
-            }
-        }
-
+        // show group in order except default group
         let group_shows: Vec<(String, (f64, f64))> = self
             .group_show_list
             .clone()
             .into_iter()
             .filter(|group_show| group_show.0 != DEFAULT_GROUP_ID.to_string())
             .collect();
-        
+
         if group_shows.len() > 0 {
             svg_str.push_str("\n");
         }
@@ -151,6 +144,17 @@ impl Svg {
             }
 
             svg_str.push_str("/>\n");
+        }
+
+        // show default group
+        let default_group = self.group_define_map.get(DEFAULT_GROUP_ID);
+        if default_group.is_some() {
+            if default_group.unwrap().widget_list.len() > 0 {
+                svg_str.push_str("\n");
+                svg_str.push_str(
+                    &self.show_group_widgets(DEFAULT_GROUP_ID.to_string(), "  ".to_string()),
+                );
+            }
         }
 
         svg_str
