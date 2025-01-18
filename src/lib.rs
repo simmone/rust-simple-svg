@@ -33,6 +33,17 @@ pub fn svg_out(mut svg: Svg) -> String {
         svg.width.to_string(),
         svg.height.to_string()
     ));
+
+    if svg.view_box.is_some() {
+        svg_out_str.push_str(&format!(
+            "    viewBox=\"{} {} {} {}\"\n",
+            svg.view_box.as_ref().unwrap().min_x,
+            svg.view_box.as_ref().unwrap().min_y,
+            svg.view_box.as_ref().unwrap().width,
+            svg.view_box.as_ref().unwrap().height
+        ))
+    }
+
     svg_out_str.push_str("    >\n");
 
     if svg.background != None {

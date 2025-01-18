@@ -2,6 +2,7 @@ use crate::defines::group::Group;
 use crate::defines::rect::Rect;
 use crate::defines::shape::Shape;
 use crate::defines::sstyle::Sstyle;
+use crate::defines::viewbox::ViewBox;
 use crate::defines::widget::Widget;
 use std::collections::HashMap;
 
@@ -12,6 +13,7 @@ pub struct Svg {
     pub width: f64,
     pub height: f64,
     pub background: Option<String>,
+    pub view_box: Option<ViewBox>,
     pub widget_id_count: usize,
     pub shape_define_map: HashMap<String, Shape>,
     pub group_define_map: HashMap<String, Group>,
@@ -24,6 +26,7 @@ impl Svg {
             width,
             height,
             background: None,
+            view_box: None,
             widget_id_count: 0,
             shape_define_map: HashMap::new(),
             group_define_map: HashMap::new(),
@@ -54,6 +57,10 @@ impl Svg {
         });
 
         self.add_name_group(BACKGROUND_GROUP_ID.to_string(), group);
+    }
+
+    pub fn set_viewbox(&mut self, min_x: f64, min_y: f64, width: f64, height: f64) {
+        self.view_box = Some(ViewBox::new(min_x, min_y, width, height));
     }
 
     pub fn add_group(&mut self, group: Group) -> String {
