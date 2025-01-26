@@ -79,7 +79,7 @@ fn circle3_test() {
 
     let svg_str = svg_out(svg);
 
-    let contents = include_str!("../showcase/shapes/circle/circle3.svg");
+    let contents = include_str!("../showcase/shapes/circle/circle4.svg");
 
     assert_eq!(svg_str, contents);
 }

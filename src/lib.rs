@@ -3,11 +3,15 @@
 //! This is rewrite from Racket library: racket-simple-svg
 
 #[doc(hidden)]
+pub use crate::defines::circle::Circle;
+#[doc(hidden)]
+pub use crate::defines::ellipse::Ellipse;
+#[doc(hidden)]
 pub use crate::defines::group::Group;
 #[doc(hidden)]
-pub use crate::defines::rect::Rect;
+pub use crate::defines::line::Line;
 #[doc(hidden)]
-pub use crate::defines::circle::Circle;
+pub use crate::defines::rect::Rect;
 #[doc(hidden)]
 pub use crate::defines::shape::Shape;
 #[doc(hidden)]

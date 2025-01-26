@@ -5,9 +5,7 @@ pub struct Circle {
 
 impl Circle {
     pub fn new(radius: f64) -> Self {
-        Circle {
-            radius,
-        }
+        Circle { radius }
     }
 
     pub fn format(&self, shape_id: String) -> String {

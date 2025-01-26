@@ -12,8 +12,10 @@ fn check_add_shape() {
     match svg.shape_define_map.get("s1").unwrap() {
         Shape::Rect(s1) => {
             assert_eq!(s1.width, 30.0);
-        },
-        Shape::Circle(_) => {},
+        }
+        Shape::Circle(_) => {}
+        Shape::Ellipse(_) => {}
+        Shape::Line(_) => {}
     }
 
     let rect2 = Rect::new(10.0, 5.0);
@@ -23,8 +25,10 @@ fn check_add_shape() {
     match svg.shape_define_map.get("s2").unwrap() {
         Shape::Rect(s2) => {
             assert_eq!(s2.width, 10.0);
-        },
-        Shape::Circle(_) => {},
+        }
+        Shape::Circle(_) => {}
+        Shape::Ellipse(_) => {}
+        Shape::Line(_) => {}
     }
 }
 

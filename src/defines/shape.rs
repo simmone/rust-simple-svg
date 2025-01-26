@@ -1,10 +1,14 @@
-use crate::defines::rect::Rect;
 use crate::defines::circle::Circle;
+use crate::defines::ellipse::Ellipse;
+use crate::defines::line::Line;
+use crate::defines::rect::Rect;
 
 #[derive(Clone)]
 pub enum Shape {
     Rect(Rect),
     Circle(Circle),
+    Ellipse(Ellipse),
+    Line(Line),
 }
 
 impl Shape {
@@ -12,6 +16,8 @@ impl Shape {
         match self {
             Shape::Rect(rect) => rect.format(shape_id),
             Shape::Circle(circle) => circle.format(shape_id),
+            Shape::Ellipse(ellipse) => ellipse.format(shape_id),
+            Shape::Line(line) => line.format(shape_id),
         }
     }
 }
