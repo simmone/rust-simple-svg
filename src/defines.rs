@@ -2,6 +2,7 @@ pub mod circle;
 pub mod ellipse;
 pub mod group;
 pub mod line;
+pub mod polygon;
 pub mod rect;
 pub mod shape;
 pub mod sstyle;

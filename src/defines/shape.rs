@@ -1,6 +1,7 @@
 use crate::defines::circle::Circle;
 use crate::defines::ellipse::Ellipse;
 use crate::defines::line::Line;
+use crate::defines::polygon::Polygon;
 use crate::defines::rect::Rect;
 
 #[derive(Clone)]
@@ -9,6 +10,7 @@ pub enum Shape {
     Circle(Circle),
     Ellipse(Ellipse),
     Line(Line),
+    Polygon(Polygon),
 }
 
 impl Shape {
@@ -18,6 +20,7 @@ impl Shape {
             Shape::Circle(circle) => circle.format(shape_id),
             Shape::Ellipse(ellipse) => ellipse.format(shape_id),
             Shape::Line(line) => line.format(shape_id),
+            Shape::Polygon(polygon) => polygon.format(shape_id),
         }
     }
 }

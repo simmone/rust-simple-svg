@@ -11,6 +11,8 @@ pub use crate::defines::group::Group;
 #[doc(hidden)]
 pub use crate::defines::line::Line;
 #[doc(hidden)]
+pub use crate::defines::polygon::Polygon;
+#[doc(hidden)]
 pub use crate::defines::rect::Rect;
 #[doc(hidden)]
 pub use crate::defines::shape::Shape;

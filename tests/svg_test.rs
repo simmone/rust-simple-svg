@@ -16,6 +16,7 @@ fn check_add_shape() {
         Shape::Circle(_) => {}
         Shape::Ellipse(_) => {}
         Shape::Line(_) => {}
+        Shape::Polygon(_) => {}
     }
 
     let rect2 = Rect::new(10.0, 5.0);
@@ -29,6 +30,7 @@ fn check_add_shape() {
         Shape::Circle(_) => {}
         Shape::Ellipse(_) => {}
         Shape::Line(_) => {}
+        Shape::Polygon(_) => {}
     }
 }
 
