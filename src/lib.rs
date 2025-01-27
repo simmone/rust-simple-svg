@@ -13,6 +13,8 @@ pub use crate::defines::line::Line;
 #[doc(hidden)]
 pub use crate::defines::polygon::Polygon;
 #[doc(hidden)]
+pub use crate::defines::polyline::Polyline;
+#[doc(hidden)]
 pub use crate::defines::rect::Rect;
 #[doc(hidden)]
 pub use crate::defines::shape::Shape;

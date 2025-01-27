@@ -3,6 +3,7 @@ pub mod ellipse;
 pub mod group;
 pub mod line;
 pub mod polygon;
+pub mod polyline;
 pub mod rect;
 pub mod shape;
 pub mod sstyle;
