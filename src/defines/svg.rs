@@ -41,6 +41,21 @@ impl Svg {
         shape_id
     }
 
+    pub fn add_group(&mut self, group: Group) -> String {
+        self.widget_id_count += 1;
+        let group_id = format!("g{}", self.widget_id_count);
+        self.add_name_group(group_id, group)
+    }
+
+    pub fn add_name_group(&mut self, group_id: String, group: Group) -> String {
+        self.group_define_map.insert(group_id.clone(), group);
+        group_id
+    }
+
+    pub fn add_default_group(&mut self, group: Group) -> String {
+        self.add_name_group(DEFAULT_GROUP_ID.to_string(), group)
+    }
+
     pub fn set_background(&mut self, background: String) {
         self.background = Some(background.clone());
 
@@ -61,21 +76,6 @@ impl Svg {
 
     pub fn set_viewbox(&mut self, min_x: f64, min_y: f64, width: f64, height: f64) {
         self.view_box = Some(ViewBox::new(min_x, min_y, width, height));
-    }
-
-    pub fn add_group(&mut self, group: Group) -> String {
-        self.widget_id_count += 1;
-        let group_id = format!("g{}", self.widget_id_count);
-        self.add_name_group(group_id, group)
-    }
-
-    pub fn add_name_group(&mut self, group_id: String, group: Group) -> String {
-        self.group_define_map.insert(group_id.clone(), group);
-        group_id
-    }
-
-    pub fn add_default_group(&mut self, group: Group) -> String {
-        self.add_name_group(DEFAULT_GROUP_ID.to_string(), group)
     }
 
     pub fn show_group_widgets(&self, group_id: String, prefix: String) -> String {
