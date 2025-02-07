@@ -292,6 +292,8 @@ fn five_circle_pattern_test() {
     svg.add_default_group(default_group);
 
     let svg_str = svg_out(svg);
+    
+    print!("{}", svg_str);
 
     let contents = include_str!("../showcase/group/group3.svg");
 
