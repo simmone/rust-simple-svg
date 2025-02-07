@@ -4,6 +4,7 @@ use crate::defines::line::Line;
 use crate::defines::polygon::Polygon;
 use crate::defines::polyline::Polyline;
 use crate::defines::rect::Rect;
+use crate::defines::filter::Filter;
 
 #[derive(Clone)]
 pub enum Shape {
@@ -13,6 +14,7 @@ pub enum Shape {
     Line(Line),
     Polygon(Polygon),
     Polyline(Polyline),
+    Filter(Filter),
 }
 
 impl Shape {
@@ -24,6 +26,7 @@ impl Shape {
             Shape::Line(line) => line.format(shape_id),
             Shape::Polygon(polygon) => polygon.format(shape_id),
             Shape::Polyline(polyline) => polyline.format(shape_id),
+            Shape::Filter(filter) => filter.format(shape_id),
         }
     }
 }

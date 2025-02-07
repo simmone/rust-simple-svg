@@ -236,16 +236,66 @@ fn five_circle_pattern_test() {
 
     five_circle_group.place_widget(Widget {
         shape_id: circle_id.clone(),
-        style: Some(circle3_sstyle),
+        style: Some(circle4_sstyle),
         at: Some((320.0, 180.0)),
         ..Default::default()
     });
 
     five_circle_group.place_widget(Widget {
         shape_id: circle_id.clone(),
-        style: Some(circle3_sstyle),
+        style: Some(circle5_sstyle),
         at: Some((400.0, 120.0)),
         ..Default::default()
     });
 
     let five_circle_group_id = svg.add_group(five_circle_group);
+
+    let mut default_group = Group::new();
+    
+    let filter_id = svg.add_shape(Shape::Filter(Filter::new()));
+
+    let mut group_sstyle = Sstyle::new();
+    group_sstyle.stroke_width = Some(12.0);
+
+    default_group.place_widget(Widget {
+        shape_id: five_circle_group_id.clone(),
+        style: Some(group_sstyle.clone()),
+        filter_id: Some(filter_id.clone()),
+        at: Some((0.0, 0.0)),
+        ..Default::default()
+    });
+
+    default_group.place_widget(Widget {
+        shape_id: five_circle_group_id.clone(),
+        style: Some(group_sstyle.clone()),
+        filter_id: Some(filter_id.clone()),
+        at: Some((0.0, 300.0)),
+        ..Default::default()
+    });
+
+    default_group.place_widget(Widget {
+        shape_id: five_circle_group_id.clone(),
+        style: Some(group_sstyle.clone()),
+        filter_id: Some(filter_id.clone()),
+        at: Some((500.0, 0.0)),
+        ..Default::default()
+    });
+
+    default_group.place_widget(Widget {
+        shape_id: five_circle_group_id.clone(),
+        style: Some(group_sstyle.clone()),
+        filter_id: Some(filter_id.clone()),
+        at: Some((500.0, 300.0)),
+        ..Default::default()
+    });
+
+    svg.add_default_group(default_group);
+
+    let svg_str = svg_out(svg);
+
+    let contents = include_str!("../showcase/group/group3.svg");
+
+    assert_eq!(svg_str, contents);
+}
+
+    

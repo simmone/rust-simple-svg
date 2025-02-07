@@ -10,3 +10,4 @@ pub mod sstyle;
 pub mod svg;
 pub mod viewbox;
 pub mod widget;
+pub mod filter;

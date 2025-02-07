@@ -18,6 +18,7 @@ fn check_add_shape() {
         Shape::Line(_) => {}
         Shape::Polygon(_) => {}
         Shape::Polyline(_) => {}
+        Shape::Filter(_) => {}
     }
 
     let rect2 = Rect::new(10.0, 5.0);
@@ -33,6 +34,7 @@ fn check_add_shape() {
         Shape::Line(_) => {}
         Shape::Polygon(_) => {}
         Shape::Polyline(_) => {}
+        Shape::Filter(_) => {}
     }
 }
 
