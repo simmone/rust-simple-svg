@@ -51,18 +51,22 @@ mod tests {
 
         assert_eq!(
             Filter::format(&filter, "1".to_string()),
-            "    <filter id=\"1\" r=\"30\" />\n"
-    <filter id="1">
-      <feGaussianBlur in="SourceAlpha" stdDeviation="2"></feGaussianBlur>
-      <feOffset dx="3" dy="3" result="offsetblur"></feOffset>
-      <feFlood flood-color="black"></feFlood>
-      <feComposite in2="offsetblur" operator="in"></feComposite>
-      <feMerge>
-        <feMergeNode></feMergeNode>
-        <feMergeNode in="SourceGraphic"></feMergeNode>
-      </feMerge>
-    </filter>
-
+            {
+                let mut c_str = String::new();
+                
+                c_str.push_str("    <filter id=\"1\">\n");
+                c_str.push_str("      <feGaussianBlur in=\"SourceAlpha\" stdDeviation=\"2\"></feGaussianBlur>\n");
+                c_str.push_str("      <feOffset dx=\"3\" dy=\"3\" result=\"offsetblur\"></feOffset>\n");
+                c_str.push_str("      <feFlood flood-color=\"black\"></feFlood>\n");
+                c_str.push_str("      <feComposite in2=\"offsetblur\" operator=\"in\"></feComposite>\n");
+                c_str.push_str("      <feMerge>\n");
+                c_str.push_str("        <feMergeNode></feMergeNode>\n");
+                c_str.push_str("        <feMergeNode in=\"SourceGraphic\"></feMergeNode>\n");
+                c_str.push_str("      </feMerge>\n");
+                c_str.push_str("    </filter>\n");
+                
+                c_str
+            }
         );
     }
 }

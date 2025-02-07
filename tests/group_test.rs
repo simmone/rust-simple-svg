@@ -249,9 +249,3 @@ fn five_circle_pattern_test() {
     });
 
     let five_circle_group_id = svg.add_group(five_circle_group);
-    
-
-
-
-    
-    
