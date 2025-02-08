@@ -193,26 +193,26 @@ fn group_pattern_test() {
 #[test]
 fn five_circle_pattern_test() {
     let mut svg = Svg::new(1000.0, 600.0);
-    
+
     let circle_id = svg.add_shape(Shape::Circle(Circle::new(60.0)));
 
     let mut circle1_sstyle = Sstyle::new();
-    circle1_sstyle.fill = Some("rgb(11, 112, 191)".to_string());
+    circle1_sstyle.stroke = Some("rgb(11, 112, 191)".to_string());
 
     let mut circle2_sstyle = Sstyle::new();
-    circle2_sstyle.fill = Some("rgb(240, 183, 0)".to_string());
+    circle2_sstyle.stroke = Some("rgb(240, 183, 0)".to_string());
 
     let mut circle3_sstyle = Sstyle::new();
-    circle3_sstyle.fill = Some("rgb(0, 0, 0)".to_string());
+    circle3_sstyle.stroke = Some("rgb(0, 0, 0)".to_string());
 
     let mut circle4_sstyle = Sstyle::new();
-    circle4_sstyle.fill = Some("rgb(13, 146, 38)".to_string());
+    circle4_sstyle.stroke = Some("rgb(13, 146, 38)".to_string());
 
     let mut circle5_sstyle = Sstyle::new();
-    circle5_sstyle.fill = Some("rgb(214, 0, 23)".to_string());
+    circle5_sstyle.stroke = Some("rgb(214, 0, 23)".to_string());
 
     let mut five_circle_group = Group::new();
-    
+
     five_circle_group.place_widget(Widget {
         shape_id: circle_id.clone(),
         style: Some(circle1_sstyle),
@@ -251,7 +251,7 @@ fn five_circle_pattern_test() {
     let five_circle_group_id = svg.add_group(five_circle_group);
 
     let mut default_group = Group::new();
-    
+
     let filter_id = svg.add_shape(Shape::Filter(Filter::new()));
 
     let mut group_sstyle = Sstyle::new();
@@ -292,12 +292,10 @@ fn five_circle_pattern_test() {
     svg.add_default_group(default_group);
 
     let svg_str = svg_out(svg);
-    
+
     print!("{}", svg_str);
 
     let contents = include_str!("../showcase/group/group3.svg");
 
     assert_eq!(svg_str, contents);
 }
-
-    

@@ -1,5 +1,6 @@
 pub mod circle;
 pub mod ellipse;
+pub mod filter;
 pub mod group;
 pub mod line;
 pub mod polygon;
@@ -10,4 +11,3 @@ pub mod sstyle;
 pub mod svg;
 pub mod viewbox;
 pub mod widget;
-pub mod filter;

@@ -14,7 +14,8 @@ pub struct Svg {
     pub height: f64,
     pub background: Option<String>,
     pub view_box: Option<ViewBox>,
-    pub widget_id_count: usize,
+    pub shape_id_count: usize,
+    pub group_id_count: usize,
     pub shape_define_map: HashMap<String, Shape>,
     pub group_define_map: HashMap<String, Group>,
     pub group_show_list: Vec<(String, (f64, f64))>,
@@ -27,7 +28,8 @@ impl Svg {
             height,
             background: None,
             view_box: None,
-            widget_id_count: 0,
+            shape_id_count: 0,
+            group_id_count: 0,
             shape_define_map: HashMap::new(),
             group_define_map: HashMap::new(),
             group_show_list: Vec::new(),
@@ -35,15 +37,15 @@ impl Svg {
     }
 
     pub fn add_shape(&mut self, shape: Shape) -> String {
-        self.widget_id_count += 1;
-        let shape_id = format!("s{}", self.widget_id_count);
+        self.shape_id_count += 1;
+        let shape_id = format!("s{}", self.shape_id_count);
         self.shape_define_map.insert(shape_id.clone(), shape);
         shape_id
     }
 
     pub fn add_group(&mut self, group: Group) -> String {
-        self.widget_id_count += 1;
-        let group_id = format!("g{}", self.widget_id_count);
+        self.group_id_count += 1;
+        let group_id = format!("g{}", self.group_id_count);
         self.add_name_group(group_id, group)
     }
 
@@ -177,7 +179,8 @@ mod tests {
         let svg: Svg = Svg::new(640.0, 480.0);
         assert_eq!(svg.width, 640.0);
         assert_eq!(svg.height, 480.0);
-        assert_eq!(svg.widget_id_count, 0);
+        assert_eq!(svg.shape_id_count, 0);
+        assert_eq!(svg.group_id_count, 0);
         assert_eq!(svg.shape_define_map.len(), 0);
     }
 }

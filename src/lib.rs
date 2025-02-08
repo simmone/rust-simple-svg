@@ -7,6 +7,8 @@ pub use crate::defines::circle::Circle;
 #[doc(hidden)]
 pub use crate::defines::ellipse::Ellipse;
 #[doc(hidden)]
+pub use crate::defines::filter::Filter;
+#[doc(hidden)]
 pub use crate::defines::group::Group;
 #[doc(hidden)]
 pub use crate::defines::line::Line;
@@ -16,8 +18,6 @@ pub use crate::defines::polygon::Polygon;
 pub use crate::defines::polyline::Polyline;
 #[doc(hidden)]
 pub use crate::defines::rect::Rect;
-#[doc(hidden)]
-pub use crate::defines::filter::Filter;
 #[doc(hidden)]
 pub use crate::defines::shape::Shape;
 #[doc(hidden)]

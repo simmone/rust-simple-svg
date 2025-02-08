@@ -18,16 +18,30 @@ impl Filter {
         let mut fmt_str = String::new();
 
         fmt_str.push_str(&format!("    <filter id=\"{}\">\n", shape_id));
-        fmt_str.push_str(&format!("      <feGaussianBlur in=\"SourceAlpha\" stdDeviation=\"{}\"></feGaussianBlur>\n", self.blur.as_ref().unwrap()));
-        fmt_str.push_str(&format!("      <feOffset dx=\"{}\" dy=\"{}\" result=\"offsetblur\"></feOffset>\n", self.dropdown_offset.as_ref().unwrap(), self.dropdown_offset.as_ref().unwrap()));
-        fmt_str.push_str(&format!("      <feFlood flood-color=\"{}\"></feFlood>\n", self.dropdown_color.as_ref().unwrap()));
-        fmt_str.push_str(&format!("      <feComposite in2=\"offsetblur\" operator=\"in\"></feComposite>\n"));
+        fmt_str.push_str(&format!(
+            "      <feGaussianBlur in=\"SourceAlpha\" stdDeviation=\"{}\"></feGaussianBlur>\n",
+            self.blur.as_ref().unwrap()
+        ));
+        fmt_str.push_str(&format!(
+            "      <feOffset dx=\"{}\" dy=\"{}\" result=\"offsetblur\"></feOffset>\n",
+            self.dropdown_offset.as_ref().unwrap(),
+            self.dropdown_offset.as_ref().unwrap()
+        ));
+        fmt_str.push_str(&format!(
+            "      <feFlood flood-color=\"{}\"></feFlood>\n",
+            self.dropdown_color.as_ref().unwrap()
+        ));
+        fmt_str.push_str(&format!(
+            "      <feComposite in2=\"offsetblur\" operator=\"in\"></feComposite>\n"
+        ));
         fmt_str.push_str(&format!("      <feMerge>\n"));
         fmt_str.push_str(&format!("        <feMergeNode></feMergeNode>\n"));
-        fmt_str.push_str(&format!("        <feMergeNode in=\"SourceGraphic\"></feMergeNode>\n"));
+        fmt_str.push_str(&format!(
+            "        <feMergeNode in=\"SourceGraphic\"></feMergeNode>\n"
+        ));
         fmt_str.push_str(&format!("      </feMerge>\n"));
         fmt_str.push_str(&format!("    </filter>\n"));
-        
+
         fmt_str
     }
 }
@@ -49,24 +63,24 @@ mod tests {
     fn check_format() {
         let filter = Filter::new();
 
-        assert_eq!(
-            Filter::format(&filter, "1".to_string()),
-            {
-                let mut c_str = String::new();
-                
-                c_str.push_str("    <filter id=\"1\">\n");
-                c_str.push_str("      <feGaussianBlur in=\"SourceAlpha\" stdDeviation=\"2\"></feGaussianBlur>\n");
-                c_str.push_str("      <feOffset dx=\"3\" dy=\"3\" result=\"offsetblur\"></feOffset>\n");
-                c_str.push_str("      <feFlood flood-color=\"black\"></feFlood>\n");
-                c_str.push_str("      <feComposite in2=\"offsetblur\" operator=\"in\"></feComposite>\n");
-                c_str.push_str("      <feMerge>\n");
-                c_str.push_str("        <feMergeNode></feMergeNode>\n");
-                c_str.push_str("        <feMergeNode in=\"SourceGraphic\"></feMergeNode>\n");
-                c_str.push_str("      </feMerge>\n");
-                c_str.push_str("    </filter>\n");
-                
-                c_str
-            }
-        );
+        assert_eq!(Filter::format(&filter, "1".to_string()), {
+            let mut c_str = String::new();
+
+            c_str.push_str("    <filter id=\"1\">\n");
+            c_str.push_str(
+                "      <feGaussianBlur in=\"SourceAlpha\" stdDeviation=\"2\"></feGaussianBlur>\n",
+            );
+            c_str.push_str("      <feOffset dx=\"3\" dy=\"3\" result=\"offsetblur\"></feOffset>\n");
+            c_str.push_str("      <feFlood flood-color=\"black\"></feFlood>\n");
+            c_str
+                .push_str("      <feComposite in2=\"offsetblur\" operator=\"in\"></feComposite>\n");
+            c_str.push_str("      <feMerge>\n");
+            c_str.push_str("        <feMergeNode></feMergeNode>\n");
+            c_str.push_str("        <feMergeNode in=\"SourceGraphic\"></feMergeNode>\n");
+            c_str.push_str("      </feMerge>\n");
+            c_str.push_str("    </filter>\n");
+
+            c_str
+        });
     }
 }

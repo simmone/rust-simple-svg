@@ -1,10 +1,10 @@
 use crate::defines::circle::Circle;
 use crate::defines::ellipse::Ellipse;
+use crate::defines::filter::Filter;
 use crate::defines::line::Line;
 use crate::defines::polygon::Polygon;
 use crate::defines::polyline::Polyline;
 use crate::defines::rect::Rect;
-use crate::defines::filter::Filter;
 
 #[derive(Clone)]
 pub enum Shape {

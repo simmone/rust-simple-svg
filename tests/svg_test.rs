@@ -8,7 +8,7 @@ fn check_add_shape() {
     let rect1 = Rect::new(30.0, 20.0);
     let shape1 = Shape::Rect(rect1);
     let _rect_id = svg.add_shape(shape1);
-    assert_eq!(svg.widget_id_count, 1);
+    assert_eq!(svg.shape_id_count, 1);
     match svg.shape_define_map.get("s1").unwrap() {
         Shape::Rect(s1) => {
             assert_eq!(s1.width, 30.0);
@@ -24,7 +24,7 @@ fn check_add_shape() {
     let rect2 = Rect::new(10.0, 5.0);
     let shape2 = Shape::Rect(rect2);
     let _rect_id = svg.add_shape(shape2);
-    assert_eq!(svg.widget_id_count, 2);
+    assert_eq!(svg.shape_id_count, 2);
     match svg.shape_define_map.get("s2").unwrap() {
         Shape::Rect(s2) => {
             assert_eq!(s2.width, 10.0);
@@ -53,7 +53,7 @@ fn check_add_group() {
 
     assert_eq!(svg.group_define_map.len(), 1);
     assert_eq!(
-        svg.group_define_map.get("g2").unwrap().widget_list[0].shape_id,
+        svg.group_define_map.get("g1").unwrap().widget_list[0].shape_id,
         "s1".to_string()
     );
 }
