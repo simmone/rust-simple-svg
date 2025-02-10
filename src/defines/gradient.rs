@@ -29,7 +29,7 @@ impl fmt::Display for SpreadMethod {
 }
 
 #[derive(Debug, Clone)]
-pub struct Gradient {
+pub struct LinearGradient {
     pub stops: Vec<(f64, String, f64)>,
     pub x1: Option<f64>,
     pub y1: Option<f64>,
@@ -39,7 +39,7 @@ pub struct Gradient {
     pub spreadMethod: Option<SpreadMethod>,
 }
 
-impl Gradient {
+impl LinearGradient {
     pub fn new(Vec<(f64, STring, f64): stops) -> Self {
         Gradient {
             stops,
@@ -60,19 +60,45 @@ impl Gradient {
                                   {
                                       let mut optionItems = vec![];
                                       
+                                      if self.x1.is_some() {
+                                          optionItems.push(format!("x1={}", self.x1.as_ref().unwrap()));
+                                      }
+
+                                      if self.y1.is_some() {
+                                          optionItems.push(format!("y1={}", self.y1.as_ref().unwrap()));
+                                      }
+
+                                      if self.x2.is_some() {
+                                          optionItems.push(format!("x2={}", self.x2.as_ref().unwrap()));
+                                      }
+
+                                      if self.y2.is_some() {
+                                          optionItems.push(format!("y2={}", self.y2.as_ref().unwrap()));
+                                      }
+
+                                      if self.gradientUnits.is_some() {
+                                          optionItems.push(format!("gradientUnits={}", self.gradientUnits.as_ref().unwrap()));
+                                      }
+
+                                      if self.spreadMethod.is_some() {
+                                          optionItems.push(format!("spreadMethod={}", self.spreadMethod.as_ref().unwrap()));
+                                      }
                                       
+                                      optionItems.join(" ")
+                                  }));
+        
+        if self.stops.is_some() {
+            for stop in self.stops.as_ref().unwrap() {
+                fmt_str.push_str(&format!("      <stop offset=\"{}%\" stop-color=\"{}\" ", stop.0, stop.1));
 
-              (string-join
-               (filter
-                (lambda (a) (not (string=? a "")))
-                (list
-                 (if (LINEAR-GRADIENT-x1 gradient) (format "x1=\"~a\"" (~r (LINEAR-GRADIENT-x1 gradient))) "")
-                 (if (LINEAR-GRADIENT-y1 gradient) (format "y1=\"~a\"" (~r (LINEAR-GRADIENT-y1 gradient))) "")
-                 (if (LINEAR-GRADIENT-x2 gradient) (format "x2=\"~a\"" (~r (LINEAR-GRADIENT-x2 gradient))) "")
-                 (if (LINEAR-GRADIENT-y2 gradient) (format "y2=\"~a\"" (~r (LINEAR-GRADIENT-y2 gradient))) "")
-                 (if (LINEAR-GRADIENT-gradientUnits gradient) (format "gradientUnits=\"~a\"" (LINEAR-GRADIENT-gradientUnits gradient)) "")
-                 (if (LINEAR-GRADIENT-spreadMethod gradient) (format "spreadMethod=\"~a\"" (LINEAR-GRADIENT-spreadMethod gradient)) "")))))
+          (when (not (= (list-ref (car stops) 2) 1))
+            (printf "stop-opacity=\"~a\" " (~r (list-ref (car stops) 2))))
+          (printf "/>\n")
 
+            }
+        }
+
+        fmt_str.push_str(&format!("    </linearGradient>\n",
 
         fmt_str
     }
