@@ -1,12 +1,12 @@
 pub mod circle;
 pub mod ellipse;
 pub mod filter;
+pub mod gradient;
 pub mod group;
 pub mod line;
 pub mod polygon;
 pub mod polyline;
 pub mod rect;
-pub mod gradient;
 pub mod shape;
 pub mod sstyle;
 pub mod svg;
