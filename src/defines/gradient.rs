@@ -112,6 +112,94 @@ impl LinearGradient {
     }
 }
 
+#[derive(Debug, Clone)]
+pub struct RadialGradient {
+    pub stops: Vec<(f64, String, f64)>,
+    pub cx: Option<f64>,
+    pub cy: Option<f64>,
+    pub fx: Option<f64>,
+    pub fy: Option<f64>,
+    pub r: Option<f64>,
+    pub gradient_units: Option<GradientUnits>,
+    pub spread_method: Option<SpreadMethod>,
+}
+
+impl RadialGradient {
+    pub fn new(stops: Vec<(f64, String, f64)>) -> Self {
+        RadialGradient {
+            stops,
+            cx: None,
+            cy: None,
+            fx: None,
+            fy: None,
+            r: None,
+            gradient_units: None,
+            spread_method: None,
+        }
+    }
+
+    pub fn format(&self, shape_id: String) -> String {
+        let mut fmt_str = String::new();
+
+        fmt_str.push_str(&format!("    <radialGradient id=\"{}\" {}>\n", shape_id, {
+            let mut option_items = vec![];
+
+            if self.cx.is_some() {
+                option_items.push(format!("cx=\"{}\"", self.cx.as_ref().unwrap()));
+            }
+
+            if self.cy.is_some() {
+                option_items.push(format!("cy=\"{}\"", self.cy.as_ref().unwrap()));
+            }
+
+            if self.fx.is_some() {
+                option_items.push(format!("fx=\"{}\"", self.fx.as_ref().unwrap()));
+            }
+
+            if self.fy.is_some() {
+                option_items.push(format!("fy=\"{}\"", self.fy.as_ref().unwrap()));
+            }
+
+            if self.r.is_some() {
+                option_items.push(format!("r=\"{}\"", self.r.as_ref().unwrap()));
+            }
+
+            if self.gradient_units.is_some() {
+                option_items.push(format!(
+                    "gradientUnits=\"{}\"",
+                    self.gradient_units.as_ref().unwrap()
+                ));
+            }
+
+            if self.spread_method.is_some() {
+                option_items.push(format!(
+                    "spreadMethod=\"{}\"",
+                    self.spread_method.as_ref().unwrap()
+                ));
+            }
+
+            option_items.join(" ")
+        }));
+
+        for stop in self.stops.clone() {
+            fmt_str.push_str(&format!(
+                "      <stop offset=\"{}%\" stop-color=\"{}\" ",
+                stop.0, stop.1
+            ));
+
+            if stop.2 != 1.0 {
+                fmt_str.push_str(&format!("stop-opacity=\"{}\" ", stop.2));
+            }
+
+            fmt_str.push_str("/>\n");
+        }
+
+        fmt_str.push_str(&format!("    </radialGradient>\n"));
+
+        fmt_str
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -144,6 +232,39 @@ mod tests {
 
         assert_eq!(
             LinearGradient::format(&gradient, "s1".to_string()),
+            contents
+        );
+    }
+
+    #[test]
+    fn check_new_radial_gradient() {
+        let gradient = RadialGradient::new(vec![
+            (0.0, "#BBC42A".to_string(), 1.0),
+            (100.0, "#ED6E46".to_string(), 1.0),
+        ]);
+
+        assert_eq!(gradient.stops.len(), 2);
+    }
+
+    #[test]
+    fn check_radial_format() {
+        let mut gradient = RadialGradient::new(vec![
+            (0.0, "#BBC42A".to_string(), 1.0),
+            (100.0, "#ED6E46".to_string(), 1.0),
+        ]);
+
+        gradient.cx = Some(0.0);
+        gradient.cy = Some(1.0);
+        gradient.fx = Some(2.0);
+        gradient.fy = Some(3.0);
+        gradient.r = Some(4.0);
+        gradient.gradient_units = Some(GradientUnits::UserSpaceOnUse);
+        gradient.spread_method = Some(SpreadMethod::Repeat);
+
+        let contents = include_str!("../../showcase/gradient/radial_gradient_define.svg");
+
+        assert_eq!(
+            RadialGradient::format(&gradient, "s1".to_string()),
             contents
         );
     }
