@@ -9,6 +9,10 @@ pub use crate::defines::ellipse::Ellipse;
 #[doc(hidden)]
 pub use crate::defines::filter::Filter;
 #[doc(hidden)]
+pub use crate::defines::gradient::LinearGradient;
+#[doc(hidden)]
+pub use crate::defines::gradient::RadialGradient;
+#[doc(hidden)]
 pub use crate::defines::group::Group;
 #[doc(hidden)]
 pub use crate::defines::line::Line;

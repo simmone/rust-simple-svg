@@ -1,6 +1,8 @@
 use crate::defines::circle::Circle;
 use crate::defines::ellipse::Ellipse;
 use crate::defines::filter::Filter;
+use crate::defines::gradient::LinearGradient;
+use crate::defines::gradient::RadialGradient;
 use crate::defines::line::Line;
 use crate::defines::polygon::Polygon;
 use crate::defines::polyline::Polyline;
@@ -15,6 +17,8 @@ pub enum Shape {
     Polygon(Polygon),
     Polyline(Polyline),
     Filter(Filter),
+    LinearGradient(LinearGradient),
+    RadialGradient(RadialGradient),
 }
 
 impl Shape {
@@ -27,6 +31,8 @@ impl Shape {
             Shape::Polygon(polygon) => polygon.format(shape_id),
             Shape::Polyline(polyline) => polyline.format(shape_id),
             Shape::Filter(filter) => filter.format(shape_id),
+            Shape::LinearGradient(linear_gradient) => linear_gradient.format(shape_id),
+            Shape::RadialGradient(radial_gradient) => radial_gradient.format(shape_id),
         }
     }
 }

@@ -19,6 +19,8 @@ fn check_add_shape() {
         Shape::Polygon(_) => {}
         Shape::Polyline(_) => {}
         Shape::Filter(_) => {}
+        Shape::LinearGradient(_) => {}
+        Shape::RadialGradient(_) => {}
     }
 
     let rect2 = Rect::new(10.0, 5.0);
@@ -35,6 +37,8 @@ fn check_add_shape() {
         Shape::Polygon(_) => {}
         Shape::Polyline(_) => {}
         Shape::Filter(_) => {}
+        Shape::LinearGradient(_) => {}
+        Shape::RadialGradient(_) => {}
     }
 }
 
