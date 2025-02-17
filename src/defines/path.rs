@@ -16,10 +16,10 @@ pub enum ArcDirection {
 impl fmt::Display for ArcDirection {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match *self {
-            ArcDirection::LeftBig => write!(f, "1, 0"),
-            ArcDirection::LeftSmall => write!(f, "0, 0"),
-            ArcDirection::RightBig => write!(f, "1, 1"),
-            ArcDirection::RightSmall => write!(f, "0, 1"),
+            ArcDirection::LeftBig => write!(f, "1,0"),
+            ArcDirection::LeftSmall => write!(f, "0,0"),
+            ArcDirection::RightBig => write!(f, "1,1"),
+            ArcDirection::RightSmall => write!(f, "0,1"),
         }
     }
 }

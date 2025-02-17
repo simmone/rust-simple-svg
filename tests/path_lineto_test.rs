@@ -2,7 +2,7 @@ use pretty_assertions::assert_eq;
 use simple_svg::*;
 
 #[test]
-fn lineto_test() {
+fn path_lineto_test() {
     let mut svg = Svg::new(110.0, 160.0);
     
     let mut path = Path::new();

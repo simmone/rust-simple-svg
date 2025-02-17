@@ -2,7 +2,7 @@ use pretty_assertions::assert_eq;
 use simple_svg::*;
 
 #[test]
-fn moveto_abs_test() {
+fn path_moveto_abs_test() {
     let mut svg = Svg::new(30.0, 70.0);
     
     let mut path = Path::new();
@@ -46,7 +46,7 @@ fn moveto_abs_test() {
 
 
 #[test]
-fn moveto_rel_test() {
+fn path_moveto_rel_test() {
     let mut svg = Svg::new(30.0, 70.0);
     
     let mut path = Path::new();

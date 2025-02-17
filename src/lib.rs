@@ -19,6 +19,8 @@ pub use crate::defines::line::Line;
 #[doc(hidden)]
 pub use crate::defines::path::Path;
 #[doc(hidden)]
+pub use crate::defines::path::ArcDirection;
+#[doc(hidden)]
 pub use crate::defines::polygon::Polygon;
 #[doc(hidden)]
 pub use crate::defines::polyline::Polyline;
