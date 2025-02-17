@@ -106,7 +106,7 @@ impl Path {
     pub fn format(&self, shape_id: String) -> String {
         let mut fmt_str = String::new();
 
-        fmt_str.push_str(&format!("    <path id=\"{}\">\n", shape_id));
+        fmt_str.push_str(&format!("    <path id=\"{}\"\n", shape_id));
 
         fmt_str.push_str(&format!("          d=\"\n"));
 
@@ -140,7 +140,7 @@ mod tests {
         assert_eq!(Path::format(&path, "1".to_string()), {
             let mut c_str = String::new();
 
-            c_str.push_str("    <path id=\"1\">\n");
+            c_str.push_str("    <path id=\"1\"\n");
             c_str.push_str("          d=\"\n");
             c_str.push_str("             path strs\n");
             c_str.push_str("            \"/>\n");

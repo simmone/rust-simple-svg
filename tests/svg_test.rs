@@ -21,6 +21,7 @@ fn check_add_shape() {
         Shape::Filter(_) => {}
         Shape::LinearGradient(_) => {}
         Shape::RadialGradient(_) => {}
+        Shape::Path(_) => {}
     }
 
     let rect2 = Rect::new(10.0, 5.0);
@@ -39,6 +40,7 @@ fn check_add_shape() {
         Shape::Filter(_) => {}
         Shape::LinearGradient(_) => {}
         Shape::RadialGradient(_) => {}
+        Shape::Path(_) => {}
     }
 }
 

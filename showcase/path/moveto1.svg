@@ -1,0 +1,17 @@
+<svg
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    width="30" height="70"
+    >
+  <defs>
+    <path id="s1"
+          d="
+             M20,60
+            "/>
+    <circle id="s2" r="5" />
+  </defs>
+
+  <use xlink:href="#s1" fill="none" stroke-width="1" stroke="#7AA20D" />
+  <use xlink:href="#s2" x="20" y="60" fill="red" />
+</svg>
