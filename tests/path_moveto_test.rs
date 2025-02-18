@@ -4,9 +4,9 @@ use simple_svg::*;
 #[test]
 fn path_moveto_abs_test() {
     let mut svg = Svg::new(30.0, 70.0);
-    
+
     let mut path = Path::new();
-    
+
     path.moveto_abs((20.0, 60.0));
 
     let path_id = svg.add_shape(Shape::Path(path));
@@ -44,13 +44,12 @@ fn path_moveto_abs_test() {
     assert_eq!(svg_str, contents);
 }
 
-
 #[test]
 fn path_moveto_rel_test() {
     let mut svg = Svg::new(30.0, 70.0);
-    
+
     let mut path = Path::new();
-    
+
     path.moveto_rel((20.0, 60.0));
 
     let path_id = svg.add_shape(Shape::Path(path));
@@ -87,5 +86,3 @@ fn path_moveto_rel_test() {
 
     assert_eq!(svg_str, contents);
 }
-
-

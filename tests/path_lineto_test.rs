@@ -4,9 +4,9 @@ use simple_svg::*;
 #[test]
 fn path_lineto_test() {
     let mut svg = Svg::new(110.0, 160.0);
-    
+
     let mut path = Path::new();
-    
+
     path.moveto_abs((5.0, 5.0));
     path.lineto_hor(100.0);
     path.lineto_ver(100.0);
