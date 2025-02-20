@@ -1,46 +1,89 @@
 use std::fmt;
 
 #[derive(Clone)]
+pub enum TextKerning {
+    Num(f64),
+    Auto,
+    Inerit,
+}
+
+impl fmt::Display for TextKerning {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match *self {
+            TextKerning::Num(n) => write!(f, "{}", n),
+            TextKerning::Auto => write!(f, "auto"),
+            TextKerning::Inerit => write!(f, "inerit"),
+        }
+    }
+}
+
+#[derive(Clone)]
+pub enum TextSpace {
+    Num(f64),
+    Normal,
+    Inerit,
+}
+
+impl fmt::Display for TextSpace {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match *self {
+            TextSpace::Num(n) => write!(f, "{}", n),
+            TextSpace::Normal => write!(f, "normal"),
+            TextSpace::Inerit => write!(f, "inerit"),
+        }
+    }
+}
+
+#[derive(Clone)]
+pub enum TextDecoration {
+    OverLine,
+    UnderLine,
+    LineThrough,
+}
+
+impl fmt::Display for TextDecoration {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match *self {
+            TextDecoration::OverLine => write!(f, "overline"),
+            TextDecoration::UnderLine => write!(f, "underline"),
+            TextDecoration::LineThrough => write!(f, "line-through"),
+        }
+    }
+}
+
+#[derive(Clone)]
 pub struct Text {
-    pub text: Option<String>,
-    pub fill_rule: Option<FillRule>,
-    pub fill_opacity: Option<f64>,
-    pub stroke: Option<String>,
-    pub stroke_width: Option<f64>,
-    pub stroke_linecap: Option<LineCap>,
-    pub stroke_linejoin: Option<LineJoin>,
-    pub stroke_miterlimit: Option<f64>,
-    pub stroke_dasharray: Option<String>,
-    pub stroke_dashoffset: Option<f64>,
-    pub translate: Option<(f64, f64)>,
-    pub rotate: Option<f64>,
-    pub scale_all: Option<f64>,
-    pub scale_xy: Option<(f64, f64)>,
-    pub skew_x: Option<f64>,
-    pub skew_y: Option<f64>,
-    pub fill_gradient: Option<String>,
+    pub text: String,
+    pub font_size: Option<f64>,
+    pub font_family: Option<String>,
+    pub dx: Option<f64>,
+    pub dy: Option<f64>,
+    pub rotate: Option<Vec<f64>>,
+    pub text_length: Option<f64>,
+    pub kerning: Option<TextKerning>,
+    pub letter_space: Option<TextSpace>,
+    pub word_space: Option<TextSpace>,
+    pub text_decoration: Option<TextDecoration>,
+    pub path: Option<String>,
+    pub path_start_offset: Option<f64>,
 }
 
 impl Text {
-    pub fn new() -> Self {
+    pub fn new(text: String) -> Self {
         Text {
-            fill: None,
-            fill_rule: None,
-            fill_opacity: None,
-            stroke: None,
-            stroke_width: None,
-            stroke_linecap: None,
-            stroke_linejoin: None,
-            stroke_miterlimit: None,
-            stroke_dasharray: None,
-            stroke_dashoffset: None,
-            translate: None,
+            text,
+            font_size: None,
+            font_family: None,
+            dx: None,
+            dy: None,
             rotate: None,
-            scale_all: None,
-            scale_xy: None,
-            skew_x: None,
-            skew_y: None,
-            fill_gradient: None,
+            text_length: None,
+            kerning: None,
+            letter_space: None,
+            word_space: None,
+            text_decoration: None,
+            path: None,
+            path_start_offset: None
         }
     }
 
