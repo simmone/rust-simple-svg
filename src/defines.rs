@@ -8,6 +8,7 @@ pub mod path;
 pub mod polygon;
 pub mod polyline;
 pub mod rect;
+pub mod text;
 pub mod shape;
 pub mod sstyle;
 pub mod svg;
