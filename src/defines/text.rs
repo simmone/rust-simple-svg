@@ -4,7 +4,7 @@ use std::fmt;
 pub enum TextKerning {
     Num(f64),
     Auto,
-    Inerit,
+    Inherit,
 }
 
 impl fmt::Display for TextKerning {
@@ -12,7 +12,7 @@ impl fmt::Display for TextKerning {
         match *self {
             TextKerning::Num(n) => write!(f, "{}", n),
             TextKerning::Auto => write!(f, "auto"),
-            TextKerning::Inerit => write!(f, "inerit"),
+            TextKerning::Inherit => write!(f, "inherit"),
         }
     }
 }
@@ -21,7 +21,7 @@ impl fmt::Display for TextKerning {
 pub enum TextSpace {
     Num(f64),
     Normal,
-    Inerit,
+    Inherit,
 }
 
 impl fmt::Display for TextSpace {
@@ -29,7 +29,7 @@ impl fmt::Display for TextSpace {
         match *self {
             TextSpace::Num(n) => write!(f, "{}", n),
             TextSpace::Normal => write!(f, "normal"),
-            TextSpace::Inerit => write!(f, "inerit"),
+            TextSpace::Inherit => write!(f, "inherit"),
         }
     }
 }
@@ -205,17 +205,17 @@ mod tests {
         text.text_length = Some(8.0);
         text.kerning = Some(TextKerning::Auto);
         text.letter_space = Some(TextSpace::Normal);
-        text.word_space = Some(TextSpace::Inerit);
+        text.word_space = Some(TextSpace::Inherit);
         text.text_decoration = Some(TextDecoration::UnderLine);
 
         assert_eq!(
             text.format("s1".to_string()),
-            "    <text id=\"s1\" dx=\"2\" dy=\"3\" font-size=\"1\" font-family=\"Arial\" rotate=\"4 5 6 7\" textLength=\"8\" kerning=\"auto\" letter-space=\"normal\" word-space=\"inerit\" text-decoration=\"underline\">hello world</text>\n");
+            "    <text id=\"s1\" dx=\"2\" dy=\"3\" font-size=\"1\" font-family=\"Arial\" rotate=\"4 5 6 7\" textLength=\"8\" kerning=\"auto\" letter-space=\"normal\" word-space=\"inherit\" text-decoration=\"underline\">hello world</text>\n");
 
         text.path = Some("9.0, 10.0".to_string());
         text.path_start_offset = Some(11.0);
         assert_eq!(
             text.format("s1".to_string()),
-            "    <text id=\"s1\" dx=\"2\" dy=\"3\" font-size=\"1\" font-family=\"Arial\" rotate=\"4 5 6 7\" textLength=\"8\" kerning=\"auto\" letter-space=\"normal\" word-space=\"inerit\" text-decoration=\"underline\">\n      <textPath xlink:href=\"#9.0, 10.0\" startOffset=\"11%\" >hello world</textPath>\n    </text>\n");
+            "    <text id=\"s1\" dx=\"2\" dy=\"3\" font-size=\"1\" font-family=\"Arial\" rotate=\"4 5 6 7\" textLength=\"8\" kerning=\"auto\" letter-space=\"normal\" word-space=\"inherit\" text-decoration=\"underline\">\n      <textPath xlink:href=\"#9.0, 10.0\" startOffset=\"11%\" >hello world</textPath>\n    </text>\n");
     }
 }
