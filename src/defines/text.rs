@@ -83,7 +83,7 @@ impl Text {
             word_space: None,
             text_decoration: None,
             path: None,
-            path_start_offset: None
+            path_start_offset: None,
         }
     }
 
@@ -103,66 +103,90 @@ impl Text {
                 }
 
                 if self.font_size.is_some() {
-                    options_str.push_str(&format!(" font-size=\"{}\"", self.font_size.as_ref().unwrap()));
+                    options_str.push_str(&format!(
+                        " font-size=\"{}\"",
+                        self.font_size.as_ref().unwrap()
+                    ));
                 }
 
                 if self.font_family.is_some() {
-                    options_str.push_str(&format!(" font-family=\"{}\"", self.font_family.as_ref().unwrap()));
+                    options_str.push_str(&format!(
+                        " font-family=\"{}\"",
+                        self.font_family.as_ref().unwrap()
+                    ));
                 }
-                
+
                 if self.rotate.is_some() {
-                    options_str.push_str(
-                        &format!(" rotate=\"{}\"",
-                                 {
-                                    let mut rotate_items = vec![];
-                    
-                                    for degree in self.rotate.as_ref().unwrap() {
-                                        rotate_items.push(format!("{}", degree));
-                                    }
-                    
-                                    rotate_items.join(" ")
-                                  }));
+                    options_str.push_str(&format!(" rotate=\"{}\"", {
+                        let mut rotate_items = vec![];
+
+                        for degree in self.rotate.as_ref().unwrap() {
+                            rotate_items.push(format!("{}", degree));
+                        }
+
+                        rotate_items.join(" ")
+                    }));
                 }
 
                 if self.text_length.is_some() {
-                    options_str.push_str(&format!(" textLength=\"{}\"", self.text_length.as_ref().unwrap()));
+                    options_str.push_str(&format!(
+                        " textLength=\"{}\"",
+                        self.text_length.as_ref().unwrap()
+                    ));
                 }
 
                 if self.kerning.is_some() {
-                    options_str.push_str(&format!(" kerning=\"{}\"", self.kerning.as_ref().unwrap()));
+                    options_str
+                        .push_str(&format!(" kerning=\"{}\"", self.kerning.as_ref().unwrap()));
                 }
 
                 if self.letter_space.is_some() {
-                    options_str.push_str(&format!(" letter-space=\"{}\"", self.letter_space.as_ref().unwrap()));
+                    options_str.push_str(&format!(
+                        " letter-space=\"{}\"",
+                        self.letter_space.as_ref().unwrap()
+                    ));
                 }
 
                 if self.word_space.is_some() {
-                    options_str.push_str(&format!(" word-space=\"{}\"", self.word_space.as_ref().unwrap()));
+                    options_str.push_str(&format!(
+                        " word-space=\"{}\"",
+                        self.word_space.as_ref().unwrap()
+                    ));
                 }
 
                 if self.text_decoration.is_some() {
-                    options_str.push_str(&format!(" text-decoration=\"{}\"", self.text_decoration.as_ref().unwrap()));
+                    options_str.push_str(&format!(
+                        " text-decoration=\"{}\"",
+                        self.text_decoration.as_ref().unwrap()
+                    ));
                 }
-                
+
                 options_str
             },
             {
                 if self.path.is_some() {
                     let mut text_str = String::new();
 
-                    text_str.push_str(&format!("\n      <textPath xlink:href=\"#{}\" ", self.path.as_ref().unwrap()));
-                    
+                    text_str.push_str(&format!(
+                        "\n      <textPath xlink:href=\"#{}\" ",
+                        self.path.as_ref().unwrap()
+                    ));
+
                     if self.path_start_offset.is_some() {
-                        text_str.push_str(&format!("startOffset=\"{}%\" ", self.path_start_offset.as_ref().unwrap()));
+                        text_str.push_str(&format!(
+                            "startOffset=\"{}%\" ",
+                            self.path_start_offset.as_ref().unwrap()
+                        ));
                     }
-                    
+
                     text_str.push_str(&format!(">{}</textPath>\n    ", self.text));
-                    
+
                     text_str
                 } else {
-                    self.text
+                    self.text.clone()
                 }
-            });
+            }
+        )
     }
 }
 
@@ -171,24 +195,27 @@ mod tests {
     use super::*;
 
     #[test]
-    fn check_format() {
+    fn check_format1() {
         let mut text = Text::new("hello world".to_string());
         text.font_size = Some(1.0);
         text.font_family = Some("Arial".to_string());
         text.dx = Some(2.0);
         text.dy = Some(3.0);
-        text.rotate = Some(vec![4.0 5.0 6.0 7.0]);
+        text.rotate = Some(vec![4.0, 5.0, 6.0, 7.0]);
         text.text_length = Some(8.0);
         text.kerning = Some(TextKerning::Auto);
         text.letter_space = Some(TextSpace::Normal);
         text.word_space = Some(TextSpace::Inerit);
         text.text_decoration = Some(TextDecoration::UnderLine);
-        text.path = Some("9.0,10.0".to_string());
-        text.path_start_offset = Some(11.0);
 
         assert_eq!(
             text.format("s1".to_string()),
-            "    <text id=\"s1\" dx=\"2\" dy=\"3\" font-size=\"1\" font-family=\"Arial\" rotate=\"4 5 6 7\" textLength=\"8\" kerning=\"auto\" letter-space=\"normal\" word-space=\"inerit\" text-decoration=\"underline\" >hello world</text>\n",
-        );
+            "    <text id=\"s1\" dx=\"2\" dy=\"3\" font-size=\"1\" font-family=\"Arial\" rotate=\"4 5 6 7\" textLength=\"8\" kerning=\"auto\" letter-space=\"normal\" word-space=\"inerit\" text-decoration=\"underline\">hello world</text>\n");
+
+        text.path = Some("9.0, 10.0".to_string());
+        text.path_start_offset = Some(11.0);
+        assert_eq!(
+            text.format("s1".to_string()),
+            "    <text id=\"s1\" dx=\"2\" dy=\"3\" font-size=\"1\" font-family=\"Arial\" rotate=\"4 5 6 7\" textLength=\"8\" kerning=\"auto\" letter-space=\"normal\" word-space=\"inerit\" text-decoration=\"underline\">\n      <textPath xlink:href=\"#9.0, 10.0\" startOffset=\"11%\" >hello world</textPath>\n    </text>\n");
     }
 }
