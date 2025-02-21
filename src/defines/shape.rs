@@ -8,6 +8,7 @@ use crate::defines::path::Path;
 use crate::defines::polygon::Polygon;
 use crate::defines::polyline::Polyline;
 use crate::defines::rect::Rect;
+use crate::defines::text::Text;
 
 #[derive(Clone)]
 pub enum Shape {
@@ -21,6 +22,7 @@ pub enum Shape {
     LinearGradient(LinearGradient),
     RadialGradient(RadialGradient),
     Path(Path),
+    Text(Text),
 }
 
 impl Shape {
@@ -36,6 +38,7 @@ impl Shape {
             Shape::LinearGradient(linear_gradient) => linear_gradient.format(shape_id),
             Shape::RadialGradient(radial_gradient) => radial_gradient.format(shape_id),
             Shape::Path(path) => path.format(shape_id),
+            Shape::Text(text) => text.format(shape_id),
         }
     }
 }

@@ -1,0 +1,12 @@
+<svg
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    width="310" height="70"
+    >
+  <defs>
+    <text id="s1" font-size="50">城春草木深</text>
+  </defs>
+
+  <use xlink:href="#s1" x="30" y="50" fill="#ED6E46" />
+</svg>
