@@ -167,17 +167,20 @@ impl Text {
                 if self.path.is_some() {
                     let mut text_str = String::new();
 
-                    text_str.push_str(&format!(
-                        "\n      <textPath xlink:href=\"#{}\" ",
-                        self.path.as_ref().unwrap()
-                    ));
+                    text_str.push_str("\n      <textPath ");
+                    
+                    let mut options = vec![];
+                    
+                    options.push(format!("xlink:href=\"#{}\"", self.path.as_ref().unwrap()));
 
                     if self.path_start_offset.is_some() {
-                        text_str.push_str(&format!(
-                            "startOffset=\"{}%\" ",
+                        options.push(format!(
+                            "startOffset=\"{}%\"",
                             self.path_start_offset.as_ref().unwrap()
                         ));
                     }
+                    
+                    text_str.push_str(&options.join(" "));
 
                     text_str.push_str(&format!(">{}</textPath>\n    ", self.text));
 
@@ -216,6 +219,6 @@ mod tests {
         text.path_start_offset = Some(11.0);
         assert_eq!(
             text.format("s1".to_string()),
-            "    <text id=\"s1\" dx=\"2\" dy=\"3\" font-size=\"1\" font-family=\"Arial\" rotate=\"4 5 6 7\" textLength=\"8\" kerning=\"auto\" letter-space=\"normal\" word-space=\"inherit\" text-decoration=\"underline\">\n      <textPath xlink:href=\"#9.0, 10.0\" startOffset=\"11%\" >hello world</textPath>\n    </text>\n");
+            "    <text id=\"s1\" dx=\"2\" dy=\"3\" font-size=\"1\" font-family=\"Arial\" rotate=\"4 5 6 7\" textLength=\"8\" kerning=\"auto\" letter-space=\"normal\" word-space=\"inherit\" text-decoration=\"underline\">\n      <textPath xlink:href=\"#9.0, 10.0\" startOffset=\"11%\">hello world</textPath>\n    </text>\n");
     }
 }
