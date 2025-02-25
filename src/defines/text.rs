@@ -200,6 +200,7 @@ mod tests {
     #[test]
     fn check_format1() {
         let mut text = Text::new("hello world".to_string());
+        assert_eq!(text.format("s1".to_string()), "    <text id=\"s1\">hello world</text>\n");
         text.font_size = Some(1.0);
         text.font_family = Some("Arial".to_string());
         text.dx = Some(2.0);
