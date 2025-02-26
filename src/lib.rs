@@ -17,7 +17,9 @@ pub use crate::defines::group::Group;
 #[doc(hidden)]
 pub use crate::defines::line::Line;
 #[doc(hidden)]
-pub use crate::defines::path::{Path, ArcDirection};
+pub use crate::defines::marker::{Marker, MarkerType};
+#[doc(hidden)]
+pub use crate::defines::path::{ArcDirection, Path};
 #[doc(hidden)]
 pub use crate::defines::polygon::Polygon;
 #[doc(hidden)]
@@ -25,13 +27,13 @@ pub use crate::defines::polyline::Polyline;
 #[doc(hidden)]
 pub use crate::defines::rect::Rect;
 #[doc(hidden)]
-pub use crate::defines::text::{Text, TextDecoration};
-#[doc(hidden)]
 pub use crate::defines::shape::Shape;
 #[doc(hidden)]
-pub use crate::defines::sstyle::{Sstyle, FillRule, LineCap, LineJoin};
+pub use crate::defines::sstyle::{FillRule, LineCap, LineJoin, Sstyle};
 #[doc(hidden)]
 pub use crate::defines::svg::Svg;
+#[doc(hidden)]
+pub use crate::defines::text::{Text, TextDecoration};
 #[doc(hidden)]
 pub use crate::defines::widget::Widget;
 

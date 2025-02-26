@@ -18,7 +18,7 @@ pub enum MarkerType {
     Diamond1,
     Diamond2,
     Curve1,
-    Curve2
+    Curve2,
 }
 
 impl fmt::Display for MarkerType {
@@ -40,16 +40,61 @@ impl fmt::Display for MarkerType {
 impl Marker {
     pub fn new(shape: MarkerType) -> Self {
         match shape {
-            MarkerType::Triangle1 => Marker { shape, size: 6.0, x: 1.0, path: "<path d=\"M0,0 L10,5 L0,10 z\"".to_string() },
-            MarkerType::Triangle2 => Marker { shape, size: 6.0, x: 1.0, path: "<path d=\"M0,0 L15,5 L0,10 z\"".to_string() },
-            MarkerType::Circle => Marker { shape, size: 6.0, x: 5.0, path: "<circle r=\"5\" cx=\"5\" cy=\"5\"".to_string() },
-            MarkerType::Indent1 => Marker { shape, size: 6.0, x: 4.0, path: "<path d=\"M0,0 L10,5 L0,10 L5,5 z\"".to_string() },
-            MarkerType::Indent2 => Marker { shape, size: 6.0, x: 4.0, path: "<path d=\"M0,0 L15,5 L0,10 L5,5 z\"".to_string() },
-            MarkerType::Diamond1 => Marker { shape, size: 6.0, x: 1.0, path: "<path d=\"M3,0 L10,5 L3,10 L0,5 z\"".to_string() },
-            MarkerType::Diamond2 => Marker { shape, size: 6.0, x: 1.0, path: "<path d=\"M3,0 L15,5 L3,10 L0,5 z\"".to_string() },
-            MarkerType::Curve1 => Marker { shape, size: 6.0, x: 2.0, path: "<path d=\"M0,0 L10,5 L0,10 C0,10 5,5 0,0 z\"".to_string() },
-            MarkerType::Curve2 => Marker { shape, size: 6.0, x: 2.0, path: "<path d=\"M0,0 L15,5 L0,10 C0,10 5,5 0,0 z\"".to_string() },
-         }
+            MarkerType::Triangle1 => Marker {
+                shape,
+                size: 6.0,
+                x: 1.0,
+                path: "<path d=\"M0,0 L10,5 L0,10 z\"".to_string(),
+            },
+            MarkerType::Triangle2 => Marker {
+                shape,
+                size: 6.0,
+                x: 1.0,
+                path: "<path d=\"M0,0 L15,5 L0,10 z\"".to_string(),
+            },
+            MarkerType::Circle => Marker {
+                shape,
+                size: 6.0,
+                x: 5.0,
+                path: "<circle r=\"5\" cx=\"5\" cy=\"5\"".to_string(),
+            },
+            MarkerType::Indent1 => Marker {
+                shape,
+                size: 6.0,
+                x: 4.0,
+                path: "<path d=\"M0,0 L10,5 L0,10 L5,5 z\"".to_string(),
+            },
+            MarkerType::Indent2 => Marker {
+                shape,
+                size: 6.0,
+                x: 4.0,
+                path: "<path d=\"M0,0 L15,5 L0,10 L5,5 z\"".to_string(),
+            },
+            MarkerType::Diamond1 => Marker {
+                shape,
+                size: 6.0,
+                x: 1.0,
+                path: "<path d=\"M3,0 L10,5 L3,10 L0,5 z\"".to_string(),
+            },
+            MarkerType::Diamond2 => Marker {
+                shape,
+                size: 6.0,
+                x: 1.0,
+                path: "<path d=\"M3,0 L15,5 L3,10 L0,5 z\"".to_string(),
+            },
+            MarkerType::Curve1 => Marker {
+                shape,
+                size: 6.0,
+                x: 2.0,
+                path: "<path d=\"M0,0 L10,5 L0,10 C0,10 5,5 0,0 z\"".to_string(),
+            },
+            MarkerType::Curve2 => Marker {
+                shape,
+                size: 6.0,
+                x: 2.0,
+                path: "<path d=\"M0,0 L15,5 L0,10 C0,10 5,5 0,0 z\"".to_string(),
+            },
+        }
     }
 
     pub fn format(&self, shape_id: String) -> String {
@@ -74,7 +119,7 @@ mod tests {
     #[test]
     fn new_marker() {
         let mut marker = Marker::new(MarkerType::Curve1);
-        
+
         marker.size = 10.0;
 
         assert_eq!(marker.size, 10.0);

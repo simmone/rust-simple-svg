@@ -168,9 +168,9 @@ impl Text {
                     let mut text_str = String::new();
 
                     text_str.push_str("\n      <textPath ");
-                    
+
                     let mut options = vec![];
-                    
+
                     options.push(format!("xlink:href=\"#{}\"", self.path.as_ref().unwrap()));
 
                     if self.path_start_offset.is_some() {
@@ -179,7 +179,7 @@ impl Text {
                             self.path_start_offset.as_ref().unwrap()
                         ));
                     }
-                    
+
                     text_str.push_str(&options.join(" "));
 
                     text_str.push_str(&format!(">{}</textPath>\n    ", self.text));
@@ -200,7 +200,10 @@ mod tests {
     #[test]
     fn check_format1() {
         let mut text = Text::new("hello world".to_string());
-        assert_eq!(text.format("s1".to_string()), "    <text id=\"s1\">hello world</text>\n");
+        assert_eq!(
+            text.format("s1".to_string()),
+            "    <text id=\"s1\">hello world</text>\n"
+        );
         text.font_size = Some(1.0);
         text.font_family = Some("Arial".to_string());
         text.dx = Some(2.0);

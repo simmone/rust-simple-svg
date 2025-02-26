@@ -4,10 +4,10 @@ use simple_svg::*;
 #[test]
 fn text_basic_test() {
     let mut svg = Svg::new(310.0, 70.0);
-    
+
     let mut text = Text::new("城春草木深".to_string());
     text.font_size = Some(50.0);
-    
+
     let text_id = svg.add_shape(Shape::Text(text));
 
     let mut text_sstyle = Sstyle::new();
@@ -33,12 +33,12 @@ fn text_basic_test() {
 #[test]
 fn text_rotate_test() {
     let mut svg = Svg::new(350.0, 120.0);
-    
+
     let mut text = Text::new("城春草木深".to_string());
     text.font_size = Some(50.0);
     text.rotate = Some(vec![10.0, 20.0, 30.0, 40.0, 50.0]);
     text.text_length = Some(300.0);
-    
+
     let text_id = svg.add_shape(Shape::Text(text));
 
     let mut text_sstyle = Sstyle::new();
@@ -64,7 +64,7 @@ fn text_rotate_test() {
 #[test]
 fn text_decoration_test() {
     let mut svg = Svg::new(310.0, 280.0);
-    
+
     let mut text1 = Text::new("国破山河在".to_string());
     text1.font_size = Some(50.0);
     text1.text_decoration = Some(TextDecoration::OverLine);
@@ -123,7 +123,7 @@ fn text_path_test() {
     path.qcurve_abs((110.0, 10.0), (210.0, 60.0));
     path.qcurve_abs((310.0, 110.0), (410.0, 60.0));
     let qcurve_id = svg.add_shape(Shape::Path(path));
-    
+
     let mut text = Text::new("国破山河在 城春草木深 感时花溅泪 恨别鸟惊心".to_string());
     text.path = Some(qcurve_id);
     text.path_start_offset = Some(5.0);
@@ -146,5 +146,3 @@ fn text_path_test() {
 
     assert_eq!(svg_str, contents);
 }
-
-

@@ -4,6 +4,7 @@ use crate::defines::filter::Filter;
 use crate::defines::gradient::LinearGradient;
 use crate::defines::gradient::RadialGradient;
 use crate::defines::line::Line;
+use crate::defines::marker::Marker;
 use crate::defines::path::Path;
 use crate::defines::polygon::Polygon;
 use crate::defines::polyline::Polyline;
@@ -23,6 +24,7 @@ pub enum Shape {
     RadialGradient(RadialGradient),
     Path(Path),
     Text(Text),
+    Marker(Marker),
 }
 
 impl Shape {
@@ -39,6 +41,7 @@ impl Shape {
             Shape::RadialGradient(radial_gradient) => radial_gradient.format(shape_id),
             Shape::Path(path) => path.format(shape_id),
             Shape::Text(text) => text.format(shape_id),
+            Shape::Marker(marker) => marker.format(shape_id),
         }
     }
 }
