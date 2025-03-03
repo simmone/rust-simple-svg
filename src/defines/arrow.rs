@@ -71,8 +71,8 @@ impl Arrow {
                 }
             );
         let handle_delta_q = ((handle_base * alpha.cos()), (handle_base * alpha.sin()));
-        let toward_updown_delta1 = if toward_updown handle_delta_q.1 handle_delta_q.0;
-        let toward_updown_delta0 = if toward_updown handle_delta_q.0 handle_delta_q.1;
+        let toward_updown_delta1 = if toward_updown {handle_delta_q.1} {handle_delta_q.0};
+        let toward_updown_delta0 = if toward_updown {handle_delta_q.0} {handle_delta_q.1};
         let handle_bottom_left = 
             (
                 if toward_left {
@@ -94,9 +94,9 @@ impl Arrow {
                     end_x - toward_updown_delta1
                 },
                 if toward_left {
-                    start_x - toward_updown_delta0
+                    end_y - toward_updown_delta0
                 } else {
-                    start_y + toward_updown_delta0
+                    end_y + toward_updown_delta0
                 }
             );
         let handle_top_left =
@@ -158,19 +158,20 @@ impl Arrow {
                 }
             );
 
-        format!("    <arrow id=\"{}\" {} />\n", shape_id, {
-            let mut shape_str = format!("width=\"{}\" height=\"{}\"", self.width, self.height);
-
-            if self.radius_x.is_some() && self.radius_y.is_some() {
-                shape_str.push_str(&format!(
-                    " rx=\"{}\" ry=\"{}\"",
-                    self.radius_x.unwrap(),
-                    self.radius_y.unwrap(),
-                ));
-            }
-
-            shape_str
-        })
+        format!("    <polygon id=\"{}\"\n{}",
+            shape_id,
+            {
+                let mut shape_str = "          points=\"\n".to_string();
+                shape_str.push_str(&format!("            {:.4},{:.4}\n", handle_bottom_left.0, handle_bottom_left.1));
+                shape_str.push_str(&format!("            {:.4},{:.4}\n", handle_bottom_right.0, handle_bottom_right.1));
+                shape_str.push_str(&format!("            {.4},{.4}\n", q.0, q.1));
+                shape_str.push_str(&format!("            {.4},{.4}\n", r.0, r.1))
+                shape_str.push_str(&format!("            {.4},{.4}\n", s.0, s.1))
+                shape_str.push_str(&format!("            {.4},{.4}\n", handle_top_right.0, handle_top_right.1));
+                shape_str.push_str(&format!("            {.4},{.4}\n", handle_top_left.0, handle_top_left.1));
+                shape_str.push_str(&format!("            \"/>\n"));
+                shape_str
+            });
     }
 }
 
