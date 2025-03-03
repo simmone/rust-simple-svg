@@ -1,0 +1,21 @@
+<svg
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    width="300" height="300"
+    >
+  <defs>
+    <polygon id="s1"
+          points="
+            21.7157,78.2843
+            195.1472,251.7157
+            166.8629,280.0000
+            280.0000,280.0000
+            280.0000,166.8629
+            251.7157,195.1472
+            78.2843,21.7157
+            "/>
+  </defs>
+
+  <use xlink:href="#s1" fill="lavender" stroke-width="5" stroke="teal" />
+</svg>

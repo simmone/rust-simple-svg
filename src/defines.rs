@@ -1,3 +1,4 @@
+pub mod arrow;
 pub mod circle;
 pub mod ellipse;
 pub mod filter;

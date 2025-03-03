@@ -1,3 +1,5 @@
+use std::f64::consts::PI;
+
 #[derive(Debug, Clone)]
 pub struct Arrow {
     pub start_x: f64,
@@ -10,15 +12,21 @@ pub struct Arrow {
 }
 
 impl Arrow {
-    pub fn new(start_x: f64, start_y: f64, end_x: f64, end_y: f64, handle_base: f64, head_base: f64, head_height: f64) -> Self {
+    pub fn new(
+        start_point: (f64, f64),
+        end_point: (f64, f64),
+        handle_base: f64,
+        head_base: f64,
+        head_height: f64,
+    ) -> Self {
         Arrow {
-            start_x,
-            start_y,
-            end_x,
-            end_y,
-            handle_base: f64,
-            head_base: f64,
-            head_height: f64,
+            start_x: start_point.0,
+            start_y: start_point.1,
+            end_x: end_point.0,
+            end_y: end_point.1,
+            handle_base,
+            head_base,
+            head_height,
         }
     }
 
@@ -26,205 +34,221 @@ impl Arrow {
         let total_base = self.handle_base + self.head_base;
         let pre_end_x = self.end_x;
         let pre_end_y = self.end_y;
-        let pre_toward_left = if self.start_x > pre_end_x {true} {false};
-        let pre_toward_updown = if self.start_x == pre_end_x {true} {false};
-        let pre_toward_up = if (self.start_x == pre_end_x) && (self.start_y > pre_end_y) {true} {false};
-        let pre_x_offset = pre_end_x - start_x;
-        let pre_y_offset = pre_end_y - start_y;
-        let pre_theta = (if pre_x_offset == 0 {0} {(pre_y_offset / pre_x_offset)}).atan();
-        let pre_alpha = (PI / 2) - pre_theta;
-        let pre_delta_r = (self.head_height * pre_theta.cos(), (self.head_height * pre_theta.sin()));
-        let pre_r_sub1 = if pre_toward_updown {pre_delta_r.1} {pre_delta_r.0};
-        let pre_r_sub2 = if pre_toward_updown {pre_delta_r.0} {pre_delta_r.1};
-        let pre_r = 
-            (
-                if pre_toward_left {
-                    pre_end_x + pre_r_sub1
-                } else {
-                    pre_end_x - pre_r_sub1
-                },
-                if (pre_toward_up || pre_toward_left) {
-                    pre_end_y + pre_r_sub2
-                } else {
-                    pre_end_y - pre_r_sub2
-                }
-            );
-        let end_x = pre_r.0;
-        let end_y = pre_r.1;
-        let toward_left = if start_x > end_x {true} {false};
-        let toward_updown = if start_x == end_x {true} {false};
-        let toward_up = if (start_x == end_x) && (start_y > end_y) {true} {false};
-        let x_offset = end_x - start_x;
-        let y_offset = end_y - start_y;
-        let theta = (if x_offset == 0.0 {0.0} {y_offset / x_offset}).atan();
+        let pre_toward_left = if self.start_x > pre_end_x {
+            true
+        } else {
+            false
+        };
+        let pre_toward_updown = if self.start_x == pre_end_x {
+            true
+        } else {
+            false
+        };
+        let pre_toward_up = if (self.start_x == pre_end_x) && (self.start_y > pre_end_y) {
+            true
+        } else {
+            false
+        };
+        let pre_x_offset = pre_end_x - self.start_x;
+        let pre_y_offset = pre_end_y - self.start_y;
+        let pre_theta = (if pre_x_offset == 0.0 {
+            0.0
+        } else {
+            pre_y_offset / pre_x_offset
+        })
+        .atan();
+        let pre_delta_r = (
+            self.head_height * pre_theta.cos(),
+            (self.head_height * pre_theta.sin()),
+        );
+        let pre_r_sub1 = if pre_toward_updown {
+            pre_delta_r.1
+        } else {
+            pre_delta_r.0
+        };
+        let pre_r_sub2 = if pre_toward_updown {
+            pre_delta_r.0
+        } else {
+            pre_delta_r.1
+        };
+        let pre_r = (
+            if pre_toward_left {
+                pre_end_x + pre_r_sub1
+            } else {
+                pre_end_x - pre_r_sub1
+            },
+            if pre_toward_up || pre_toward_left {
+                pre_end_y + pre_r_sub2
+            } else {
+                pre_end_y - pre_r_sub2
+            },
+        );
+        let new_end_x = pre_r.0;
+        let new_end_y = pre_r.1;
+        let toward_left = if self.start_x > new_end_x {
+            true
+        } else {
+            false
+        };
+        let toward_updown = if self.start_x == new_end_x {
+            true
+        } else {
+            false
+        };
+        let toward_up = if (self.start_x == new_end_x) && (self.start_y > new_end_y) {
+            true
+        } else {
+            false
+        };
+        let x_offset = new_end_x - self.start_x;
+        let y_offset = new_end_y - self.start_y;
+        let theta = (if x_offset == 0.0 {
+            0.0
+        } else {
+            y_offset / x_offset
+        })
+        .atan();
         let alpha = (PI / 2.0) - theta;
-        let delta_r = ((head_heat * theta.cos()), (head_height * theta.sin()));
-        let r_sub1 = if toward_updown delta_r.1 delta_r.0;
-        let r_sub2 = if toward_updown delta_r.0 delta_r.1;
-        let r =
-            (
-                if toward_left (end_x - r_sub1) (end_x + r_sub1),
-                if (toward_up || toward_left) {
-                    end_y - r_sub2
-                } else {
-                    end_y + r_sub2
-                }
-            );
-        let handle_delta_q = ((handle_base * alpha.cos()), (handle_base * alpha.sin()));
-        let toward_updown_delta1 = if toward_updown {handle_delta_q.1} {handle_delta_q.0};
-        let toward_updown_delta0 = if toward_updown {handle_delta_q.0} {handle_delta_q.1};
-        let handle_bottom_left = 
-            (
-                if toward_left {
-                    start_x + toward_updown_delta1
-                } else {
-                    start_x - toward_updown_delta1
-                },
-                if toward_left {
-                    start_y - toward_updown_delta0
-                } else {
-                    start_y + toward_updown_delta0
-                }
-            );
-        let handle_bottom_right =
-            (
-                if toward_left {
-                    end_x + toward_updown_delta1
-                } else {
-                    end_x - toward_updown_delta1
-                },
-                if toward_left {
-                    end_y - toward_updown_delta0
-                } else {
-                    end_y + toward_updown_delta0
-                }
-            );
-        let handle_top_left =
-            (
-                if toward_left {
-                    start_x - toward_updown_delta1
-                } else {
-                    start_x + toward_updown_delta1
-                },
-                if toward_left {
-                    start_y + toward_updown_delta0
-                } else {
-                    start_y - toward_updown_delta0
-                }
-            );
-        let handle_top_right =
-            (
-                if toward_left {
-                    end_x - toward_updown_delta1
-                } else {
-                    end_x + toward_updown_delta1
-                },
-                if toward_left {
-                    end_y + toward_updown_delta0
-                } else {
-                    end_y - toward_updown_delta0
-                }
-            );
-        let head_delta_q =
-            (
-                total_base * alpha.cos(),
-                total_base * alpha.sin()
-            );
-        let q =
-            (
-                if toward_left {
-                    end_x + toward_updown_delta1
-                } else {
-                    end_x - toward_updown_delta1
-                },
-                if toward_left {
-                    end_y - toward_updown_delta0
-                } else {
-                    end_y + toward_updown_delta1
-                }
-           );
-        
-        let s =
-            (
-                if toward_left {
-                    end_x - toward_updown_delta1
-                } else {
-                    end_x + toward_updown_delta1
-                },
-                if toward_left {
-                    end_y + toward_updown_delta0
-                } else {
-                    end_y - toward_updown_delta0
-                }
-            );
-
-        format!("    <polygon id=\"{}\"\n{}",
-            shape_id,
-            {
-                let mut shape_str = "          points=\"\n".to_string();
-                shape_str.push_str(&format!("            {:.4},{:.4}\n", handle_bottom_left.0, handle_bottom_left.1));
-                shape_str.push_str(&format!("            {:.4},{:.4}\n", handle_bottom_right.0, handle_bottom_right.1));
-                shape_str.push_str(&format!("            {.4},{.4}\n", q.0, q.1));
-                shape_str.push_str(&format!("            {.4},{.4}\n", r.0, r.1))
-                shape_str.push_str(&format!("            {.4},{.4}\n", s.0, s.1))
-                shape_str.push_str(&format!("            {.4},{.4}\n", handle_top_right.0, handle_top_right.1));
-                shape_str.push_str(&format!("            {.4},{.4}\n", handle_top_left.0, handle_top_left.1));
-                shape_str.push_str(&format!("            \"/>\n"));
-                shape_str
-            });
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn check_new_arrow() {
-        let arrow = Arrow {
-            width: 30.0,
-            height: 20f64,
-            radius_x: Some(10.0),
-            radius_y: Some(5f64),
-        };
-
-        assert_eq!(arrow.width, 30.0);
-        assert_eq!(arrow.height, 20.0);
-        assert_eq!(arrow.radius_x.unwrap(), 10.0);
-        assert_eq!(arrow.radius_y.unwrap(), 5.0);
-    }
-
-    #[test]
-    fn check_new() {
-        let arrow = Arrow::new(30f64, 20f64);
-        assert_eq!(arrow.width, 30.0);
-        assert_eq!(arrow.height, 20.0);
-        assert!(arrow.radius_x.is_none());
-        assert!(arrow.radius_y.is_none());
-    }
-
-    #[test]
-    fn check_format1() {
-        let arrow = Arrow::new(30.0, 20.0);
-
-        assert_eq!(
-            Arrow::format(&arrow, "1".to_string()),
-            "    <arrow id=\"1\" width=\"30\" height=\"20\" />\n"
+        let delta_r = (
+            (self.head_height * theta.cos()),
+            (self.head_height * theta.sin()),
         );
-    }
-
-    #[test]
-    fn check_format2() {
-        let arrow = Arrow {
-            width: 30.0,
-            height: 20.0,
-            radius_x: Some(10.0),
-            radius_y: Some(5.0),
-        };
-
-        assert_eq!(
-            Arrow::format(&arrow, "1".to_string()),
-            "    <arrow id=\"1\" width=\"30\" height=\"20\" rx=\"10\" ry=\"5\" />\n"
+        let r_sub1 = if toward_updown { delta_r.1 } else { delta_r.0 };
+        let r_sub2 = if toward_updown { delta_r.0 } else { delta_r.1 };
+        let r = (
+            if toward_left {
+                new_end_x - r_sub1
+            } else {
+                new_end_x + r_sub1
+            },
+            if toward_up || toward_left {
+                new_end_y - r_sub2
+            } else {
+                new_end_y + r_sub2
+            },
         );
+        let handle_delta_q = (
+            (self.handle_base * alpha.cos()),
+            (self.handle_base * alpha.sin()),
+        );
+        let toward_updown_handle_delta1 = if toward_updown {
+            handle_delta_q.1
+        } else {
+            handle_delta_q.0
+        };
+        let toward_updown_handle_delta0 = if toward_updown {
+            handle_delta_q.0
+        } else {
+            handle_delta_q.1
+        };
+        let handle_bottom_left = (
+            if toward_left {
+                self.start_x + toward_updown_handle_delta1
+            } else {
+                self.start_x - toward_updown_handle_delta1
+            },
+            if toward_left {
+                self.start_y - toward_updown_handle_delta0
+            } else {
+                self.start_y + toward_updown_handle_delta0
+            },
+        );
+        let handle_bottom_right = (
+            if toward_left {
+                new_end_x + toward_updown_handle_delta1
+            } else {
+                new_end_x - toward_updown_handle_delta1
+            },
+            if toward_left {
+                new_end_y - toward_updown_handle_delta0
+            } else {
+                new_end_y + toward_updown_handle_delta0
+            },
+        );
+        let handle_top_left = (
+            if toward_left {
+                self.start_x - toward_updown_handle_delta1
+            } else {
+                self.start_x + toward_updown_handle_delta1
+            },
+            if toward_left {
+                self.start_y + toward_updown_handle_delta0
+            } else {
+                self.start_y - toward_updown_handle_delta0
+            },
+        );
+        let handle_top_right = (
+            if toward_left {
+                new_end_x - toward_updown_handle_delta1
+            } else {
+                new_end_x + toward_updown_handle_delta1
+            },
+            if toward_left {
+                new_end_y + toward_updown_handle_delta0
+            } else {
+                new_end_y - toward_updown_handle_delta0
+            },
+        );
+        let head_delta_q = (total_base * alpha.cos(), total_base * alpha.sin());
+        let toward_updown_head_delta1 = if toward_updown {
+            head_delta_q.1
+        } else {
+            head_delta_q.0
+        };
+        let toward_updown_head_delta0 = if toward_updown {
+            head_delta_q.0
+        } else {
+            head_delta_q.1
+        };
+        let q = (
+            if toward_left {
+                new_end_x + toward_updown_head_delta1
+            } else {
+                new_end_x - toward_updown_head_delta1
+            },
+            if toward_left {
+                new_end_y - toward_updown_head_delta0
+            } else {
+                new_end_y + toward_updown_head_delta1
+            },
+        );
+
+        let s = (
+            if toward_left {
+                new_end_x - toward_updown_head_delta1
+            } else {
+                new_end_x + toward_updown_head_delta1
+            },
+            if toward_left {
+                new_end_y + toward_updown_head_delta0
+            } else {
+                new_end_y - toward_updown_head_delta0
+            },
+        );
+
+        format!("    <polygon id=\"{}\"\n{}", shape_id, {
+            let mut shape_str = "          points=\"\n".to_string();
+            shape_str.push_str(&format!(
+                "            {:.4},{:.4}\n",
+                handle_bottom_left.0, handle_bottom_left.1
+            ));
+            shape_str.push_str(&format!(
+                "            {:.4},{:.4}\n",
+                handle_bottom_right.0, handle_bottom_right.1
+            ));
+            shape_str.push_str(&format!("            {:.4},{:.4}\n", q.0, q.1));
+            shape_str.push_str(&format!("            {:.4},{:.4}\n", r.0, r.1));
+            shape_str.push_str(&format!("            {:.4},{:.4}\n", s.0, s.1));
+            shape_str.push_str(&format!(
+                "            {:.4},{:.4}\n",
+                handle_top_right.0, handle_top_right.1
+            ));
+            shape_str.push_str(&format!(
+                "            {:.4},{:.4}\n",
+                handle_top_left.0, handle_top_left.1
+            ));
+            shape_str.push_str(&format!("            \"/>\n"));
+            shape_str
+        })
     }
 }

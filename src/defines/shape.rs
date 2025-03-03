@@ -1,3 +1,4 @@
+use crate::defines::arrow::Arrow;
 use crate::defines::circle::Circle;
 use crate::defines::ellipse::Ellipse;
 use crate::defines::filter::Filter;
@@ -25,6 +26,7 @@ pub enum Shape {
     Path(Path),
     Text(Text),
     Marker(Marker),
+    Arrow(Arrow),
 }
 
 impl Shape {
@@ -42,6 +44,7 @@ impl Shape {
             Shape::Path(path) => path.format(shape_id),
             Shape::Text(text) => text.format(shape_id),
             Shape::Marker(marker) => marker.format(shape_id),
+            Shape::Arrow(arrow) => arrow.format(shape_id),
         }
     }
 }

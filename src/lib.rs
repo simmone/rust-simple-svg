@@ -3,6 +3,8 @@
 //! This is rewrite from Racket library: racket-simple-svg
 
 #[doc(hidden)]
+pub use crate::defines::arrow::Arrow;
+#[doc(hidden)]
 pub use crate::defines::circle::Circle;
 #[doc(hidden)]
 pub use crate::defines::ellipse::Ellipse;
