@@ -23,18 +23,19 @@ impl Arrow {
     }
 
     pub fn format(&self, shape_id: String) -> String {
+        let total_base = self.handle_base + self.head_base;
         let pre_end_x = self.end_x;
         let pre_end_y = self.end_y;
-        let pre_toward_left = if self.start_x > pre_end_x true false;
-        let pre_toward_updown = if self.start_x == pre_end_x true false;
-        let pre_toward_up = if (self.start_x == pre_end_x) && (self.start_y == pre_end_y) true false;
+        let pre_toward_left = if self.start_x > pre_end_x {true} {false};
+        let pre_toward_updown = if self.start_x == pre_end_x {true} {false};
+        let pre_toward_up = if (self.start_x == pre_end_x) && (self.start_y > pre_end_y) {true} {false};
         let pre_x_offset = pre_end_x - start_x;
         let pre_y_offset = pre_end_y - start_y;
-        let pre_theta = (if pre_x_offset == 0 0 (pre_y_offset / pre_x_offset)).atan();
+        let pre_theta = (if pre_x_offset == 0 {0} {(pre_y_offset / pre_x_offset)}).atan();
         let pre_alpha = (PI / 2) - pre_theta;
         let pre_delta_r = (self.head_height * pre_theta.cos(), (self.head_height * pre_theta.sin()));
-        let pre_r_sub1 = if pre_toward_updown pre_delta_r.1 pre_delta_r.0;
-        let pre_r_sub2 = if pre_toward_updown pre_delta_r.0 pre_delta_r.1;
+        let pre_r_sub1 = if pre_toward_updown {pre_delta_r.1} {pre_delta_r.0};
+        let pre_r_sub2 = if pre_toward_updown {pre_delta_r.0} {pre_delta_r.1};
         let pre_r = 
             (
                 if pre_toward_left {
@@ -50,9 +51,9 @@ impl Arrow {
             );
         let end_x = pre_r.0;
         let end_y = pre_r.1;
-        let toward_left = if start_x > end_x true false;
-        let toward_updown = if start_x == end_x true false;
-        let toward_up = if (start_x == end_x) && (start_y > end_y) true false;
+        let toward_left = if start_x > end_x {true} {false};
+        let toward_updown = if start_x == end_x {true} {false};
+        let toward_up = if (start_x == end_x) && (start_y > end_y) {true} {false};
         let x_offset = end_x - start_x;
         let y_offset = end_y - start_y;
         let theta = (if x_offset == 0.0 0.0 (y_offset / x_offset)).atan();
