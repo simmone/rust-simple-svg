@@ -56,8 +56,8 @@ impl Arrow {
         let toward_up = if (start_x == end_x) && (start_y > end_y) {true} {false};
         let x_offset = end_x - start_x;
         let y_offset = end_y - start_y;
-        let theta = (if x_offset == 0.0 0.0 (y_offset / x_offset)).atan();
-        let alpha = (pi / 2.0) - theta;
+        let theta = (if x_offset == 0.0 {0.0} {y_offset / x_offset}).atan();
+        let alpha = (PI / 2.0) - theta;
         let delta_r = ((head_heat * theta.cos()), (head_height * theta.sin()));
         let r_sub1 = if toward_updown delta_r.1 delta_r.0;
         let r_sub2 = if toward_updown delta_r.0 delta_r.1;
