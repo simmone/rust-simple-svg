@@ -216,6 +216,8 @@ fn arrow2_test() {
     svg.add_default_group(group);
 
     let svg_str = svg_out(svg);
+    
+    print!("{}\n", svg_str);
 
     let contents = include_str!("../showcase/arrow/arrow2.svg");
 

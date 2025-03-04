@@ -6,8 +6,8 @@ use crate::defines::viewbox::ViewBox;
 use crate::defines::widget::Widget;
 use std::collections::HashMap;
 
-pub static DEFAULT_GROUP_ID: &str = "d0";
-pub static BACKGROUND_GROUP_ID: &str = "b0";
+pub static DEFAULT_GROUP_ID: &str = "g0";
+pub static BACKGROUND_GROUP_ID: &str = "g1";
 
 pub struct Svg {
     pub width: f64,
@@ -29,7 +29,7 @@ impl Svg {
             background: None,
             view_box: None,
             shape_id_count: 0,
-            group_id_count: 0,
+            group_id_count: 2,
             shape_define_map: HashMap::new(),
             group_define_map: HashMap::new(),
             group_show_list: Vec::new(),
@@ -94,6 +94,17 @@ impl Svg {
 
         group_str
     }
+    
+    pub fn sort_id(ids: &mut Vec::<String>) {
+        ids.sort_by(|a, b|
+                    {
+                        let va: Vec<&str> = a.split(char::is_alphabetic).collect();
+                        let vb: Vec<&str> = b.split(char::is_alphabetic).collect();
+                        let van = va[1].parse::<usize>().unwrap();
+                        let vbn = vb[1].parse::<usize>().unwrap();
+                        van.cmp(&vbn)
+                    });
+    }
 
     pub fn flush_data(&self) -> String {
         let mut svg_str = String::new();
@@ -103,8 +114,7 @@ impl Svg {
             svg_str.push_str("  <defs>\n");
 
             let mut shape_ids: Vec<String> = self.shape_define_map.clone().into_keys().collect();
-            shape_ids.sort();
-
+            Svg::sort_id(&mut shape_ids);
             for shape_id in shape_ids {
                 let shape = self.shape_define_map.get(&shape_id).unwrap();
 
@@ -121,7 +131,8 @@ impl Svg {
             .into_keys()
             .filter(|group_id| group_id != DEFAULT_GROUP_ID)
             .collect();
-        group_ids.sort();
+
+        Svg::sort_id(&mut group_ids);
 
         for group_id in group_ids {
             svg_str.push_str("\n");

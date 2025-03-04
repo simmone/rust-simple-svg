@@ -51,6 +51,15 @@ fn check_add_shape() {
 }
 
 #[test]
+fn check_shape_sort() {
+    let mut ids = vec!["s10", "s1", "s2", "g3", "g0"].iter().map(|s| s.to_string());
+    
+    Svg::sort_id(&mut ids);
+    
+    assert_eq!(ids, vec!["g0", "s1", "s2", "g3", "s10"].iter().map(|s| s.to_string()));
+}
+
+#[test]
 fn check_add_group() {
     let mut svg: Svg = Svg::new(640.0, 480.0);
     let shape_id = svg.add_shape(Shape::Rect(Rect::new(30.0, 20.0)));
