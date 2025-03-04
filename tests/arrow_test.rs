@@ -217,8 +217,6 @@ fn arrow2_test() {
 
     let svg_str = svg_out(svg);
     
-    print!("{}\n", svg_str);
-
     let contents = include_str!("../showcase/arrow/arrow2.svg");
 
     assert_eq!(svg_str, contents);

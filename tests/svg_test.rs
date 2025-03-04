@@ -52,11 +52,13 @@ fn check_add_shape() {
 
 #[test]
 fn check_shape_sort() {
-    let mut ids = vec!["s10", "s1", "s2", "g3", "g0"].iter().map(|s| s.to_string());
+    let mut ids: Vec<String> = vec!["s10", "s1", "s2", "g3", "g0"].into_iter().map(|s| s.to_string()).collect();
     
     Svg::sort_id(&mut ids);
     
-    assert_eq!(ids, vec!["g0", "s1", "s2", "g3", "s10"].iter().map(|s| s.to_string()));
+    let expected_strings: Vec<String> = vec!["g0", "s1", "s2", "g3", "s10"].into_iter().map(|s| s.to_string()).collect();
+    
+    assert_eq!(ids, expected_strings);
 }
 
 #[test]

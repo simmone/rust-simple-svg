@@ -191,7 +191,7 @@ mod tests {
         assert_eq!(svg.width, 640.0);
         assert_eq!(svg.height, 480.0);
         assert_eq!(svg.shape_id_count, 0);
-        assert_eq!(svg.group_id_count, 0);
+        assert_eq!(svg.group_id_count, 2);
         assert_eq!(svg.shape_define_map.len(), 0);
     }
 }

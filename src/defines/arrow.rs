@@ -66,7 +66,7 @@ impl Arrow {
         } else {
             pre_delta_r.0
         };
-        let pre_r_sub2 = if pre_toward_updown {
+        let pre_r_sub0 = if pre_toward_updown {
             pre_delta_r.0
         } else {
             pre_delta_r.1
@@ -78,9 +78,9 @@ impl Arrow {
                 pre_end_x - pre_r_sub1
             },
             if pre_toward_up || pre_toward_left {
-                pre_end_y + pre_r_sub2
+                pre_end_y + pre_r_sub0
             } else {
-                pre_end_y - pre_r_sub2
+                pre_end_y - pre_r_sub0
             },
         );
         let new_end_x = pre_r.0;
@@ -209,7 +209,7 @@ impl Arrow {
             if toward_left {
                 new_end_y - toward_updown_head_delta0
             } else {
-                new_end_y + toward_updown_head_delta1
+                new_end_y + toward_updown_head_delta0
             },
         );
 
