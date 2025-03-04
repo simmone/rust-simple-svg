@@ -82,8 +82,7 @@ fn group_basic_test() {
 }
 
 #[test]
-fn group_pat
-tern_test() {
+fn group_pattern_test() {
     let mut svg = Svg::new(100.0, 100.0);
 
     let rect_id = svg.add_shape(Shape::Rect(Rect::new(50.0, 50.0)));

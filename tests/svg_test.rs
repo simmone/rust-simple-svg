@@ -76,7 +76,7 @@ fn check_add_group() {
 
     assert_eq!(svg.group_define_map.len(), 1);
     assert_eq!(
-        svg.group_define_map.get("g1").unwrap().widget_list[0].shape_id,
+        svg.group_define_map.get("g2").unwrap().widget_list[0].shape_id,
         "s1".to_string()
     );
 }
