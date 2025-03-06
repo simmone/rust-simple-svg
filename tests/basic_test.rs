@@ -48,8 +48,6 @@ fn rect_in_background_test() {
 
     let svg_str = svg_out(svg);
 
-    println!("{}", svg_str);
-
     let contents = include_str!("../showcase/basic/rect_in_background.svg");
 
     assert_eq!(svg_str, contents);
