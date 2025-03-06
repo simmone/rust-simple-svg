@@ -111,7 +111,7 @@ impl Path {
         fmt_str.push_str(&format!("          d=\"\n"));
 
         for def in self.defs.clone() {
-            fmt_str.push_str(&format!("             {}\n", def));
+            fmt_str.push_str(&format!("{}\n", def));
         }
 
         fmt_str.push_str(&format!("            \"/>\n"));
@@ -135,7 +135,7 @@ mod tests {
     fn check_format() {
         let mut path = Path::new();
 
-        path.defs.push("path strs".to_string());
+        path.defs.push("             path strs".to_string());
 
         assert_eq!(Path::format(&path, "1".to_string()), {
             let mut c_str = String::new();
