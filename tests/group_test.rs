@@ -293,8 +293,6 @@ fn five_circle_pattern_test() {
 
     let svg_str = svg_out(svg);
 
-    print!("{}", svg_str);
-
     let contents = include_str!("../showcase/group/group3.svg");
 
     assert_eq!(svg_str, contents);

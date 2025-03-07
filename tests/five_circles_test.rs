@@ -72,8 +72,6 @@ fn five_star_test() {
 
     let svg_str = svg_out(svg);
     
-    print!("{}\n", svg_str);
-
     let contents = include_str!("../showcase/example/five_circles.svg");
 
     assert_eq!(svg_str, contents);
