@@ -65,4 +65,3 @@ fn dual_line_test() {
 
     assert_eq!(svg_str, contents);
 }
-

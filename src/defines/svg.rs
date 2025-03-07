@@ -94,16 +94,15 @@ impl Svg {
 
         group_str
     }
-    
-    pub fn sort_id(ids: &mut Vec::<String>) {
-        ids.sort_by(|a, b|
-                    {
-                        let va: Vec<&str> = a.split(char::is_alphabetic).collect();
-                        let vb: Vec<&str> = b.split(char::is_alphabetic).collect();
-                        let van = va[1].parse::<usize>().unwrap();
-                        let vbn = vb[1].parse::<usize>().unwrap();
-                        van.cmp(&vbn)
-                    });
+
+    pub fn sort_id(ids: &mut Vec<String>) {
+        ids.sort_by(|a, b| {
+            let va: Vec<&str> = a.split(char::is_alphabetic).collect();
+            let vb: Vec<&str> = b.split(char::is_alphabetic).collect();
+            let van = va[1].parse::<usize>().unwrap();
+            let vbn = vb[1].parse::<usize>().unwrap();
+            van.cmp(&vbn)
+        });
     }
 
     pub fn flush_data(&self) -> String {
