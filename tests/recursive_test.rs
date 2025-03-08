@@ -3,22 +3,25 @@ use std::fs::File;
 use std::io::prelude::*;
 use simple_svg::*;
 
-fn recursive_it(mut x: f64, mut y: f64, mut radius: f64) -> usize {
+fn recursive_it(x: f64, y: f64, radius: f64) -> usize {
     let mut count = 1;
-    
-    while radius > 8.0 {
-        print!("{}, {}, {}\n", x, y, radius);
-    
-    loop {
-        if radius > 8.0 {
-            count += 1;
 
-            radius = radius / 2.0;
-            
-            continue;
-        } else {
-            break;
-        }
+    let mut loop_radius = radius;
+    let mut loop_x = x;
+    let mut loop_y = y;
+
+    print!("{}, {}, {}, {}\n", loop_x, loop_y, loop_radius, count);
+    
+    while loop_radius > 8.0 {
+        loop_radius = loop_radius / 2.0;
+
+        count = count + 1;
+
+        print!("{}, {}, {}, {}\n", loop_x, loop_y, loop_radius, count);
+        
+        loop_left_x_radius = loop_x - loop_radius;
+        
+        while 
     }
         
     count
