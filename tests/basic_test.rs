@@ -19,8 +19,6 @@ fn background_test() {
 
     let svg_str = svg_out(svg);
 
-    println!("{}", svg_str);
-
     let contents = include_str!("../showcase/basic/background.svg");
 
     assert_eq!(svg_str, contents);
