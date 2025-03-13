@@ -10,6 +10,7 @@ license = "MIT"
 exclude = ["/showcase"]
 
 [dependencies]
+num = "0.4.3"
 
 [dev-dependencies]
 pretty_assertions = "1.4.1"
