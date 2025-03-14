@@ -26,3 +26,39 @@ fn get_end_point(start_point: (f64, f64), length: f64, deg: f64, precision: f64)
         ((start_point.1 + end.im) * (10.0f64.powf(precision))).round() / (10.0f64.powf(precision))
     )
 }
+
+fn 
+
+#[test]
+fn fern_test() {
+    let canvas_width = 600.0;
+    let canvas_height = 600.0;
+    let start_point = (300.0, 50.0);
+    let start_length = 120.0;
+    let start_deg = 100.0; // 100°
+    let start_width = 3.0;
+    let step_width = 0.86;
+    let color = "#5a5";
+    let min_length = 0.5;
+    let central_reduction = 0.75;
+    let lateral_reduction = 0.35;
+    let lateral_deg = 80.0; // 80°
+    let bend = 5.0; // 5°
+    let precision = 0.0;
+
+    let mut svg = Svg::new(canvas_width, canvas_height);
+    
+    svg.add_default_group(group);
+
+    let svg_str = svg_out(svg);
+
+//    let mut file = File::create("resursive.svg")?;
+
+//    file.write(svg_str.as_bytes())?;
+
+//    Ok(())
+
+    let contents = include_str!("../showcase/example/fern.svg");
+
+    assert_eq!(svg_str, contents);
+}
