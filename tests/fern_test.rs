@@ -1,6 +1,6 @@
 use pretty_assertions::assert_eq;
-use std::fs::File;
-use std::io::prelude::*;
+//use std::fs::File;
+//use std::io::prelude::*;
 use num::complex::Complex;
 use simple_svg::*;
 use std::collections::HashMap;
@@ -13,7 +13,7 @@ const START_LENGTH: f64 = 120.0;
 const START_DEG: f64 = 100.0; // 100°
 const START_WIDTH: f64 = 3.0;
 const STEP_WIDTH: f64 = 0.86;
-const COLOR: &str = "#5A5";
+const COLOR: &str = "#5a5";
 const MIN_LENGTH: f64 = 0.5;
 const CENTRAL_REDUCTION: f64 = 0.75;
 const LATERAL_REDUCTION: f64 = 0.35;
@@ -59,10 +59,10 @@ fn recursive_points(
     if (CENTRAL_REDUCTION * length) >= MIN_LENGTH {
         let loop_end_point = get_end_point(loop_start_point, length, deg, PRECISION);
 
-        let truncted_length = format!("{:.2}", length);
+        let truncted_width = format!("{:.2}", width);
 
         lines.push((
-            truncted_length,
+            truncted_width,
             (loop_start_point.0, CANVAS_HEIGHT - loop_start_point.1),
             (loop_end_point.0, CANVAS_HEIGHT - loop_end_point.1),
         ));
@@ -112,11 +112,11 @@ fn recursive_points_test() {
 }
 
 #[test]
-fn recursive_test() -> std::io::Result<()> {
-//fn fern_test() {
+//fn fern_test() -> std::io::Result<()> {
+fn fern_test() {
     let mut svg = Svg::new(CANVAS_WIDTH, CANVAS_HEIGHT);
 
-    let mut group = Group::new();
+    let mut default_group = Group::new();
 
     let mut lines: Vec<(String, (f64, f64), (f64, f64))> = vec![];
 
@@ -143,22 +143,58 @@ fn recursive_test() -> std::io::Result<()> {
             exists_vec.push((line.1, line.2));
          }
     }
-    
-    for (line_width, points) in &width_group_map {
-        println!("{}, {}", line_width, points.len());
-    }
 
-    svg.add_default_group(group);
+    assert_eq!(width_group_map.len(), 19);
+
+    let mut widths: Vec<String> = width_group_map.clone().into_keys().collect();
+    widths.sort_by(
+        |a, b| {
+            let a_num = a.parse::<f64>().unwrap();
+            let b_num = b.parse::<f64>().unwrap();
+            
+            let a_int = (a_num * 100.0).round() as usize;
+            let b_int = (b_num * 100.0).round() as usize;
+            
+            b_int.cmp(&a_int)
+        }
+    );
+    
+    for width in widths {
+        let mut width_sstyle = Sstyle::new();
+        width_sstyle.stroke = Some(COLOR.to_string());
+        width_sstyle.stroke_width = Some(width.parse::<f64>().unwrap());
+
+        let mut width_group = Group::new();
+        
+        for point_pair in width_group_map.get(&width).unwrap() {
+            let line_id = svg.add_shape(Shape::Line(Line::new(point_pair.0, point_pair.1)));
+
+            width_group.place_widget(Widget {
+            shape_id: line_id,
+            ..Default::default()
+            });
+        }
+        
+        let width_group_id = svg.add_group(width_group);
+
+        default_group.place_widget(Widget {
+            shape_id: width_group_id.clone(),
+            style: Some(width_sstyle.clone()),
+            ..Default::default()
+        });
+    }
+    
+    svg.add_default_group(default_group);
 
     let svg_str = svg_out(svg);
 
-    let mut file = File::create("fern.svg")?;
+//    let mut file = File::create("fern.svg")?;
 
-    file.write(svg_str.as_bytes())?;
+//    file.write(svg_str.as_bytes())?;
+    
+//    Ok(())
 
-    Ok(())
+    let contents = include_str!("../showcase/example/fern.svg");
 
-//    let contents = include_str!("../showcase/example/fern.svg");
-
-//    assert_eq!(svg_str, contents);
+    assert_eq!(svg_str, contents);
 }
