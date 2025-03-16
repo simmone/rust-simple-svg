@@ -127,54 +127,52 @@ fn fern_test() {
         START_WIDTH,
         &mut lines,
     );
-    
+
     let mut width_group_map = HashMap::new();
-    
+
     for line in lines {
         if !width_group_map.contains_key(&line.0) {
             let mut new_vec = vec![];
-            
+
             new_vec.push((line.1, line.2));
-            
+
             width_group_map.insert(line.0, new_vec);
-         } else {
+        } else {
             let exists_vec = width_group_map.get_mut(&line.0).unwrap();
-        
+
             exists_vec.push((line.1, line.2));
-         }
+        }
     }
 
     assert_eq!(width_group_map.len(), 19);
 
     let mut widths: Vec<String> = width_group_map.clone().into_keys().collect();
-    widths.sort_by(
-        |a, b| {
-            let a_num = a.parse::<f64>().unwrap();
-            let b_num = b.parse::<f64>().unwrap();
-            
-            let a_int = (a_num * 100.0).round() as usize;
-            let b_int = (b_num * 100.0).round() as usize;
-            
-            b_int.cmp(&a_int)
-        }
-    );
-    
+    widths.sort_by(|a, b| {
+        let a_num = a.parse::<f64>().unwrap();
+        let b_num = b.parse::<f64>().unwrap();
+
+        let a_int = (a_num * 100.0).round() as usize;
+        let b_int = (b_num * 100.0).round() as usize;
+
+        b_int.cmp(&a_int)
+    });
+
     for width in widths {
         let mut width_sstyle = Sstyle::new();
         width_sstyle.stroke = Some(COLOR.to_string());
         width_sstyle.stroke_width = Some(width.parse::<f64>().unwrap());
 
         let mut width_group = Group::new();
-        
+
         for point_pair in width_group_map.get(&width).unwrap() {
             let line_id = svg.add_shape(Shape::Line(Line::new(point_pair.0, point_pair.1)));
 
             width_group.place_widget(Widget {
-            shape_id: line_id,
-            ..Default::default()
+                shape_id: line_id,
+                ..Default::default()
             });
         }
-        
+
         let width_group_id = svg.add_group(width_group);
 
         default_group.place_widget(Widget {
@@ -183,16 +181,16 @@ fn fern_test() {
             ..Default::default()
         });
     }
-    
+
     svg.add_default_group(default_group);
 
     let svg_str = svg_out(svg);
 
-//    let mut file = File::create("fern.svg")?;
+    //    let mut file = File::create("fern.svg")?;
 
-//    file.write(svg_str.as_bytes())?;
-    
-//    Ok(())
+    //    file.write(svg_str.as_bytes())?;
+
+    //    Ok(())
 
     let contents = include_str!("../showcase/example/fern.svg");
 
