@@ -1,16 +1,16 @@
-use crate::defines::arrow::Arrow;
-use crate::defines::circle::Circle;
-use crate::defines::ellipse::Ellipse;
-use crate::defines::filter::Filter;
-use crate::defines::gradient::LinearGradient;
-use crate::defines::gradient::RadialGradient;
-use crate::defines::line::Line;
-use crate::defines::marker::Marker;
-use crate::defines::path::Path;
-use crate::defines::polygon::Polygon;
-use crate::defines::polyline::Polyline;
-use crate::defines::rect::Rect;
-use crate::defines::text::Text;
+use crate::define::arrow::Arrow;
+use crate::define::circle::Circle;
+use crate::define::ellipse::Ellipse;
+use crate::define::filter::Filter;
+use crate::define::gradient::LinearGradient;
+use crate::define::gradient::RadialGradient;
+use crate::define::line::Line;
+use crate::define::marker::Marker;
+use crate::define::path::Path;
+use crate::define::polygon::Polygon;
+use crate::define::polyline::Polyline;
+use crate::define::rect::Rect;
+use crate::define::text::Text;
 
 #[derive(Clone)]
 pub enum Shape {
