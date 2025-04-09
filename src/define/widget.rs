@@ -1,4 +1,4 @@
-use crate::defines::sstyle::Sstyle;
+use crate::define::sstyle::Sstyle;
 
 #[derive(Default, Clone)]
 pub struct Widget {

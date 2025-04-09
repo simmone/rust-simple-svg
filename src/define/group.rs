@@ -1,4 +1,4 @@
-use crate::defines::widget::Widget;
+use crate::define::widget::Widget;
 
 #[derive(Clone)]
 pub struct Group {
@@ -21,10 +21,10 @@ impl Group {
 mod tests {
     use super::*;
 
-    use crate::defines::rect::Rect;
-    use crate::defines::shape::Shape;
-    use crate::defines::sstyle::Sstyle;
-    use crate::defines::svg::Svg;
+    use crate::define::shape::rect::Rect;
+    use crate::define::shape::Shape;
+    use crate::define::sstyle::Sstyle;
+    use crate::define::svg::Svg;
 
     #[test]
     fn check_new() {

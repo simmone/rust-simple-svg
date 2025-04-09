@@ -1,9 +1,9 @@
-use crate::defines::group::Group;
-use crate::defines::rect::Rect;
-use crate::defines::shape::Shape;
-use crate::defines::sstyle::Sstyle;
-use crate::defines::viewbox::ViewBox;
-use crate::defines::widget::Widget;
+use crate::define::group::Group;
+use crate::define::shape::rect::Rect;
+use crate::define::shape::Shape;
+use crate::define::sstyle::Sstyle;
+use crate::define::viewbox::ViewBox;
+use crate::define::widget::Widget;
 use std::collections::HashMap;
 
 pub static DEFAULT_GROUP_ID: &str = "g0";

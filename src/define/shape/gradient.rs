@@ -228,7 +228,7 @@ mod tests {
         gradient.gradient_units = Some(GradientUnits::UserSpaceOnUse);
         gradient.spread_method = Some(SpreadMethod::Repeat);
 
-        let contents = include_str!("../../showcase/gradient/linear_gradient_define.svg");
+        let contents = include_str!("../../../showcase/gradient/linear_gradient_define.svg");
 
         assert_eq!(
             LinearGradient::format(&gradient, "s1".to_string()),
@@ -261,7 +261,7 @@ mod tests {
         gradient.gradient_units = Some(GradientUnits::UserSpaceOnUse);
         gradient.spread_method = Some(SpreadMethod::Repeat);
 
-        let contents = include_str!("../../showcase/gradient/radial_gradient_define.svg");
+        let contents = include_str!("../../../showcase/gradient/radial_gradient_define.svg");
 
         assert_eq!(
             RadialGradient::format(&gradient, "s1".to_string()),

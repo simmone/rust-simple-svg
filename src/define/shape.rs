@@ -1,16 +1,29 @@
-use crate::define::arrow::Arrow;
-use crate::define::circle::Circle;
-use crate::define::ellipse::Ellipse;
-use crate::define::filter::Filter;
-use crate::define::gradient::LinearGradient;
-use crate::define::gradient::RadialGradient;
-use crate::define::line::Line;
-use crate::define::marker::Marker;
-use crate::define::path::Path;
-use crate::define::polygon::Polygon;
-use crate::define::polyline::Polyline;
-use crate::define::rect::Rect;
-use crate::define::text::Text;
+pub mod arrow;
+pub mod circle;
+pub mod ellipse;
+pub mod filter;
+pub mod gradient;
+pub mod line;
+pub mod marker;
+pub mod path;
+pub mod polygon;
+pub mod polyline;
+pub mod rect;
+pub mod text;
+
+use crate::define::shape::arrow::Arrow;
+use crate::define::shape::circle::Circle;
+use crate::define::shape::ellipse::Ellipse;
+use crate::define::shape::filter::Filter;
+use crate::define::shape::gradient::LinearGradient;
+use crate::define::shape::gradient::RadialGradient;
+use crate::define::shape::line::Line;
+use crate::define::shape::marker::Marker;
+use crate::define::shape::path::Path;
+use crate::define::shape::polygon::Polygon;
+use crate::define::shape::polyline::Polyline;
+use crate::define::shape::rect::Rect;
+use crate::define::shape::text::Text;
 
 #[derive(Clone)]
 pub enum Shape {

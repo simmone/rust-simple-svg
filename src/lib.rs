@@ -3,47 +3,47 @@
 //! This is rewrite from Racket library: racket-simple-svg
 
 #[doc(hidden)]
-pub use crate::defines::arrow::Arrow;
+pub use crate::define::shape::arrow::Arrow;
 #[doc(hidden)]
-pub use crate::defines::circle::Circle;
+pub use crate::define::shape::circle::Circle;
 #[doc(hidden)]
-pub use crate::defines::ellipse::Ellipse;
+pub use crate::define::shape::ellipse::Ellipse;
 #[doc(hidden)]
-pub use crate::defines::filter::Filter;
+pub use crate::define::shape::filter::Filter;
 #[doc(hidden)]
-pub use crate::defines::gradient::LinearGradient;
+pub use crate::define::shape::gradient::LinearGradient;
 #[doc(hidden)]
-pub use crate::defines::gradient::RadialGradient;
+pub use crate::define::shape::gradient::RadialGradient;
 #[doc(hidden)]
-pub use crate::defines::group::Group;
+pub use crate::define::group::Group;
 #[doc(hidden)]
-pub use crate::defines::line::Line;
+pub use crate::define::shape::line::Line;
 #[doc(hidden)]
-pub use crate::defines::marker::{Marker, MarkerType};
+pub use crate::define::shape::marker::{Marker, MarkerType};
 #[doc(hidden)]
-pub use crate::defines::path::{ArcDirection, Path};
+pub use crate::define::shape::path::{ArcDirection, Path};
 #[doc(hidden)]
-pub use crate::defines::polygon::Polygon;
+pub use crate::define::shape::polygon::Polygon;
 #[doc(hidden)]
-pub use crate::defines::polyline::Polyline;
+pub use crate::define::shape::polyline::Polyline;
 #[doc(hidden)]
-pub use crate::defines::rect::Rect;
+pub use crate::define::shape::rect::Rect;
 #[doc(hidden)]
-pub use crate::defines::shape::Shape;
+pub use crate::define::shape::text::{Text, TextDecoration};
 #[doc(hidden)]
-pub use crate::defines::sstyle::{FillRule, LineCap, LineJoin, Sstyle};
+pub use crate::define::shape::Shape;
 #[doc(hidden)]
-pub use crate::defines::svg::Svg;
+pub use crate::define::sstyle::{FillRule, LineCap, LineJoin, Sstyle};
 #[doc(hidden)]
-pub use crate::defines::text::{Text, TextDecoration};
+pub use crate::define::svg::Svg;
 #[doc(hidden)]
-pub use crate::defines::widget::Widget;
+pub use crate::define::widget::Widget;
 
-use crate::defines::svg::BACKGROUND_GROUP_ID;
-use crate::defines::svg::DEFAULT_GROUP_ID;
+use crate::define::svg::BACKGROUND_GROUP_ID;
+use crate::define::svg::DEFAULT_GROUP_ID;
 
 #[doc(hidden)]
-pub mod defines;
+pub mod define;
 
 pub fn svg_out(mut svg: Svg) -> String {
     let mut svg_out_str = String::new();
