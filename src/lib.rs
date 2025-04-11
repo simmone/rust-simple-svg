@@ -44,6 +44,8 @@ use crate::define::svg::DEFAULT_GROUP_ID;
 
 #[doc(hidden)]
 pub mod define;
+#[doc(hidden)]
+pub mod gadget;
 
 pub fn svg_out(mut svg: Svg) -> String {
     let mut svg_out_str = String::new();

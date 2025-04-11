@@ -12,4 +12,19 @@ pub struct Cell {
 }
 
 fn get_cells(matrix: &Vec<Vec<String>>) -> (Vec<(usize, usize)>, Vec<String>) {
+    (vec![(0, 0)], vec!["1".to_string()])
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    
+    #[test]
+    fn check_get_cells() {
+        let cells = get_cells(vec![["1", "2"], ["3"]]);
+        
+        assert_eq!(cells.0.length, 4);
+        
+        assert_eq!(cells.1.length, 4);
+    }
 }
