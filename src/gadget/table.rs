@@ -11,8 +11,19 @@ pub struct Cell {
     pub margin_left: f64
 }
 
-fn get_cells(matrix: &Vec<Vec<String>>) -> (Vec<(usize, usize)>, Vec<String>) {
-    (vec![(0, 0)], vec!["1".to_string()])
+fn get_cells<'a>(matrix: &Vec<[&'a str; 2]>) -> Vec<(usize, usize, &'a str)> {
+    let row_count = matrix.len();
+    let col_count = matrix[0].len();
+    
+    let mut axis_data_array = vec![];
+    
+    for row in 0..row_count {
+        for col in 0..col_count {
+            axis_data_array.push((row, col, matrix[row][col]));
+        }
+    }
+
+    axis_data_array
 }
 
 #[cfg(test)]
@@ -21,10 +32,10 @@ mod tests {
     
     #[test]
     fn check_get_cells() {
-        let cells = get_cells(vec![["1", "2"], ["3"]]);
+        let cells = get_cells(&vec![["1", "2"], ["3", "4"]]);
         
-        assert_eq!(cells.0.length, 4);
+        assert_eq!(cells.len(), 4);
         
-        assert_eq!(cells.1.length, 4);
+        assert_eq!(cells, vec![(0, 0, "1"), (0, 1, "2"), (1, 0, "3"), (1, 1, "4")]);
     }
 }
