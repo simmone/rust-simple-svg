@@ -31,7 +31,33 @@ fn matrix_to_cells(matrix: &Vec<[&str; 2]>, col_width: f64, row_height: f64, col
     
     let mut cells = vec![];
     
-    for axis_data in axis_data_array {
+    let mut loop_point = start_point;
+    
+    for (index, axis_data) in axis_data_array.iter().enumerate() {
+        let row_index = axis_data.0;
+        let col_index = axis_data.1;
+        let text = axis_data.2.clone();
+
+        cells.push(
+            Cell{
+                start_point: loop_point,
+                width: col_width,
+                height: row_height,
+                color: color.to_string(),
+                text,
+                font_size,
+                font_color: font_color.to_string(),
+                margin_top: cell_margin_top,
+                margin_left: cell_margin_left,
+            });
+
+        if index < axis_data_array.len() - 1 {
+            if row_index == axis_data_array[index+1].0 {
+                loop_point = (loop_point.0 + col_width, loop_point.1);
+            } else {
+                loop_point = (start_point.0, loop_point.1 + row_height);
+            }
+        }
     }
     
     cells
