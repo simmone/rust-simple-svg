@@ -3,6 +3,8 @@
 //! This is rewrite from Racket library: racket-simple-svg
 
 #[doc(hidden)]
+pub use crate::define::group::Group;
+#[doc(hidden)]
 pub use crate::define::shape::arrow::Arrow;
 #[doc(hidden)]
 pub use crate::define::shape::circle::Circle;
@@ -14,8 +16,6 @@ pub use crate::define::shape::filter::Filter;
 pub use crate::define::shape::gradient::LinearGradient;
 #[doc(hidden)]
 pub use crate::define::shape::gradient::RadialGradient;
-#[doc(hidden)]
-pub use crate::define::group::Group;
 #[doc(hidden)]
 pub use crate::define::shape::line::Line;
 #[doc(hidden)]
