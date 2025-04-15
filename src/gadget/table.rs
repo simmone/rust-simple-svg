@@ -11,6 +11,25 @@ pub struct Cell {
     pub margin_left: f64,
 }
 
+pub struct Table {
+    pub cells: Vec<Cell>,
+    pub col_width: f64,
+    pub row_height: f64,
+    pub color: String,
+    pub cell_margin_top: f64,
+    pub cell_margin_left: f64,
+    pub start_point: (f64, f64),
+    pub font_size: f64,
+    pub font_color: String,
+}
+
+impl Table {
+    pub fn new() -> Self {
+        Table {
+        }
+    }
+}
+
 fn get_cells(matrix: &Vec<[&str; 2]>) -> Vec<(usize, usize, String)> {
     let row_count = matrix.len();
     let col_count = matrix[0].len();
