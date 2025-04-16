@@ -98,9 +98,9 @@ impl Table {
 
         cells
     }
+    
+    pub fn 
 }
-
-//(define (matrix-to-cells matrix col_width row_height color cell_margin_top cell_margin_left start_point font_size font_color)
 
 #[cfg(test)]
 mod tests {
