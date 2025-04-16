@@ -1,3 +1,5 @@
+pub use crate::define::group::Group;
+
 #[derive(Debug, Clone, PartialEq)]
 pub struct Cell {
     pub start_point: (f64, f64),
@@ -100,7 +102,9 @@ impl Table {
     }
 }
 
-pub fn 
+pub fn table_group(matrix: &Vec<[&str; 2]>) -> Group {
+    Group::new()
+}
 
 #[cfg(test)]
 mod tests {
