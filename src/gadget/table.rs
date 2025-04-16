@@ -98,9 +98,9 @@ impl Table {
 
         cells
     }
-    
-    pub fn 
 }
+
+pub fn 
 
 #[cfg(test)]
 mod tests {
