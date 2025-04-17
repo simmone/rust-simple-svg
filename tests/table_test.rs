@@ -5,9 +5,9 @@ use simple_svg::*;
 fn table1_test() {
     let mut svg = Svg::new(250.0, 200.0);
 
-    let mut table = Table::new();
+    let table = Table::new();
 
-    let table_group = table.to_group(&mut svg, &vec![["1", "2"], ["3", "4"]]);
+    let table_group = table.to_group(&mut svg, &vec![vec!["1", "2", "3"], vec!["4", "5", "6"], vec!["7", "8", "9"]]);
 
     let table_id = svg.add_group(table_group);
 
@@ -23,7 +23,7 @@ fn table1_test() {
 
     let svg_str = svg_out(svg);
 
-    println!("{svg_str}");
+    eprintln!("{svg_str}");
 
     let contents = include_str!("../showcase/gadget/table/table1.svg");
 

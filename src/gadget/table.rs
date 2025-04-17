@@ -44,7 +44,7 @@ impl Table {
         }
     }
 
-    fn get_cells(matrix: &Vec<[&str; 2]>) -> Vec<(usize, usize, String)> {
+    fn get_cells(matrix: &Vec<Vec<&str>>) -> Vec<(usize, usize, String)> {
         let row_count = matrix.len();
         let col_count = matrix[0].len();
 
@@ -60,7 +60,7 @@ impl Table {
     }
 
     fn matrix_to_cells(
-        matrix: &Vec<[&str; 2]>,
+        matrix: &Vec<Vec<&str>>,
         col_width: f64,
         row_height: f64,
         color: &str,
@@ -104,7 +104,7 @@ impl Table {
         cells
     }
 
-    pub fn to_group(&self, svg: &mut Svg, matrix: &Vec<[&str; 2]>) -> Group {
+    pub fn to_group(&self, svg: &mut Svg, matrix: &Vec<Vec<&str>>) -> Group {
         let cells = Self::matrix_to_cells(
             matrix,
             self.col_width,
@@ -122,7 +122,7 @@ impl Table {
             let rect_id = svg.add_shape(Shape::Rect(Rect::new(cell.width, cell.height)));
 
             let mut rect_sstyle = Sstyle::new();
-            rect_sstyle.fill = Some(cell.color);
+            rect_sstyle.stroke = Some(cell.color);
 
             group.place_widget(Widget {
                 shape_id: rect_id,
@@ -161,7 +161,7 @@ mod tests {
 
     #[test]
     fn check_get_cells() {
-        let cells = Table::get_cells(&vec![["1", "2"], ["3", "4"]]);
+        let cells = Table::get_cells(&vec![vec!["1", "2"], vec!["3", "4"]]);
 
         assert_eq!(cells.len(), 4);
 
@@ -179,7 +179,7 @@ mod tests {
     #[test]
     fn check_matrix_to_cells() {
         let cells = Table::matrix_to_cells(
-            &vec![["1", "2"], ["3", "4"]],
+            &vec![vec!["1", "2"], vec!["3", "4"]],
             5.0,
             5.0,
             "black",
