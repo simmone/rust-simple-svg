@@ -100,16 +100,27 @@ impl Table {
 
     pub fn to_group(&self, matrix: &Vec<[&str; 2]>) -> Group {
         let cells = Self::matrix_to_cells(
-            matrix, 
+            matrix,
             self.col_width,
             self.row_height,
             &self.color,
             self.cell_margin_top,
             self.cell_margin_left,
             self.font_size,
-            &self.font_color);
+            &self.font_color,
+        );
 
-        Group::new()
+        let mut group = Group::new();
+        
+        for cell in cells {
+            let rect_id = svg.add_shape(Shape::Rect(Rect::new(cell.width, cell.height)));
+
+            let mut line_sstyle = Sstyle::new();
+            line_sstyle.stroke = Some("#765373".to_string());
+            line_sstyle.stroke_width = Some(5.0);
+        }
+        
+        group
     }
 }
 
