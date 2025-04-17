@@ -1,3 +1,9 @@
+pub use crate::define::svg::Svg;
+pub use crate::define::shape::Shape;
+pub use crate::define::widget::Widget;
+pub use crate::define::shape::rect::Rect;
+pub use crate::define::shape::text::Text;
+pub use crate::define::sstyle::Sstyle;
 pub use crate::define::group::Group;
 
 #[derive(Debug, Clone, PartialEq)]
@@ -98,7 +104,7 @@ impl Table {
         cells
     }
 
-    pub fn to_group(&self, matrix: &Vec<[&str; 2]>) -> Group {
+    pub fn to_group(&self, svg: &mut Svg, matrix: &Vec<[&str; 2]>) -> Group {
         let cells = Self::matrix_to_cells(
             matrix,
             self.col_width,
@@ -115,9 +121,34 @@ impl Table {
         for cell in cells {
             let rect_id = svg.add_shape(Shape::Rect(Rect::new(cell.width, cell.height)));
 
-            let mut line_sstyle = Sstyle::new();
-            line_sstyle.stroke = Some("#765373".to_string());
-            line_sstyle.stroke_width = Some(5.0);
+            let mut rect_sstyle = Sstyle::new();
+            rect_sstyle.fill = Some(cell.color);
+
+            group.place_widget(Widget {
+                shape_id: rect_id,
+                style: Some(rect_sstyle),
+                at: Some(cell.start_point),
+                ..Default::default()
+            });
+
+            let mut text = Text::new(cell.text);
+            text.font_size = Some(cell.font_size);
+            let text_id = svg.add_shape(Shape::Text(text));
+
+            let mut text_sstyle = Sstyle::new();
+            text_sstyle.fill = Some(cell.font_color.clone());
+            text_sstyle.stroke = Some(cell.font_color.clone());
+
+            group.place_widget(Widget {
+                shape_id: text_id,
+                style: Some(text_sstyle),
+                at: Some(
+                    (
+                        cell.start_point.0 + cell.margin_left,
+                        cell.start_point.1 + cell.margin_top
+                    )),
+                ..Default::default()
+            });
         }
         
         group

@@ -7,7 +7,7 @@ fn table1_test() {
 
     let mut table = Table::new();
 
-    let table_group = table.to_group(&vec![["1", "2"], ["3", "4"]]);
+    let table_group = table.to_group(&mut svg, &vec![["1", "2"], ["3", "4"]]);
 
     let table_id = svg.add_group(table_group);
 
