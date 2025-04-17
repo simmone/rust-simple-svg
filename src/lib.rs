@@ -38,6 +38,8 @@ pub use crate::define::sstyle::{FillRule, LineCap, LineJoin, Sstyle};
 pub use crate::define::svg::Svg;
 #[doc(hidden)]
 pub use crate::define::widget::Widget;
+#[doc(hidden)]
+pub use crate::gadget::table::Table;
 
 use crate::define::svg::BACKGROUND_GROUP_ID;
 use crate::define::svg::DEFAULT_GROUP_ID;

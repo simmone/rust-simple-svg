@@ -15,7 +15,6 @@ pub struct Cell {
 
 pub struct Table {
     pub cells: Vec<Cell>,
-    pub start_point: (f64, f64),
     pub col_width: f64,
     pub row_height: f64,
     pub color: String,
@@ -34,7 +33,6 @@ impl Table {
             color: "black".to_string(),
             cell_margin_top: 22.0,
             cell_margin_left: 20.0,
-            start_point: (0.0, 0.0),
             font_size: 20.0,
             font_color: "black".to_string(),
         }
@@ -62,7 +60,6 @@ impl Table {
         color: &str,
         cell_margin_top: f64,
         cell_margin_left: f64,
-        start_point: (f64, f64),
         font_size: f64,
         font_color: &str,
     ) -> Vec<Cell> {
@@ -70,7 +67,7 @@ impl Table {
 
         let mut cells = vec![];
 
-        let mut loop_point = start_point;
+        let mut loop_point = (0.0, 0.0);
 
         for (index, axis_data) in axis_data_array.iter().enumerate() {
             let row_index = axis_data.0;
@@ -93,17 +90,27 @@ impl Table {
                 if row_index == axis_data_array[index + 1].0 {
                     loop_point = (loop_point.0 + col_width, loop_point.1);
                 } else {
-                    loop_point = (start_point.0, loop_point.1 + row_height);
+                    loop_point = (0.0, loop_point.1 + row_height);
                 }
             }
         }
 
         cells
     }
-}
 
-pub fn table_group(matrix: &Vec<[&str; 2]>) -> Group {
-    Group::new()
+    pub fn to_group(&self, matrix: &Vec<[&str; 2]>) -> Group {
+        let cells = Self::matrix_to_cells(
+            matrix, 
+            self.col_width,
+            self.row_height,
+            &self.color,
+            self.cell_margin_top,
+            self.cell_margin_left,
+            self.font_size,
+            &self.font_color);
+
+        Group::new()
+    }
 }
 
 #[cfg(test)]
@@ -136,7 +143,6 @@ mod tests {
             "black",
             1.0,
             1.0,
-            (0.0, 0.0),
             10.0,
             "red",
         );
