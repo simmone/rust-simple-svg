@@ -16,7 +16,7 @@ pub struct Svg {
     pub view_box: Option<ViewBox>,
     pub shape_id_count: usize,
     pub group_id_count: usize,
-    pub shape_define_map: HashMap<String, Shape>,
+    pub shape_define_map: HashMap<Shape, String>,
     pub group_define_map: HashMap<String, Group>,
     pub group_show_list: Vec<(String, (f64, f64))>,
 }
@@ -37,10 +37,16 @@ impl Svg {
     }
 
     pub fn add_shape(&mut self, shape: Shape) -> String {
-        self.shape_id_count += 1;
-        let shape_id = format!("s{}", self.shape_id_count);
-        self.shape_define_map.insert(shape_id.clone(), shape);
-        shape_id
+        if shape_define_map.contains_key(&shape) {
+            shape_deine_map.get(&shape).unwrap()
+        } else {
+            self.shape_id_count += 1;
+            let shape_id = format!("s{}", self.shape_id_count);
+
+            self.shape_define_map.insert(shape, shape_id.clone());
+
+            shape_id
+        }
     }
 
     pub fn add_group(&mut self, group: Group) -> String {
