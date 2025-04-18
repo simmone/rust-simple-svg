@@ -11,6 +11,10 @@ impl Circle {
     pub fn format(&self, shape_id: String) -> String {
         format!("    <circle id=\"{}\" r=\"{}\" />\n", shape_id, self.radius)
     }
+
+    pub fn unique(&self) -> String {
+        format!("Circle/radius/{}", self.radius)
+    }
 }
 
 #[cfg(test)]

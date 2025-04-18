@@ -31,6 +31,10 @@ impl Rect {
             shape_str
         })
     }
+    
+    pub fn unique(&self) -> String {
+        format!("Rect/width/{}/height/{}/radius_x/{:?}/radius_y/{:?}", self.width, self.height, self.radius_x, self.radius_y)
+    }
 }
 
 #[cfg(test)]

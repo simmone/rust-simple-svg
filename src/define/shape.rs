@@ -60,4 +60,22 @@ impl Shape {
             Shape::Arrow(arrow) => arrow.format(shape_id),
         }
     }
+
+    pub fn unique(&self) -> String {
+        match self {
+            Shape::Rect(rect) => rect.unique(),
+            Shape::Circle(circle) => circle.unique(),
+            Shape::Ellipse(ellipse) => ellipse.unique(),
+            Shape::Line(line) => line.unique(),
+            Shape::Polygon(polygon) => polygon.unique(),
+            Shape::Polyline(polyline) => polyline.unique(),
+            Shape::Filter(filter) => filter.unique(),
+            Shape::LinearGradient(linear_gradient) => linear_gradient.unique(),
+            Shape::RadialGradient(radial_gradient) => radial_gradient.unique(),
+            Shape::Path(path) => path.unique(),
+            Shape::Text(text) => text.unique(),
+            Shape::Marker(marker) => marker.unique(),
+            Shape::Arrow(arrow) => arrow.unique(),
+        }
+    }
 }
