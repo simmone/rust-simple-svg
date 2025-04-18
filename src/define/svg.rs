@@ -37,8 +37,8 @@ impl Svg {
     }
 
     pub fn add_shape(&mut self, shape: Shape) -> String {
-        if shape_define_map.contains_key(&shape) {
-            shape_deine_map.get(&shape).unwrap()
+        if self.shape_define_map.contains_key(&shape) {
+            self.shape_deine_map.get(&shape).unwrap()
         } else {
             self.shape_id_count += 1;
             let shape_id = format!("s{}", self.shape_id_count);
@@ -118,10 +118,11 @@ impl Svg {
         if self.shape_define_map.len() > 0 {
             svg_str.push_str("  <defs>\n");
 
-            let mut shape_ids: Vec<String> = self.shape_define_map.clone().into_keys().collect();
+            let mut shape_ids: Vec<String> = self.shape_define_map.clone().into_values().collect();
+            let inverted_shape_define_map: HashMap<String, Shape> = self.shape_define_map.iter().map(|(k, v)| (v.clone(), k.clone())).collect();
             Svg::sort_id(&mut shape_ids);
             for shape_id in shape_ids {
-                let shape = self.shape_define_map.get(&shape_id).unwrap();
+                let shape = inverted_shape_define_map.get(&shape_id).unwrap();
 
                 svg_str.push_str(&format!("{}", shape.format(shape_id.to_string())));
             }
