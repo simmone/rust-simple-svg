@@ -44,6 +44,13 @@ impl Filter {
 
         fmt_str
     }
+
+    pub fn unique(&self) -> String {
+        format!(
+            "Filter/blur/{:?}/dropdown_offset/{:?}/dropdown_color/{:?}",
+            self.blur, self.dropdown_offset, self.dropdown_color
+        )
+    }
 }
 
 #[cfg(test)]

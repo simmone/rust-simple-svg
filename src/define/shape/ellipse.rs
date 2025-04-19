@@ -15,6 +15,13 @@ impl Ellipse {
             shape_id, self.radius_x, self.radius_y
         )
     }
+
+    pub fn unique(&self) -> String {
+        format!(
+            "Ellipse/radius_x/{}/radius_y/{}",
+            self.radius_x, self.radius_y
+        )
+    }
 }
 
 #[cfg(test)]

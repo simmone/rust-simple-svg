@@ -22,6 +22,13 @@ impl Line {
             shape_id, self.start_x, self.start_y, self.end_x, self.end_y
         )
     }
+
+    pub fn unique(&self) -> String {
+        format!(
+            "Line/start_x/{}/start_y/{}/end_x/{}/end_y/{}",
+            self.start_x, self.start_y, self.end_x, self.end_y
+        )
+    }
 }
 
 #[cfg(test)]

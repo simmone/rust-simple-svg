@@ -251,4 +251,15 @@ impl Arrow {
             shape_str
         })
     }
+
+    pub fn unique(&self) -> String {
+        format!("Arrow/start_x/{}/start_y/{}/end_x/{}/end_y/{}/handle_base/{}/head_base/{}/head_height/{}",
+                self.start_x,
+                self.start_y,
+                self.end_x,
+                self.end_y,
+                self.handle_base,
+                self.head_base,
+                self.head_height)
+    }
 }

@@ -119,7 +119,11 @@ impl Svg {
             svg_str.push_str("  <defs>\n");
 
             let mut shape_ids: Vec<String> = self.shape_define_map.clone().into_values().collect();
-            let inverted_shape_define_map: HashMap<String, Shape> = self.shape_define_map.iter().map(|(k, v)| (v.clone(), k.clone())).collect();
+            let inverted_shape_define_map: HashMap<String, Shape> = self
+                .shape_define_map
+                .iter()
+                .map(|(k, v)| (v.clone(), k.clone()))
+                .collect();
             Svg::sort_id(&mut shape_ids);
             for shape_id in shape_ids {
                 let shape = inverted_shape_define_map.get(&shape_id).unwrap();

@@ -1,10 +1,10 @@
-pub use crate::define::svg::Svg;
-pub use crate::define::shape::Shape;
-pub use crate::define::widget::Widget;
+pub use crate::define::group::Group;
 pub use crate::define::shape::rect::Rect;
 pub use crate::define::shape::text::Text;
+pub use crate::define::shape::Shape;
 pub use crate::define::sstyle::Sstyle;
-pub use crate::define::group::Group;
+pub use crate::define::svg::Svg;
+pub use crate::define::widget::Widget;
 
 #[derive(Debug, Clone, PartialEq)]
 pub struct Cell {
@@ -117,7 +117,7 @@ impl Table {
         );
 
         let mut group = Group::new();
-        
+
         for cell in cells {
             let rect_id = svg.add_shape(Shape::Rect(Rect::new(cell.width, cell.height)));
 
@@ -142,15 +142,14 @@ impl Table {
             group.place_widget(Widget {
                 shape_id: text_id,
                 style: Some(text_sstyle),
-                at: Some(
-                    (
-                        cell.start_point.0 + cell.margin_left,
-                        cell.start_point.1 + cell.margin_top
-                    )),
+                at: Some((
+                    cell.start_point.0 + cell.margin_left,
+                    cell.start_point.1 + cell.margin_top,
+                )),
                 ..Default::default()
             });
         }
-        
+
         group
     }
 }
