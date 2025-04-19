@@ -1,6 +1,6 @@
 use std::fmt;
 
-#[derive(Clone)]
+#[derive(Debug, Clone)]
 pub enum TextKerning {
     Num(f64),
     Auto,
@@ -17,7 +17,7 @@ impl fmt::Display for TextKerning {
     }
 }
 
-#[derive(Clone)]
+#[derive(Debug, Clone)]
 pub enum TextSpace {
     Num(f64),
     Normal,
@@ -34,7 +34,7 @@ impl fmt::Display for TextSpace {
     }
 }
 
-#[derive(Clone)]
+#[derive(Debug, Clone)]
 pub enum TextDecoration {
     OverLine,
     UnderLine,
@@ -190,6 +190,23 @@ impl Text {
                 }
             }
         )
+    }
+
+    pub fn unique(&self) -> String {
+        format!("Polyline/text/{}/font_size/{:?}/font_family/{:?}/dx/{:?}/dy/{:?}/rotate/{:?}/text_length/{:?}/kerning/{:?}/letter_space/{:?}/word_space/{:?}/text_decoration/{:?}/path/{:?}/path_start_offset/{:?}",
+                self.text,
+                self.font_size,
+                self.font_family,
+                self.dx,
+                self.dy,
+                self.rotate,
+                self.text_length,
+                self.kerning,
+                self.letter_space,
+                self.word_space,
+                self.text_decoration,
+                self.path,
+                self.path_start_offset)
     }
 }
 

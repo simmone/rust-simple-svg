@@ -19,6 +19,10 @@ impl Polyline {
             point_pairs.join(" ")
         })
     }
+
+    pub fn unique(&self) -> String {
+        format!("Polyline/points/{:?}", self.points)
+    }
 }
 
 #[cfg(test)]

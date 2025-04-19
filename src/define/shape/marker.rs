@@ -110,6 +110,13 @@ impl Marker {
 
         fmt_str
     }
+
+    pub fn unique(&self) -> String {
+        format!(
+            "Marker/shape/{}/size/{}/x/{}/path/{}",
+            self.shape, self.size, self.x, self.path
+        )
+    }
 }
 
 #[cfg(test)]

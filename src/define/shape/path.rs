@@ -118,6 +118,10 @@ impl Path {
 
         fmt_str
     }
+
+    pub fn unique(&self) -> String {
+        format!("Path/defs/{:?}", self.defs)
+    }
 }
 
 #[cfg(test)]

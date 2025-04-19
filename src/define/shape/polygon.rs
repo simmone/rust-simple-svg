@@ -19,6 +19,10 @@ impl Polygon {
             point_pairs.join(" ")
         })
     }
+
+    pub fn unique(&self) -> String {
+        format!("Polygon/points/{:?}", self.points)
+    }
 }
 
 #[cfg(test)]

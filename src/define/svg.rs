@@ -16,7 +16,8 @@ pub struct Svg {
     pub view_box: Option<ViewBox>,
     pub shape_id_count: usize,
     pub group_id_count: usize,
-    pub shape_define_map: HashMap<Shape, String>,
+    pub unique_shape_map: HashMap<String, String>,
+    pub shape_define_map: HashMap<String, Shape>,
     pub group_define_map: HashMap<String, Group>,
     pub group_show_list: Vec<(String, (f64, f64))>,
 }
@@ -30,6 +31,7 @@ impl Svg {
             view_box: None,
             shape_id_count: 0,
             group_id_count: 1,
+            unique_shape_map: HashMap::new(),
             shape_define_map: HashMap::new(),
             group_define_map: HashMap::new(),
             group_show_list: Vec::new(),
@@ -37,13 +39,14 @@ impl Svg {
     }
 
     pub fn add_shape(&mut self, shape: Shape) -> String {
-        if self.shape_define_map.contains_key(&shape) {
-            self.shape_deine_map.get(&shape).unwrap()
+        if self.unique_shape_map.contains_key(&shape.unique()) {
+            self.unique_shape_map.get(&shape.unique()).unwrap().to_string()
         } else {
             self.shape_id_count += 1;
             let shape_id = format!("s{}", self.shape_id_count);
 
-            self.shape_define_map.insert(shape, shape_id.clone());
+            self.unique_shape_map.insert(shape.unique(), shape_id.clone());
+            self.shape_define_map.insert(shape_id.clone(), shape);
 
             shape_id
         }
@@ -118,15 +121,10 @@ impl Svg {
         if self.shape_define_map.len() > 0 {
             svg_str.push_str("  <defs>\n");
 
-            let mut shape_ids: Vec<String> = self.shape_define_map.clone().into_values().collect();
-            let inverted_shape_define_map: HashMap<String, Shape> = self
-                .shape_define_map
-                .iter()
-                .map(|(k, v)| (v.clone(), k.clone()))
-                .collect();
+            let mut shape_ids: Vec<String> = self.shape_define_map.clone().into_keys().collect();
             Svg::sort_id(&mut shape_ids);
             for shape_id in shape_ids {
-                let shape = inverted_shape_define_map.get(&shape_id).unwrap();
+                let shape = self.shape_define_map.get(&shape_id).unwrap();
 
                 svg_str.push_str(&format!("{}", shape.format(shape_id.to_string())));
             }
