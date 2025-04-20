@@ -71,6 +71,8 @@ fn five_star_test() {
     svg.add_default_group(group);
 
     let svg_str = svg_out(svg);
+    
+    println!("{}", svg_str);
 
     let contents = include_str!("../showcase/example/five_circles.svg");
 
