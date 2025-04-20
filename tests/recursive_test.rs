@@ -54,21 +54,30 @@ fn recursive_test() {
 
         group.place_widget(Widget {
             shape_id: circle_id.to_string(),
-            style: Some(sstyle.clone()),
             at: Some((circle.0, circle.1)),
             ..Default::default()
         });
     }
 
-    svg.add_default_group(group);
+    let group_id = svg.add_group(group);
+
+    let mut default_group = Group::new();
+
+    default_group.place_widget(Widget {
+        shape_id: group_id,
+        style: Some(sstyle.clone()),
+        ..Default::default()
+    });
+
+    svg.add_default_group(default_group);
 
     let svg_str = svg_out(svg);
 
-    //    let mut file = File::create("resursive.svg")?;
+//        let mut file = File::create("recursive.svg")?;
 
-    //    file.write(svg_str.as_bytes())?;
+//        file.write(svg_str.as_bytes())?;
 
-    //    Ok(())
+//        Ok(())
 
     let contents = include_str!("../showcase/example/recursive.svg");
 
