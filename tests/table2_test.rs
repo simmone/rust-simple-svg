@@ -34,8 +34,6 @@ fn table2_test() {
 
     let svg_str = svg_out(svg);
 
-    eprintln!("{svg_str}");
-
     let contents = include_str!("../showcase/gadget/table/table2.svg");
 
     assert_eq!(svg_str, contents);

@@ -74,6 +74,7 @@ impl Table {
     }
 
     fn matrix_to_cells(
+        &self,
         matrix: &Vec<Vec<&str>>,
         col_width: f64,
         row_height: f64,
@@ -93,24 +94,44 @@ impl Table {
             let row_index = axis_data.0;
             let col_index = axis_data.1;
             let text = axis_data.2.clone();
+            
+            let mut col_real_width = col_width;
+            if self.col_width_map.contains_key(&col_index) {
+                col_real_width = *self.col_width_map.get(&col_index).unwrap()
+            }
+            
+            let mut row_real_height = row_height;
+            if self.row_height_map.contains_key(&row_index) {
+                row_real_height = *self.row_height_map.get(&row_index).unwrap();
+            }
+            
+            let mut cell_real_margin_top = cell_margin_top;
+            if self.row_margin_top_map.contains_key(&row_index) {
+                cell_real_margin_top = *self.row_margin_top_map.get(&row_index).unwrap();
+            }
+            
+            let mut cell_real_margin_left = cell_margin_left;
+            if self.col_margin_left_map.contains_key(&col_index) {
+                cell_real_margin_left = *self.col_margin_left_map.get(&col_index).unwrap();
+            }
 
             cells.push(Cell {
                 start_point: loop_point,
-                width: col_width,
-                height: row_height,
+                width: col_real_width,
+                height: row_real_height,
                 color: color.to_string(),
                 text,
                 font_size,
                 font_color: font_color.to_string(),
-                margin_top: cell_margin_top,
-                margin_left: cell_margin_left,
+                margin_top: cell_real_margin_top,
+                margin_left: cell_real_margin_left,
             });
 
             if index < axis_data_array.len() - 1 {
                 if row_index == axis_data_array[index + 1].0 {
-                    loop_point = (loop_point.0 + col_width, loop_point.1);
+                    loop_point = (loop_point.0 + col_real_width, loop_point.1);
                 } else {
-                    loop_point = (0.0, loop_point.1 + row_height);
+                    loop_point = (0.0, loop_point.1 + row_real_height);
                 }
             }
         }
@@ -119,7 +140,7 @@ impl Table {
     }
 
     pub fn to_group(&self, svg: &mut Svg, matrix: &Vec<Vec<&str>>) -> Group {
-        let cells = Self::matrix_to_cells(
+        let cells = self.matrix_to_cells(
             matrix,
             self.col_width,
             self.row_height,
