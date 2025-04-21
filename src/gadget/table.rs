@@ -152,6 +152,18 @@ impl Table {
 
         group
     }
+    
+    pub fn set_table_col_width(&self, cols: &Vec<usize>, width: f64) {
+    }
+    
+    pub fn set_table_row_height(&self, rows: &Vec<usize>, height: f64) {
+    }
+    
+    pub fn set_table_col_margin_left(&self, cols: &Vec<usize>, margin: f64) {
+    }
+    
+    pub fn set_table_row_margin_top(&self, rows: &Vec<usize>, margin: f64) {
+    }
 }
 
 #[cfg(test)]
