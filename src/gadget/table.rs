@@ -1,10 +1,12 @@
-pub use crate::define::group::Group;
-pub use crate::define::shape::rect::Rect;
-pub use crate::define::shape::text::Text;
-pub use crate::define::shape::Shape;
-pub use crate::define::sstyle::Sstyle;
-pub use crate::define::svg::Svg;
-pub use crate::define::widget::Widget;
+use std::collections::HashMap;
+
+use crate::define::group::Group;
+use crate::define::shape::rect::Rect;
+use crate::define::shape::text::Text;
+use crate::define::shape::Shape;
+use crate::define::sstyle::Sstyle;
+use crate::define::svg::Svg;
+use crate::define::widget::Widget;
 
 #[derive(Debug, Clone, PartialEq)]
 pub struct Cell {
@@ -20,14 +22,20 @@ pub struct Cell {
 }
 
 pub struct Table {
-    pub cells: Vec<Cell>,
-    pub col_width: f64,
-    pub row_height: f64,
-    pub color: String,
-    pub font_size: f64,
-    pub font_color: String,
-    pub cell_margin_top: f64,
-    pub cell_margin_left: f64,
+    cells: Vec<Cell>,
+    col_width: f64,
+    row_height: f64,
+    color: String,
+    font_size: f64,
+    font_color: String,
+    cell_margin_top: f64,
+    cell_margin_left: f64,
+    row_height_map: HashMap<usize, f64>,
+    col_width_map: HashMap<usize, f64>,
+    col_margin_left_map: HashMap<usize, f64>,
+    row_margin_top_map: HashMap<usize, f64>,
+    cell_front_size_map: HashMap<usize, f64>,
+    cell_front_color_map: HashMap<usize, f64>,
 }
 
 impl Table {
@@ -41,6 +49,12 @@ impl Table {
             cell_margin_left: 20.0,
             font_size: 20.0,
             font_color: "black".to_string(),
+            row_height_map: HashMap::new(),
+            col_width_map: HashMap::new(),
+            col_margin_left_map: HashMap::new(),
+            row_margin_top_map: HashMap::new(),
+            cell_front_size_map: HashMap::new(),
+            cell_front_color_map: HashMap::new(),
         }
     }
 
@@ -153,16 +167,28 @@ impl Table {
         group
     }
     
-    pub fn set_table_col_width(&self, cols: &Vec<usize>, width: f64) {
+    pub fn set_table_col_width(&mut self, cols: Vec<usize>, width: f64) {
+        for col in cols {
+            self.col_width_map.insert(col, width);
+        }
     }
     
-    pub fn set_table_row_height(&self, rows: &Vec<usize>, height: f64) {
+    pub fn set_table_row_height(&mut self, rows: Vec<usize>, height: f64) {
+        for row in rows {
+            self.row_height_map.insert(row, height);
+        }
     }
     
-    pub fn set_table_col_margin_left(&self, cols: &Vec<usize>, margin: f64) {
+    pub fn set_table_col_margin_left(&mut self, cols: Vec<usize>, margin: f64) {
+        for col in cols {
+            self.col_margin_left_map.insert(col, margin);
+        }
     }
     
-    pub fn set_table_row_margin_top(&self, rows: &Vec<usize>, margin: f64) {
+    pub fn set_table_row_margin_top(&mut self, rows: Vec<usize>, margin: f64) {
+        for row in rows {
+            self.row_margin_top_map.insert(row, margin);
+        }
     }
 }
 

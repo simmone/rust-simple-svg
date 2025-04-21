@@ -5,11 +5,11 @@ use simple_svg::*;
 fn table2_test() {
     let mut svg = Svg::new(250.0, 200.0);
 
-    let table = Table::new();
-    table.set_table_col_width(&vec![1], 80.0);
-    table.set_table_row_height(&vec![1], 50.0);
-    table.set_table_col_margin_left(&vec![1], 35.0);
-    table.set_table_row_margin_top(&vec![1], 30.0);
+    let mut table = Table::new();
+    table.set_table_col_width(vec![1], 80.0);
+    table.set_table_row_height(vec![1], 50.0);
+    table.set_table_col_margin_left(vec![1], 35.0);
+    table.set_table_row_margin_top(vec![1], 30.0);
 
     let table_group = table.to_group(
         &mut svg,
