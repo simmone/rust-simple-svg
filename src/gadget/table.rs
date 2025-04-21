@@ -34,8 +34,8 @@ pub struct Table {
     col_width_map: HashMap<usize, f64>,
     col_margin_left_map: HashMap<usize, f64>,
     row_margin_top_map: HashMap<usize, f64>,
-    cell_front_size_map: HashMap<usize, f64>,
-    cell_front_color_map: HashMap<usize, f64>,
+    cell_font_size_map: HashMap<(f64, f64), f64>,
+    cell_font_color_map: HashMap<(f64, f64), String>,
 }
 
 impl Table {
@@ -53,8 +53,8 @@ impl Table {
             col_width_map: HashMap::new(),
             col_margin_left_map: HashMap::new(),
             row_margin_top_map: HashMap::new(),
-            cell_front_size_map: HashMap::new(),
-            cell_front_color_map: HashMap::new(),
+            cell_font_size_map: HashMap::new(),
+            cell_font_color_map: HashMap::new(),
         }
     }
 
@@ -114,6 +114,16 @@ impl Table {
             if self.col_margin_left_map.contains_key(&col_index) {
                 cell_real_margin_left = *self.col_margin_left_map.get(&col_index).unwrap();
             }
+            
+            let mut font_real_size = font_size;
+            if self.cell_font_size_map.contains_key(&axis_data) {
+                font_real_size = *self.cell_font_size_map.get(&axis_data);
+            }
+            
+            let mut font_real_color = font_color;
+            if self.cell_font_color_map.contains_key(&axis_data) {
+                font_real_color = *self.cell_font_color_map.get(&axis_data);
+            }
 
             cells.push(Cell {
                 start_point: loop_point,
@@ -121,8 +131,8 @@ impl Table {
                 height: row_real_height,
                 color: color.to_string(),
                 text,
-                font_size,
-                font_color: font_color.to_string(),
+                font_size: font_real_size,
+                font_color: font_real_color,
                 margin_top: cell_real_margin_top,
                 margin_left: cell_real_margin_left,
             });
@@ -236,7 +246,10 @@ mod tests {
 
     #[test]
     fn check_matrix_to_cells() {
+        let table = Table::new();
+
         let cells = Table::matrix_to_cells(
+            &table,
             &vec![vec!["1", "2"], vec!["3", "4"]],
             5.0,
             5.0,
