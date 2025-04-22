@@ -22,20 +22,20 @@ pub struct Cell {
 }
 
 pub struct Table {
-    cells: Vec<Cell>,
-    col_width: f64,
-    row_height: f64,
-    color: String,
-    font_size: f64,
-    font_color: String,
-    cell_margin_top: f64,
-    cell_margin_left: f64,
+    pub cells: Vec<Cell>,
+    pub col_width: f64,
+    pub row_height: f64,
+    pub color: String,
+    pub font_size: f64,
+    pub font_color: String,
+    pub cell_margin_top: f64,
+    pub cell_margin_left: f64,
     row_height_map: HashMap<usize, f64>,
     col_width_map: HashMap<usize, f64>,
     col_margin_left_map: HashMap<usize, f64>,
     row_margin_top_map: HashMap<usize, f64>,
-    cell_font_size_map: HashMap<(f64, f64), f64>,
-    cell_font_color_map: HashMap<(f64, f64), String>,
+    cell_font_size_map: HashMap<String, f64>,
+    cell_font_color_map: HashMap<String, String>,
 }
 
 impl Table {
@@ -94,35 +94,49 @@ impl Table {
             let row_index = axis_data.0;
             let col_index = axis_data.1;
             let text = axis_data.2.clone();
-            
+
             let mut col_real_width = col_width;
             if self.col_width_map.contains_key(&col_index) {
                 col_real_width = *self.col_width_map.get(&col_index).unwrap()
             }
-            
+
             let mut row_real_height = row_height;
             if self.row_height_map.contains_key(&row_index) {
                 row_real_height = *self.row_height_map.get(&row_index).unwrap();
             }
-            
+
             let mut cell_real_margin_top = cell_margin_top;
             if self.row_margin_top_map.contains_key(&row_index) {
                 cell_real_margin_top = *self.row_margin_top_map.get(&row_index).unwrap();
             }
-            
+
             let mut cell_real_margin_left = cell_margin_left;
             if self.col_margin_left_map.contains_key(&col_index) {
                 cell_real_margin_left = *self.col_margin_left_map.get(&col_index).unwrap();
             }
-            
+
             let mut font_real_size = font_size;
-            if self.cell_font_size_map.contains_key(&axis_data) {
-                font_real_size = *self.cell_font_size_map.get(&axis_data);
+            if self
+                .cell_font_size_map
+                .contains_key(&Table::axis_to_string(loop_point))
+            {
+                font_real_size = self
+                    .cell_font_size_map
+                    .get(&Table::axis_to_string(loop_point))
+                    .unwrap()
+                    .clone();
             }
-            
-            let mut font_real_color = font_color;
-            if self.cell_font_color_map.contains_key(&axis_data) {
-                font_real_color = *self.cell_font_color_map.get(&axis_data);
+
+            let mut font_real_color = font_color.to_string();
+            if self
+                .cell_font_color_map
+                .contains_key(&Table::axis_to_string(loop_point))
+            {
+                font_real_color = self
+                    .cell_font_color_map
+                    .get(&Table::axis_to_string(loop_point))
+                    .unwrap()
+                    .clone();
             }
 
             cells.push(Cell {
@@ -197,28 +211,46 @@ impl Table {
 
         group
     }
-    
+
     pub fn set_table_col_width(&mut self, cols: Vec<usize>, width: f64) {
         for col in cols {
             self.col_width_map.insert(col, width);
         }
     }
-    
+
     pub fn set_table_row_height(&mut self, rows: Vec<usize>, height: f64) {
         for row in rows {
             self.row_height_map.insert(row, height);
         }
     }
-    
+
     pub fn set_table_col_margin_left(&mut self, cols: Vec<usize>, margin: f64) {
         for col in cols {
             self.col_margin_left_map.insert(col, margin);
         }
     }
-    
+
     pub fn set_table_row_margin_top(&mut self, rows: Vec<usize>, margin: f64) {
         for row in rows {
             self.row_margin_top_map.insert(row, margin);
+        }
+    }
+
+    pub fn axis_to_string(axis: (f64, f64)) -> String {
+        format!("{:.2},{:.2}", axis.0, axis.1)
+    }
+
+    pub fn set_table_cell_font_size(&mut self, axises: Vec<(f64, f64)>, font_size: f64) {
+        for axis in axises {
+            self.cell_font_size_map
+                .insert(Table::axis_to_string(axis), font_size);
+        }
+    }
+
+    pub fn set_table_cell_font_color(&mut self, axises: Vec<(f64, f64)>, font_color: String) {
+        for axis in axises {
+            self.cell_font_color_map
+                .insert(Table::axis_to_string(axis), font_color.clone());
         }
     }
 }

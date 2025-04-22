@@ -40,12 +40,16 @@ impl Svg {
 
     pub fn add_shape(&mut self, shape: Shape) -> String {
         if self.unique_shape_map.contains_key(&shape.unique()) {
-            self.unique_shape_map.get(&shape.unique()).unwrap().to_string()
+            self.unique_shape_map
+                .get(&shape.unique())
+                .unwrap()
+                .to_string()
         } else {
             self.shape_id_count += 1;
             let shape_id = format!("s{}", self.shape_id_count);
 
-            self.unique_shape_map.insert(shape.unique(), shape_id.clone());
+            self.unique_shape_map
+                .insert(shape.unique(), shape_id.clone());
             self.shape_define_map.insert(shape_id.clone(), shape);
 
             shape_id

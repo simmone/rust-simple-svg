@@ -73,11 +73,11 @@ fn recursive_test() {
 
     let svg_str = svg_out(svg);
 
-//        let mut file = File::create("recursive.svg")?;
+    //        let mut file = File::create("recursive.svg")?;
 
-//        file.write(svg_str.as_bytes())?;
+    //        file.write(svg_str.as_bytes())?;
 
-//        Ok(())
+    //        Ok(())
 
     let contents = include_str!("../showcase/example/recursive.svg");
 
