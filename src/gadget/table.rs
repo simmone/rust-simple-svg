@@ -34,8 +34,8 @@ pub struct Table {
     col_width_map: HashMap<usize, f64>,
     col_margin_left_map: HashMap<usize, f64>,
     row_margin_top_map: HashMap<usize, f64>,
-    cell_font_size_map: HashMap<String, f64>,
-    cell_font_color_map: HashMap<String, String>,
+    cell_font_size_map: HashMap<(usize, usize), f64>,
+    cell_font_color_map: HashMap<(usize, usize), String>,
 }
 
 impl Table {
@@ -118,11 +118,11 @@ impl Table {
             let mut font_real_size = font_size;
             if self
                 .cell_font_size_map
-                .contains_key(&Table::axis_to_string(loop_point))
+                .contains_key(&(axis_data.0, axis_data.1))
             {
                 font_real_size = self
                     .cell_font_size_map
-                    .get(&Table::axis_to_string(loop_point))
+                    .get(&(axis_data.0, axis_data.1))
                     .unwrap()
                     .clone();
             }
@@ -130,11 +130,11 @@ impl Table {
             let mut font_real_color = font_color.to_string();
             if self
                 .cell_font_color_map
-                .contains_key(&Table::axis_to_string(loop_point))
+                .contains_key(&(axis_data.0, axis_data.1))
             {
                 font_real_color = self
                     .cell_font_color_map
-                    .get(&Table::axis_to_string(loop_point))
+                    .get(&(axis_data.0, axis_data.1))
                     .unwrap()
                     .clone();
             }
@@ -236,21 +236,15 @@ impl Table {
         }
     }
 
-    pub fn axis_to_string(axis: (f64, f64)) -> String {
-        format!("{:.2},{:.2}", axis.0, axis.1)
-    }
-
-    pub fn set_table_cell_font_size(&mut self, axises: Vec<(f64, f64)>, font_size: f64) {
+    pub fn set_table_cell_font_size(&mut self, axises: Vec<(usize, usize)>, font_size: f64) {
         for axis in axises {
-            self.cell_font_size_map
-                .insert(Table::axis_to_string(axis), font_size);
+            self.cell_font_size_map.insert(axis, font_size);
         }
     }
 
-    pub fn set_table_cell_font_color(&mut self, axises: Vec<(f64, f64)>, font_color: String) {
+    pub fn set_table_cell_font_color(&mut self, axises: Vec<(usize, usize)>, font_color: String) {
         for axis in axises {
-            self.cell_font_color_map
-                .insert(Table::axis_to_string(axis), font_color.clone());
+            self.cell_font_color_map.insert(axis, font_color.clone());
         }
     }
 }

@@ -9,11 +9,12 @@ fn table3_test() {
     table.col_width = 100.0;
     table.row_height = 60.0;
     table.color = "green".to_string();
+    table.font_color = "blue".to_string();
     table.cell_margin_top = 44.0;
     table.cell_margin_left = 40.0;
 
-    table.set_table_cell_font_size(vec![(0.0, 0.0), (1.0, 1.0), (2.0, 2.0)], 40.0);
-    table.set_table_cell_font_color(vec![(0.0, 0.0), (1.0, 1.0), (2.0, 2.0)], "red".to_string());
+    table.set_table_cell_font_size(vec![(0, 0), (1, 1), (2, 2)], 40.0);
+    table.set_table_cell_font_color(vec![(0, 0), (1, 1), (2, 2)], "red".to_string());
 
     let table_group = table.to_group(
         &mut svg,
