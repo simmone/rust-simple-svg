@@ -1,7 +1,6 @@
-//! A library to generate SVG format file
+//! simple_svg is a simple library to write svg.
 //!
-//! This is rewrite from Racket library: racket-simple-svg
-
+//! thanks to Joni's tutorial: ["Svg Pocket Guide"](https://svgpocketguide.com/)
 #[doc(hidden)]
 pub use crate::define::group::Group;
 #[doc(hidden)]
