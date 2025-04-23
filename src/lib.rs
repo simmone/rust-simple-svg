@@ -1,6 +1,5 @@
-//! simple_svg is a simple library to write svg.
-//!
-//! thanks to Joni's tutorial: ["Svg Pocket Guide"](https://svgpocketguide.com/)
+#![doc = include_str!("../README.md")]
+
 #[doc(hidden)]
 pub use crate::define::group::Group;
 #[doc(hidden)]
