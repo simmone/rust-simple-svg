@@ -6,9 +6,7 @@ thanks to Joni's tutorial: [SVG Pocket Guide](http://svgpocketguide.com/)
 
 ## Getting Started
 
-```
-cargo add simple_svg
-```
+This library's target is to generate combined shapes progmatically.
 
 ## Examples and Usage
 
@@ -24,6 +22,10 @@ Basic steps(ie: create a rectangle):
 ...
 
 ```
+use std::fs::File;
+use std::io::prelude::*;
+use simple_svg::*;
+
 let mut svg = Svg::new(100.0, 100.0);
 
 let rect_id = svg.add_shape(Shape::Rect(Rect::new(100.0, 100.0)));
@@ -42,9 +44,9 @@ svg.add_default_group(group);
 
 let svg_str = svg_out(svg);
 
-let mut file = File::create("recursive.svg")?;
+let mut file = File::create("target/doc/simple_svg/rect.svg").unwrap();
 
-file.write(svg_str.as_bytes())?;
+file.write(svg_str.as_bytes()).unwrap();
 
 ```
 

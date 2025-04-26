@@ -1,4 +1,5 @@
 #![doc = include_str!("../README.md")]
+#![doc = include_str!("../showcase/shapes/rect/rect.svg")]
 
 #[doc(hidden)]
 pub use crate::define::group::Group;
