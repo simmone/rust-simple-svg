@@ -49,3 +49,5 @@ let mut file = File::create("target/doc/simple_svg/rect.svg").unwrap();
 file.write(svg_str.as_bytes()).unwrap();
 
 ```
+
+![ScreenShot](rect.svg)
