@@ -19,7 +19,6 @@ Basic steps(ie: create a rectangle):
 5. place the shape in the group and set style: group.place_widget(Widget(shape_id:..., style:..., ..Default::default()))
 6. set group as default group;
 7. use svg_out to generate svg content;
-...
 
 ```
 use std::fs::File;
@@ -50,4 +49,4 @@ file.write(svg_str.as_bytes()).unwrap();
 
 ```
 
-![ScreenShot](rect.svg)
+![ScreenShot](../../../showcase/shapes/rect/rect.svg)
