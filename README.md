@@ -50,5 +50,4 @@ file.write(svg_str.as_bytes()).unwrap();
 ```
 
 ![](showcase/shapes/rect/rect.svg)
-
-![](target/doc/simple_svg/rect.svg)
+![](../../../showcase/shapes/rect/rect.svg)
