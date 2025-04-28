@@ -1,8 +1,5 @@
 use pretty_assertions::assert_eq;
-//use std::fs::File;
-//use std::io::prelude::*;
 use simple_svg::*;
-use std::collections::HashMap;
 
 fn get_circles(x: f64, y: f64, radius: f64, mut circles: &mut Vec<(f64, f64, f64)>) {
     circles.push((x, y, radius));
@@ -33,24 +30,14 @@ fn recursive_test() {
     sstyle.stroke_width = Some(1.0);
     sstyle.stroke = Some("red".to_string());
 
-    let mut group = Group::new();
-
     let mut circles: Vec<(f64, f64, f64)> = vec![];
 
     get_circles(200.0, 200.0, 100.0, &mut circles);
 
-    let mut circle_id_map: HashMap<String, String> = HashMap::new();
-    let mut loop_radius = 100.0;
-    while loop_radius > 6.0 {
-        let circle_id = svg.add_shape(Shape::Circle(Circle::new(loop_radius)));
-
-        circle_id_map.insert(loop_radius.to_string(), circle_id);
-
-        loop_radius = loop_radius / 2.0;
-    }
+    let mut group = Group::new();
 
     for circle in circles {
-        let circle_id = circle_id_map.get(&(circle.2.to_string())).unwrap();
+        let circle_id = svg.add_shape(Shape::Circle(Circle::new(circle.2)));
 
         group.place_widget(Widget {
             shape_id: circle_id.to_string(),
@@ -72,12 +59,6 @@ fn recursive_test() {
     svg.add_default_group(default_group);
 
     let svg_str = svg_out(svg);
-
-    //        let mut file = File::create("recursive.svg")?;
-
-    //        file.write(svg_str.as_bytes())?;
-
-    //        Ok(())
 
     let contents = include_str!("../showcase/example/recursive.svg");
 
