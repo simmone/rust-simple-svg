@@ -1,8 +1,6 @@
 #![doc = include_str!("../README.md")]
 
 #[doc(hidden)]
-pub use crate::define::shape::rect::Rect;
-#[doc(hidden)]
 pub use crate::define::group::Group;
 #[doc(hidden)]
 pub use crate::define::shape::arrow::Arrow;
@@ -26,6 +24,8 @@ pub use crate::define::shape::path::{ArcDirection, Path};
 pub use crate::define::shape::polygon::Polygon;
 #[doc(hidden)]
 pub use crate::define::shape::polyline::Polyline;
+#[doc(hidden)]
+pub use crate::define::shape::rect::Rect;
 #[doc(hidden)]
 pub use crate::define::shape::text::{Text, TextDecoration};
 #[doc(hidden)]
