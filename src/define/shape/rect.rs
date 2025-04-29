@@ -1,3 +1,5 @@
+#![doc = include_str!("RECT.md")]
+
 #[derive(Debug, Clone)]
 pub struct Rect {
     pub width: f64,

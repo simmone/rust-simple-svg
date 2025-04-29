@@ -1,3 +1,6 @@
+//! Shape is basic element of svg.
+//! Define some kind of shape, give it a style, place it into group at somewhere.
+
 pub mod arrow;
 pub mod circle;
 pub mod ellipse;

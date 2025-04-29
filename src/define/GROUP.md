@@ -1,4 +1,4 @@
-### Group: group shapes or other groups, reuse it.
+### Group: group shapes or other groups, reuse it. Group is a reusable set.
 
 Create: Group::new()
 
@@ -203,7 +203,7 @@ assert_eq!(svg_str, contents);
 
 ![](../../../../../showcase/group/group2.svg)
 
-#### Group showcase: create a five circle, reuse it.
+#### Group showcase: create a five circle group, reuse it four times.
 
 ```
 use simple_svg::*;
