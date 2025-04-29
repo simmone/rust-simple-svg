@@ -1,5 +1,6 @@
 #![doc = include_str!("../README.md")]
 
+#[doc(hidden)]
 pub use crate::define::shape::rect::Rect;
 #[doc(hidden)]
 pub use crate::define::group::Group;
@@ -41,7 +42,6 @@ pub use crate::gadget::table::Table;
 use crate::define::svg::BACKGROUND_GROUP_ID;
 use crate::define::svg::DEFAULT_GROUP_ID;
 
-#[doc(hidden)]
 pub mod define;
 #[doc(hidden)]
 pub mod gadget;

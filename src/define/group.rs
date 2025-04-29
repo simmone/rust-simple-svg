@@ -1,3 +1,5 @@
+#![doc = include_str!("GROUP.md")]
+
 use crate::define::widget::Widget;
 
 #[derive(Clone)]
