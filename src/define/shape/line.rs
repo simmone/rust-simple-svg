@@ -1,3 +1,5 @@
+#![doc = include_str!("LINE.md")]
+
 #[derive(Debug, Clone)]
 pub struct Line {
     pub start_x: f64,
