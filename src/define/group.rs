@@ -2,6 +2,7 @@
 
 use crate::define::widget::Widget;
 
+/// Group contains a widget list.
 #[derive(Clone)]
 pub struct Group {
     pub widget_list: Vec<Widget>,
