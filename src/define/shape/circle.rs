@@ -1,3 +1,5 @@
+#![doc = include_str!("CIRCLE.md")]
+
 #[derive(Debug, Clone)]
 pub struct Circle {
     pub radius: f64,

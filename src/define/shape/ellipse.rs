@@ -1,3 +1,5 @@
+#![doc = include_str!("ELLIPSE.md")]
+
 #[derive(Debug, Clone)]
 pub struct Ellipse {
     pub radius_x: f64,

@@ -1,4 +1,4 @@
-### Rect: rectangle, defined by width and height.
+### Rect: defined by width and height.
 
 Create: svg.add_shape(Shape::Rect(Rect::new(width, height)))
 
