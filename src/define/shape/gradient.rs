@@ -1,3 +1,5 @@
+#![doc = include_str!("GRADIENT.md")]
+
 use std::fmt;
 
 #[derive(Clone, Debug)]
