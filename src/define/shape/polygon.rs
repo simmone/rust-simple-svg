@@ -1,3 +1,5 @@
+#![doc = include_str!("POLYGON.md")]
+
 #[derive(Debug, Clone)]
 pub struct Polygon {
     pub points: Vec<(f64, f64)>,

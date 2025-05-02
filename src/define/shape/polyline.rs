@@ -1,3 +1,5 @@
+#![doc = include_str!("POLYLINE.md")]
+
 #[derive(Debug, Clone)]
 pub struct Polyline {
     pub points: Vec<(f64, f64)>,

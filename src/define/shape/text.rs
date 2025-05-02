@@ -1,3 +1,5 @@
+#![doc = include_str!("TEXT.md")]
+
 use std::fmt;
 
 #[derive(Debug, Clone)]
