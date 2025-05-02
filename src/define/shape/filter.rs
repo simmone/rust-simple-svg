@@ -1,3 +1,5 @@
+#![doc = include_str!("FILTER.md")]
+
 #[derive(Debug, Clone)]
 pub struct Filter {
     pub blur: Option<f64>,
