@@ -1,3 +1,6 @@
+//! Sstyle used to set shape/group style, it includes multiple effect.
+//! Please check Joni's tutorial: [SVG Pocket Guide](http://svgpocketguide.com/)
+
 use std::fmt;
 
 #[derive(Clone)]
