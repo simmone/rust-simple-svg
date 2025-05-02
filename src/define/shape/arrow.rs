@@ -1,3 +1,5 @@
+#![doc = include_str!("ARROW.md")]
+
 use std::f64::consts::PI;
 
 #[derive(Debug, Clone)]
