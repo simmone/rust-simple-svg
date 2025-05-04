@@ -1,5 +1,6 @@
 #![doc = include_str!("../README.md")]
 
+pub mod define;
 #[doc(hidden)]
 pub use crate::define::group::Group;
 #[doc(hidden)]
@@ -36,15 +37,12 @@ pub use crate::define::sstyle::{FillRule, LineCap, LineJoin, Sstyle};
 pub use crate::define::svg::Svg;
 #[doc(hidden)]
 pub use crate::define::widget::Widget;
-#[doc(hidden)]
+
+pub mod gadget;
 pub use crate::gadget::table::Table;
 
 use crate::define::svg::BACKGROUND_GROUP_ID;
 use crate::define::svg::DEFAULT_GROUP_ID;
-
-pub mod define;
-#[doc(hidden)]
-pub mod gadget;
 
 pub fn svg_out(mut svg: Svg) -> String {
     let mut svg_out_str = String::new();

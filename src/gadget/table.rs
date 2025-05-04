@@ -1,3 +1,5 @@
+#![doc = include_str!("TABLE.md")]
+
 use std::collections::HashMap;
 
 use crate::define::group::Group;
