@@ -39,6 +39,7 @@ pub use crate::define::svg::Svg;
 pub use crate::define::widget::Widget;
 
 pub mod gadget;
+#[doc(hidden)]
 pub use crate::gadget::table::Table;
 
 use crate::define::svg::BACKGROUND_GROUP_ID;
