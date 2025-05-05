@@ -110,6 +110,7 @@ assert_eq!(svg_str, contents);
 ```
 
 ![](../../../showcase/example/five_circles.svg)
+![](showcase/example/five_circles.svg)
 
 ## Showcase: Recursive circles
 
@@ -128,6 +129,13 @@ Thanks to the author: Matteo d'Addio matteo.daddio@live.it)
 
 ![](../../../showcase/example/fern.svg)
 ![](showcase/example/fern.svg)
+
+## Showcase: Racket Lang Logo
+
+[Code](https://github.com/simmone/rust-simple-svg/blob/master/tests/logo_racket_test.rs)
+
+![](../../../showcase/example/logo_racket.svg)
+![](showcase/example/logo_racket.svg)
 
 ## License
 

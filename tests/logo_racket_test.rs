@@ -77,7 +77,7 @@ fn logo_test() {
 
     let svg_str = svg_out(svg);
 
-    let contents = include_str!("../showcase/example/logo.svg");
+    let contents = include_str!("../showcase/example/logo_racket.svg");
 
     assert_eq!(svg_str, contents);
 }
