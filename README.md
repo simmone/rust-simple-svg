@@ -118,6 +118,7 @@ Start a fixed size circle, then paint four circles with half radious length at u
 [Code](https://github.com/simmone/rust-simple-svg/blob/master/tests/recursive_test.rs)
 
 ![](../../../showcase/example/recursive.svg)
+![](showcase/example/recursive.svg)
 
 ## Showcase: Recursive fern
 
@@ -126,6 +127,7 @@ Thanks to the author: Matteo d'Addio matteo.daddio@live.it)
 [Code](https://github.com/simmone/rust-simple-svg/blob/master/tests/fern_test.rs)
 
 ![](../../../showcase/example/fern.svg)
+![](showcase/example/fern.svg)
 
 ## License
 
