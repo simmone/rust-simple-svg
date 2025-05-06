@@ -1,13 +1,13 @@
-[workspace]
-members = ["access_file"]
-resolver = "2"
-
 [package]
-name = "simple-svg"
+name = "simple_svg"
 version = "0.1.0"
 edition = "2021"
 license = "MIT"
-exclude = ["/showcase"]
+description = "A simple svg generate tool to create svg programtically"
+exclude = ["/showcase", "/tests"]
+
+[profile.release]
+opt-level = 3
 
 [dependencies]
 num = "0.4.3"
