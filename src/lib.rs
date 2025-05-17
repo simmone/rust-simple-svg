@@ -38,6 +38,8 @@ pub use crate::define::svg::Svg;
 #[doc(hidden)]
 pub use crate::define::widget::Widget;
 
+pub mod tools;
+
 pub mod gadget;
 #[doc(hidden)]
 pub use crate::gadget::table::Table;
