@@ -12,11 +12,11 @@ use simple_svg::*;
 let mut svg = Svg::new(300.0, 300.0);
 
 let arrow_id = svg.add_shape(Shape::Arrow(Arrow::new(
-    (50.0, 50.0),
-    (280.0, 280.0),
-    40.0,
-    40.0,
-    80.0,
+    (50.00004, 50.00001),
+    (280.00001, 280.00001),
+    40.00001,
+    40.00001,
+    80.00001,
 )));
 
 let mut arrow_sstyle = Sstyle::new();

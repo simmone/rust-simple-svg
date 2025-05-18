@@ -1,6 +1,7 @@
 #![doc = include_str!("ARROW.md")]
 
 use std::f64::consts::PI;
+use crate::tools::precision::svg_round;
 
 #[derive(Debug, Clone)]
 pub struct Arrow {
@@ -230,25 +231,13 @@ impl Arrow {
 
         format!("    <polygon id=\"{}\"\n{}", shape_id, {
             let mut shape_str = "          points=\"\n".to_string();
-            shape_str.push_str(&format!(
-                "            {:.4},{:.4}\n",
-                handle_bottom_left.0, handle_bottom_left.1
-            ));
-            shape_str.push_str(&format!(
-                "            {:.4},{:.4}\n",
-                handle_bottom_right.0, handle_bottom_right.1
-            ));
-            shape_str.push_str(&format!("            {:.4},{:.4}\n", q.0, q.1));
-            shape_str.push_str(&format!("            {:.4},{:.4}\n", r.0, r.1));
-            shape_str.push_str(&format!("            {:.4},{:.4}\n", s.0, s.1));
-            shape_str.push_str(&format!(
-                "            {:.4},{:.4}\n",
-                handle_top_right.0, handle_top_right.1
-            ));
-            shape_str.push_str(&format!(
-                "            {:.4},{:.4}\n",
-                handle_top_left.0, handle_top_left.1
-            ));
+            shape_str.push_str(&format!("            {},{}\n", svg_round(handle_bottom_left.0), svg_round(handle_bottom_left.1)));
+            shape_str.push_str(&format!("            {},{}\n", svg_round(handle_bottom_right.0), svg_round(handle_bottom_right.1)));
+            shape_str.push_str(&format!("            {},{}\n", svg_round(q.0), svg_round(q.1)));
+            shape_str.push_str(&format!("            {},{}\n", svg_round(r.0), svg_round(r.1)));
+            shape_str.push_str(&format!("            {},{}\n", svg_round(s.0), svg_round(s.1)));
+            shape_str.push_str(&format!("            {},{}\n", svg_round(handle_top_right.0), svg_round(handle_top_right.1)));
+            shape_str.push_str(&format!("            {},{}\n", svg_round(handle_top_left.0), svg_round(handle_top_left.1)));
             shape_str.push_str(&format!("            \"/>\n"));
             shape_str
         })
