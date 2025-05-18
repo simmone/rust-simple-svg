@@ -228,6 +228,9 @@ impl Arrow {
                 new_end_y - toward_updown_head_delta0
             },
         );
+        
+        print!("{}\n", handle_top_right.0);
+        print!("{}\n", handle_top_left.1);
 
         format!("    <polygon id=\"{}\"\n{}", shape_id, {
             let mut shape_str = "          points=\"\n".to_string();
