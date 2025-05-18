@@ -229,9 +229,6 @@ impl Arrow {
             },
         );
         
-        print!("{}\n", handle_top_right.0);
-        print!("{}\n", handle_top_left.1);
-
         format!("    <polygon id=\"{}\"\n{}", shape_id, {
             let mut shape_str = "          points=\"\n".to_string();
             shape_str.push_str(&format!("            {},{}\n", svg_round(handle_bottom_left.0), svg_round(handle_bottom_left.1)));
