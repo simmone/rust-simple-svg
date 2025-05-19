@@ -1,5 +1,7 @@
 #![doc = include_str!("LINE.md")]
 
+use crate::tools::precision::svg_round;
+
 #[derive(Debug, Clone)]
 pub struct Line {
     pub start_x: f64,
@@ -21,7 +23,7 @@ impl Line {
     pub fn format(&self, shape_id: String) -> String {
         format!(
             "    <line id=\"{}\" x1=\"{}\" y1=\"{}\" x2=\"{}\" y2=\"{}\" />\n",
-            shape_id, self.start_x, self.start_y, self.end_x, self.end_y
+            shape_id, svg_round(self.start_x), svg_round(self.start_y), svg_round(self.end_x), svg_round(self.end_y)
         )
     }
 

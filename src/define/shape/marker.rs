@@ -1,5 +1,7 @@
 #![doc = include_str!("MARKER.md")]
 
+use crate::tools::precision::svg_round;
+
 use std::fmt;
 
 #[derive(Debug, Clone)]
@@ -104,9 +106,9 @@ impl Marker {
 
         fmt_str.push_str(&format!("    <marker id=\"{}\" markerWidth=\"{}\" markerHeight=\"{}\" orient=\"auto-start-reverse\" viewBox=\"0 0 15 15\" refX=\"{}\" refY=\"5\" markerUnits=\"strokeWidth\">\n",
                                   shape_id,
-                                  self.size,
-                                  self.size,
-                                  self.x));
+                                  svg_round(self.size),
+                                  svg_round(self.size),
+                                  svg_round(self.x)));
         fmt_str.push_str(&format!("      {} fill=\"context-stroke\" />\n", self.path));
         fmt_str.push_str(&format!("    </marker>\n"));
 
@@ -132,5 +134,26 @@ mod tests {
         marker.size = 10.0;
 
         assert_eq!(marker.size, 10.0);
+    }
+    
+    #[test]
+    fn marker_format() {
+        let marker = Marker {
+                shape: MarkerType::Triangle1,
+                size: 6.00001,
+                x: 1.00001,
+                path: "path".to_string(),
+            };
+        
+        assert_eq!(
+            marker.format("s1".to_string()),
+            {
+                let mut fmt_str = String::new();
+                fmt_str.push_str(&format!("    <marker id=\"s1\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto-start-reverse\" viewBox=\"0 0 15 15\" refX=\"1\" refY=\"5\" markerUnits=\"strokeWidth\">\n"));
+
+                fmt_str.push_str(&format!("      path fill=\"context-stroke\" />\n"));
+                fmt_str.push_str(&format!("    </marker>\n"));
+                fmt_str
+            });
     }
 }
