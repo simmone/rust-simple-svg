@@ -1,5 +1,6 @@
 #![doc = include_str!("GRADIENT.md")]
 
+use crate::tools::precision::svg_round;
 use std::fmt;
 
 #[derive(Clone, Debug)]
@@ -63,19 +64,19 @@ impl LinearGradient {
             let mut option_items = vec![];
 
             if self.x1.is_some() {
-                option_items.push(format!("x1=\"{}\"", self.x1.as_ref().unwrap()));
+                option_items.push(format!("x1=\"{}\"", svg_round(*self.x1.as_ref().unwrap())));
             }
 
             if self.y1.is_some() {
-                option_items.push(format!("y1=\"{}\"", self.y1.as_ref().unwrap()));
+                option_items.push(format!("y1=\"{}\"", svg_round(*self.y1.as_ref().unwrap())));
             }
 
             if self.x2.is_some() {
-                option_items.push(format!("x2=\"{}\"", self.x2.as_ref().unwrap()));
+                option_items.push(format!("x2=\"{}\"", svg_round(*self.x2.as_ref().unwrap())));
             }
 
             if self.y2.is_some() {
-                option_items.push(format!("y2=\"{}\"", self.y2.as_ref().unwrap()));
+                option_items.push(format!("y2=\"{}\"", svg_round(*self.y2.as_ref().unwrap())));
             }
 
             if self.gradient_units.is_some() {
@@ -98,11 +99,11 @@ impl LinearGradient {
         for stop in self.stops.clone() {
             fmt_str.push_str(&format!(
                 "      <stop offset=\"{}%\" stop-color=\"{}\" ",
-                stop.0, stop.1
+                svg_round(stop.0), stop.1
             ));
 
-            if stop.2 != 1.0 {
-                fmt_str.push_str(&format!("stop-opacity=\"{}\" ", stop.2));
+            if svg_round(stop.2) != "1" {
+                fmt_str.push_str(&format!("stop-opacity=\"{}\" ", svg_round(stop.2)));
             }
 
             fmt_str.push_str("/>\n");
@@ -159,23 +160,23 @@ impl RadialGradient {
             let mut option_items = vec![];
 
             if self.cx.is_some() {
-                option_items.push(format!("cx=\"{}\"", self.cx.as_ref().unwrap()));
+                option_items.push(format!("cx=\"{}\"", svg_round(*self.cx.as_ref().unwrap())));
             }
 
             if self.cy.is_some() {
-                option_items.push(format!("cy=\"{}\"", self.cy.as_ref().unwrap()));
+                option_items.push(format!("cy=\"{}\"", svg_round(*self.cy.as_ref().unwrap())));
             }
 
             if self.fx.is_some() {
-                option_items.push(format!("fx=\"{}\"", self.fx.as_ref().unwrap()));
+                option_items.push(format!("fx=\"{}\"", svg_round(*self.fx.as_ref().unwrap())));
             }
 
             if self.fy.is_some() {
-                option_items.push(format!("fy=\"{}\"", self.fy.as_ref().unwrap()));
+                option_items.push(format!("fy=\"{}\"", svg_round(*self.fy.as_ref().unwrap())));
             }
 
             if self.r.is_some() {
-                option_items.push(format!("r=\"{}\"", self.r.as_ref().unwrap()));
+                option_items.push(format!("r=\"{}\"", svg_round(*self.r.as_ref().unwrap())));
             }
 
             if self.gradient_units.is_some() {
@@ -198,11 +199,11 @@ impl RadialGradient {
         for stop in self.stops.clone() {
             fmt_str.push_str(&format!(
                 "      <stop offset=\"{}%\" stop-color=\"{}\" ",
-                stop.0, stop.1
+                svg_round(stop.0), stop.1
             ));
 
-            if stop.2 != 1.0 {
-                fmt_str.push_str(&format!("stop-opacity=\"{}\" ", stop.2));
+            if svg_round(stop.2) != "1" {
+                fmt_str.push_str(&format!("stop-opacity=\"{}\" ", svg_round(stop.2)));
             }
 
             fmt_str.push_str("/>\n");
@@ -244,14 +245,14 @@ mod tests {
     #[test]
     fn check_linear_format() {
         let mut gradient = LinearGradient::new(vec![
-            (0.0, "#BBC42A".to_string(), 1.0),
-            (100.0, "#ED6E46".to_string(), 1.0),
+            (0.00001, "#BBC42A".to_string(), 1.00001),
+            (100.00001, "#ED6E46".to_string(), 1.00001),
         ]);
 
-        gradient.x1 = Some(0.0);
-        gradient.y1 = Some(1.0);
-        gradient.x2 = Some(2.0);
-        gradient.y2 = Some(3.0);
+        gradient.x1 = Some(0.00001);
+        gradient.y1 = Some(1.00001);
+        gradient.x2 = Some(2.00001);
+        gradient.y2 = Some(3.00001);
         gradient.gradient_units = Some(GradientUnits::UserSpaceOnUse);
         gradient.spread_method = Some(SpreadMethod::Repeat);
 
@@ -276,14 +277,14 @@ mod tests {
     #[test]
     fn check_radial_format() {
         let mut gradient = RadialGradient::new(vec![
-            (0.0, "#BBC42A".to_string(), 1.0),
-            (100.0, "#ED6E46".to_string(), 1.0),
+            (0.00001, "#BBC42A".to_string(), 1.00001),
+            (100.00001, "#ED6E46".to_string(), 1.00001),
         ]);
 
-        gradient.cx = Some(0.0);
-        gradient.cy = Some(1.0);
-        gradient.fx = Some(2.0);
-        gradient.fy = Some(3.0);
+        gradient.cx = Some(0.00001);
+        gradient.cy = Some(1.00001);
+        gradient.fx = Some(2.00001);
+        gradient.fy = Some(3.00001);
         gradient.r = Some(4.0);
         gradient.gradient_units = Some(GradientUnits::UserSpaceOnUse);
         gradient.spread_method = Some(SpreadMethod::Repeat);
