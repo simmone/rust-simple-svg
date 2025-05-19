@@ -1,5 +1,7 @@
 #![doc = include_str!("CIRCLE.md")]
 
+use crate::tools::precision::svg_round;
+
 #[derive(Debug, Clone)]
 pub struct Circle {
     pub radius: f64,
@@ -11,7 +13,7 @@ impl Circle {
     }
 
     pub fn format(&self, shape_id: String) -> String {
-        format!("    <circle id=\"{}\" r=\"{}\" />\n", shape_id, self.radius)
+        format!("    <circle id=\"{}\" r=\"{}\" />\n", shape_id, svg_round(self.radius))
     }
 
     pub fn unique(&self) -> String {

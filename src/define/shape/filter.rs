@@ -1,5 +1,7 @@
 #![doc = include_str!("FILTER.md")]
 
+use crate::tools::precision::svg_round;
+
 #[derive(Debug, Clone)]
 pub struct Filter {
     pub blur: Option<f64>,
@@ -22,12 +24,12 @@ impl Filter {
         fmt_str.push_str(&format!("    <filter id=\"{}\">\n", shape_id));
         fmt_str.push_str(&format!(
             "      <feGaussianBlur in=\"SourceAlpha\" stdDeviation=\"{}\"></feGaussianBlur>\n",
-            self.blur.as_ref().unwrap()
+            svg_round(*self.blur.as_ref().unwrap())
         ));
         fmt_str.push_str(&format!(
             "      <feOffset dx=\"{}\" dy=\"{}\" result=\"offsetblur\"></feOffset>\n",
-            self.dropdown_offset.as_ref().unwrap(),
-            self.dropdown_offset.as_ref().unwrap()
+            svg_round(*self.dropdown_offset.as_ref().unwrap()),
+            svg_round(*self.dropdown_offset.as_ref().unwrap())
         ));
         fmt_str.push_str(&format!(
             "      <feFlood flood-color=\"{}\"></feFlood>\n",

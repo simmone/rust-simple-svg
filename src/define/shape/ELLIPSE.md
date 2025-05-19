@@ -9,7 +9,7 @@ use simple_svg::*;
 
 let mut svg = Svg::new(200.0, 100.0);
 
-let ellipse_id = svg.add_shape(Shape::Ellipse(Ellipse::new(100.0, 50.0)));
+let ellipse_id = svg.add_shape(Shape::Ellipse(Ellipse::new(100.00001, 50.00001)));
 
 let mut ellipse_sstyle = Sstyle::new();
 ellipse_sstyle.fill = Some("#7AA20D".to_string());

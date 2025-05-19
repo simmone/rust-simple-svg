@@ -1,5 +1,7 @@
 #![doc = include_str!("ELLIPSE.md")]
 
+use crate::tools::precision::svg_round;
+
 #[derive(Debug, Clone)]
 pub struct Ellipse {
     pub radius_x: f64,
@@ -14,7 +16,7 @@ impl Ellipse {
     pub fn format(&self, shape_id: String) -> String {
         format!(
             "    <ellipse id=\"{}\" rx=\"{}\" ry=\"{}\" />\n",
-            shape_id, self.radius_x, self.radius_y
+            shape_id, svg_round(self.radius_x), svg_round(self.radius_y)
         )
     }
 
