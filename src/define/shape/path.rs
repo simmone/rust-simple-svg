@@ -34,32 +34,32 @@ impl Path {
     }
 
     pub fn lineto_abs(&mut self, point: (f64, f64)) {
-        self.defs.push(format!("L{},{}", point.0, point.1));
+        self.defs.push(format!("L{},{}", svg_round(point.0), svg_round(point.1)));
     }
 
     pub fn lineto_rel(&mut self, point: (f64, f64)) {
-        self.defs.push(format!("l{},{}", point.0, point.1));
+        self.defs.push(format!("l{},{}", svg_round(point.0), svg_round(point.1)));
     }
 
     pub fn lineto_hor(&mut self, length: f64) {
-        self.defs.push(format!("h{}", length));
+        self.defs.push(format!("h{}", svg_round(length)));
     }
 
     pub fn lineto_ver(&mut self, length: f64) {
-        self.defs.push(format!("v{}", length));
+        self.defs.push(format!("v{}", svg_round(length)));
     }
 
     pub fn arc_abs(&mut self, point: (f64, f64), radius: (f64, f64), section: ArcDirection) {
         self.defs.push(format!(
             "A{},{} 0 {} {},{}",
-            radius.0, radius.1, section, point.0, point.1
+            svg_round(radius.0), svg_round(radius.1), section, svg_round(point.0), svg_round(point.1)
         ));
     }
 
     pub fn arc_rel(&mut self, point: (f64, f64), radius: (f64, f64), section: ArcDirection) {
         self.defs.push(format!(
             "a{},{} 0 {} {},{}",
-            radius.0, radius.1, section, point.0, point.1
+            svg_round(radius.0), svg_round(radius.1), section, svg_round(point.0), svg_round(point.1)
         ));
     }
 
@@ -96,7 +96,7 @@ impl Path {
     }
 
     pub fn moveto_rel(&mut self, point: (f64, f64)) {
-        self.defs.push(format!("m{},{}", point.0, point.1));
+        self.defs.push(format!("m{},{}", svg_round(point.0), svg_round(point.1)));
     }
 
     pub fn raw(&mut self, raw_data: String) {
