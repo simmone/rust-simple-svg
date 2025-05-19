@@ -1,5 +1,7 @@
 #![doc = include_str!("PATH.md")]
 
+use crate::tools::precision::svg_round;
+
 use std::fmt;
 
 #[derive(Debug, Clone)]
@@ -90,7 +92,7 @@ impl Path {
     }
 
     pub fn moveto_abs(&mut self, point: (f64, f64)) {
-        self.defs.push(format!("M{},{}", point.0, point.1));
+        self.defs.push(format!("M{},{}", svg_round(point.0), svg_round(point.1)));
     }
 
     pub fn moveto_rel(&mut self, point: (f64, f64)) {
