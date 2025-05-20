@@ -1,5 +1,7 @@
 #![doc = include_str!("RECT.md")]
 
+use crate::tools::precision::svg_round;
+
 #[derive(Debug, Clone)]
 pub struct Rect {
     pub width: f64,
@@ -20,13 +22,13 @@ impl Rect {
 
     pub fn format(&self, shape_id: String) -> String {
         format!("    <rect id=\"{}\" {} />\n", shape_id, {
-            let mut shape_str = format!("width=\"{}\" height=\"{}\"", self.width, self.height);
+            let mut shape_str = format!("width=\"{}\" height=\"{}\"", svg_round(self.width), svg_round(self.height));
 
             if self.radius_x.is_some() && self.radius_y.is_some() {
                 shape_str.push_str(&format!(
                     " rx=\"{}\" ry=\"{}\"",
-                    self.radius_x.unwrap(),
-                    self.radius_y.unwrap(),
+                    svg_round(self.radius_x.unwrap()),
+                    svg_round(self.radius_y.unwrap()),
                 ));
             }
 
@@ -83,10 +85,10 @@ mod tests {
     #[test]
     fn check_format2() {
         let rect = Rect {
-            width: 30.0,
-            height: 20.0,
-            radius_x: Some(10.0),
-            radius_y: Some(5.0),
+            width: 30.00001,
+            height: 20.00001,
+            radius_x: Some(10.00001),
+            radius_y: Some(5.00001),
         };
 
         assert_eq!(

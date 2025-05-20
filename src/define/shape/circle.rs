@@ -34,7 +34,7 @@ mod tests {
 
     #[test]
     fn check_format() {
-        let circle = Circle::new(30.0);
+        let circle = Circle::new(30.00001);
 
         assert_eq!(
             Circle::format(&circle, "1".to_string()),

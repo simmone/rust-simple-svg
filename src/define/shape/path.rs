@@ -66,28 +66,28 @@ impl Path {
     pub fn ccurve_abs(&mut self, point1: (f64, f64), point2: (f64, f64), point3: (f64, f64)) {
         self.defs.push(format!(
             "C{},{} {},{} {},{}",
-            point1.0, point1.1, point2.0, point2.1, point3.0, point3.1
+            svg_round(point1.0), svg_round(point1.1), svg_round(point2.0), svg_round(point2.1), svg_round(point3.0), svg_round(point3.1)
         ));
     }
 
     pub fn ccurve_rel(&mut self, point1: (f64, f64), point2: (f64, f64), point3: (f64, f64)) {
         self.defs.push(format!(
             "c{},{} {},{} {},{}",
-            point1.0, point1.1, point2.0, point2.1, point3.0, point3.1
+            svg_round(point1.0), svg_round(point1.1), svg_round(point2.0), svg_round(point2.1), svg_round(point3.0), svg_round(point3.1)
         ));
     }
 
     pub fn qcurve_abs(&mut self, point1: (f64, f64), point2: (f64, f64)) {
         self.defs.push(format!(
             "Q{},{} {},{}",
-            point1.0, point1.1, point2.0, point2.1
+            svg_round(point1.0), svg_round(point1.1), svg_round(point2.0), svg_round(point2.1)
         ));
     }
 
     pub fn qcurve_rel(&mut self, point1: (f64, f64), point2: (f64, f64)) {
         self.defs.push(format!(
             "q{},{} {},{}",
-            point1.0, point1.1, point2.0, point2.1
+            svg_round(point1.0), svg_round(point1.1), svg_round(point2.0), svg_round(point2.1)
         ));
     }
 

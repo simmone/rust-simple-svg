@@ -51,7 +51,7 @@ mod tests {
 
     #[test]
     fn check_format() {
-        let line = Line::new((10.0, 20.0), (30.0, 40.0));
+        let line = Line::new((10.00001, 20.00001), (30.00001, 40.00001));
 
         assert_eq!(
             Line::format(&line, "1".to_string()),

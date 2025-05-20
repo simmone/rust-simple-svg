@@ -211,3 +211,313 @@ fn path_arc_format_test() {
     assert_eq!(svg_str, contents);
 }
 
+#[test]
+fn path_qcurve_absolute_format_test() {
+    let mut svg = Svg::new(220.0, 120.0);
+
+    let mut path = Path::new();
+    path.moveto_abs((10.0, 60.0));
+    path.qcurve_abs((60.00001, 10.00001), (110.00001, 60.00001));
+    path.qcurve_abs((160.0, 110.0), (210.0, 60.0));
+
+    let qcurve_id = svg.add_shape(Shape::Path(path));
+
+    let circle_id = svg.add_shape(Shape::Circle(Circle::new(5.0)));
+
+    let mut group = Group::new();
+
+    let mut qcurve_sstyle = Sstyle::new();
+    qcurve_sstyle.stroke_width = Some(3.0);
+    qcurve_sstyle.stroke = Some("#333333".to_string());
+    group.place_widget(Widget {
+        shape_id: qcurve_id,
+        style: Some(qcurve_sstyle),
+        ..Default::default()
+    });
+
+    let mut circle_sstyle = Sstyle::new();
+    circle_sstyle.fill = Some("red".to_string());
+
+    group.place_widget(Widget {
+        shape_id: circle_id.clone(),
+        style: Some(circle_sstyle.clone()),
+        at: Some((10.0, 60.0)),
+        ..Default::default()
+    });
+
+    group.place_widget(Widget {
+        shape_id: circle_id.clone(),
+        style: Some(circle_sstyle.clone()),
+        at: Some((60.0, 10.0)),
+        ..Default::default()
+    });
+
+    group.place_widget(Widget {
+        shape_id: circle_id.clone(),
+        style: Some(circle_sstyle.clone()),
+        at: Some((110.0, 60.0)),
+        ..Default::default()
+    });
+
+    group.place_widget(Widget {
+        shape_id: circle_id.clone(),
+        style: Some(circle_sstyle.clone()),
+        at: Some((160.0, 110.0)),
+        ..Default::default()
+    });
+
+    group.place_widget(Widget {
+        shape_id: circle_id.clone(),
+        style: Some(circle_sstyle.clone()),
+        at: Some((210.0, 60.0)),
+        ..Default::default()
+    });
+
+    svg.add_default_group(group);
+
+    let svg_str = svg_out(svg);
+
+    let contents = include_str!("../showcase/path/qcurve1.svg");
+
+    assert_eq!(svg_str, contents);
+}
+
+#[test]
+fn path_qcurve_relative_format_test() {
+    let mut svg = Svg::new(220.0, 120.0);
+
+    let mut path = Path::new();
+    path.moveto_abs((10.0, 60.0));
+    path.qcurve_rel((50.00001, -50.00001), (100.00001, 0.00001));
+    path.qcurve_rel((50.0, 50.0), (100.0, 0.0));
+
+    let qcurve_id = svg.add_shape(Shape::Path(path));
+
+    let circle_id = svg.add_shape(Shape::Circle(Circle::new(5.0)));
+
+    let mut group = Group::new();
+
+    let mut qcurve_sstyle = Sstyle::new();
+    qcurve_sstyle.stroke_width = Some(3.0);
+    qcurve_sstyle.stroke = Some("#333333".to_string());
+    group.place_widget(Widget {
+        shape_id: qcurve_id,
+        style: Some(qcurve_sstyle),
+        ..Default::default()
+    });
+
+    let mut circle_sstyle = Sstyle::new();
+    circle_sstyle.fill = Some("red".to_string());
+
+    group.place_widget(Widget {
+        shape_id: circle_id.clone(),
+        style: Some(circle_sstyle.clone()),
+        at: Some((10.0, 60.0)),
+        ..Default::default()
+    });
+
+    group.place_widget(Widget {
+        shape_id: circle_id.clone(),
+        style: Some(circle_sstyle.clone()),
+        at: Some((60.0, 10.0)),
+        ..Default::default()
+    });
+
+    group.place_widget(Widget {
+        shape_id: circle_id.clone(),
+        style: Some(circle_sstyle.clone()),
+        at: Some((110.0, 60.0)),
+        ..Default::default()
+    });
+
+    group.place_widget(Widget {
+        shape_id: circle_id.clone(),
+        style: Some(circle_sstyle.clone()),
+        at: Some((160.0, 110.0)),
+        ..Default::default()
+    });
+
+    group.place_widget(Widget {
+        shape_id: circle_id.clone(),
+        style: Some(circle_sstyle.clone()),
+        at: Some((210.0, 60.0)),
+        ..Default::default()
+    });
+
+    svg.add_default_group(group);
+
+    let svg_str = svg_out(svg);
+
+    let contents = include_str!("../showcase/path/qcurve2.svg");
+
+    assert_eq!(svg_str, contents);
+}
+
+#[test]
+fn path_ccurve_absolute_format_test() {
+    let mut svg = Svg::new(200.0, 120.0);
+
+    let mut path = Path::new();
+    path.moveto_abs((10.0, 60.0));
+    path.ccurve_abs((30.00001, 15.00001), (80.00001, 15.00001), (100.00001, 60.00001));
+    path.ccurve_abs((120.0, 105.0), (170.0, 105.0), (190.0, 60.0));
+    let ccurve_id = svg.add_shape(Shape::Path(path));
+
+    let circle_id = svg.add_shape(Shape::Circle(Circle::new(5.0)));
+
+    let mut group = Group::new();
+
+    let mut ccurve_sstyle = Sstyle::new();
+    ccurve_sstyle.stroke_width = Some(3.0);
+    ccurve_sstyle.stroke = Some("#333333".to_string());
+    group.place_widget(Widget {
+        shape_id: ccurve_id,
+        style: Some(ccurve_sstyle),
+        ..Default::default()
+    });
+
+    let mut circle_sstyle = Sstyle::new();
+    circle_sstyle.fill = Some("red".to_string());
+
+    group.place_widget(Widget {
+        shape_id: circle_id.clone(),
+        style: Some(circle_sstyle.clone()),
+        at: Some((10.0, 60.0)),
+        ..Default::default()
+    });
+
+    group.place_widget(Widget {
+        shape_id: circle_id.clone(),
+        style: Some(circle_sstyle.clone()),
+        at: Some((30.0, 15.0)),
+        ..Default::default()
+    });
+
+    group.place_widget(Widget {
+        shape_id: circle_id.clone(),
+        style: Some(circle_sstyle.clone()),
+        at: Some((80.0, 15.0)),
+        ..Default::default()
+    });
+
+    group.place_widget(Widget {
+        shape_id: circle_id.clone(),
+        style: Some(circle_sstyle.clone()),
+        at: Some((100.0, 60.0)),
+        ..Default::default()
+    });
+
+    group.place_widget(Widget {
+        shape_id: circle_id.clone(),
+        style: Some(circle_sstyle.clone()),
+        at: Some((120.0, 105.0)),
+        ..Default::default()
+    });
+
+    group.place_widget(Widget {
+        shape_id: circle_id.clone(),
+        style: Some(circle_sstyle.clone()),
+        at: Some((170.0, 105.0)),
+        ..Default::default()
+    });
+
+    group.place_widget(Widget {
+        shape_id: circle_id.clone(),
+        style: Some(circle_sstyle.clone()),
+        at: Some((190.0, 60.0)),
+        ..Default::default()
+    });
+
+    svg.add_default_group(group);
+
+    let svg_str = svg_out(svg);
+
+    let contents = include_str!("../showcase/path/ccurve1.svg");
+
+    assert_eq!(svg_str, contents);
+}
+
+#[test]
+fn path_ccurve_relative_format_test() {
+    let mut svg = Svg::new(200.0, 120.0);
+
+    let mut path = Path::new();
+    path.moveto_abs((10.0, 60.0));
+    path.ccurve_rel((20.00001, -45.00001), (70.00001, -45.00001), (90.00001, 0.00001));
+    path.ccurve_rel((20.0, 45.0), (70.0, 45.0), (90.0, 0.0));
+
+    let ccurve_id = svg.add_shape(Shape::Path(path));
+
+    let circle_id = svg.add_shape(Shape::Circle(Circle::new(5.0)));
+
+    let mut group = Group::new();
+
+    let mut ccurve_sstyle = Sstyle::new();
+    ccurve_sstyle.stroke_width = Some(3.0);
+    ccurve_sstyle.stroke = Some("#333333".to_string());
+    group.place_widget(Widget {
+        shape_id: ccurve_id,
+        style: Some(ccurve_sstyle),
+        ..Default::default()
+    });
+
+    let mut circle_sstyle = Sstyle::new();
+    circle_sstyle.fill = Some("red".to_string());
+
+    group.place_widget(Widget {
+        shape_id: circle_id.clone(),
+        style: Some(circle_sstyle.clone()),
+        at: Some((10.0, 60.0)),
+        ..Default::default()
+    });
+
+    group.place_widget(Widget {
+        shape_id: circle_id.clone(),
+        style: Some(circle_sstyle.clone()),
+        at: Some((30.0, 15.0)),
+        ..Default::default()
+    });
+
+    group.place_widget(Widget {
+        shape_id: circle_id.clone(),
+        style: Some(circle_sstyle.clone()),
+        at: Some((80.0, 15.0)),
+        ..Default::default()
+    });
+
+    group.place_widget(Widget {
+        shape_id: circle_id.clone(),
+        style: Some(circle_sstyle.clone()),
+        at: Some((100.0, 60.0)),
+        ..Default::default()
+    });
+
+    group.place_widget(Widget {
+        shape_id: circle_id.clone(),
+        style: Some(circle_sstyle.clone()),
+        at: Some((120.0, 105.0)),
+        ..Default::default()
+    });
+
+    group.place_widget(Widget {
+        shape_id: circle_id.clone(),
+        style: Some(circle_sstyle.clone()),
+        at: Some((170.0, 105.0)),
+        ..Default::default()
+    });
+
+    group.place_widget(Widget {
+        shape_id: circle_id.clone(),
+        style: Some(circle_sstyle.clone()),
+        at: Some((190.0, 60.0)),
+        ..Default::default()
+    });
+
+    svg.add_default_group(group);
+
+    let svg_str = svg_out(svg);
+
+    let contents = include_str!("../showcase/path/ccurve2.svg");
+
+    assert_eq!(svg_str, contents);
+}

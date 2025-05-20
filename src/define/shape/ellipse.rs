@@ -42,7 +42,7 @@ mod tests {
 
     #[test]
     fn check_format() {
-        let ellipse = Ellipse::new(30.0, 20.0);
+        let ellipse = Ellipse::new(30.00001, 20.00001);
 
         assert_eq!(
             Ellipse::format(&ellipse, "1".to_string()),

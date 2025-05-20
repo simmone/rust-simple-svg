@@ -1,5 +1,7 @@
 #![doc = include_str!("POLYLINE.md")]
 
+use crate::tools::precision::svg_round;
+
 #[derive(Debug, Clone)]
 pub struct Polyline {
     pub points: Vec<(f64, f64)>,
@@ -15,7 +17,7 @@ impl Polyline {
             let mut point_pairs = vec![];
 
             for point in &self.points {
-                point_pairs.push(format!("{},{}", point.0, point.1));
+                point_pairs.push(format!("{},{}", svg_round(point.0), svg_round(point.1)));
             }
 
             point_pairs.join(" ")
