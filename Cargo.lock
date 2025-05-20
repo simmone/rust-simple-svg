@@ -99,7 +99,7 @@ dependencies = [
 
 [[package]]
 name = "simple_svg"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "num",
  "pretty_assertions",
