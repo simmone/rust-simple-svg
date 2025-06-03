@@ -7,6 +7,7 @@ pub struct Filter {
     pub blur: Option<f64>,
     pub dropdown_offset: Option<f64>,
     pub dropdown_color: Option<String>,
+    pub precision: usize,
 }
 
 impl Filter {
@@ -15,6 +16,7 @@ impl Filter {
             blur: Some(2.0),
             dropdown_offset: Some(3.0),
             dropdown_color: Some("black".to_string()),
+            precision: 0,
         }
     }
 
@@ -24,12 +26,12 @@ impl Filter {
         fmt_str.push_str(&format!("    <filter id=\"{}\">\n", shape_id));
         fmt_str.push_str(&format!(
             "      <feGaussianBlur in=\"SourceAlpha\" stdDeviation=\"{}\"></feGaussianBlur>\n",
-            svg_round(*self.blur.as_ref().unwrap())
+            svg_round(*self.blur.as_ref().unwrap(), self.precision)
         ));
         fmt_str.push_str(&format!(
             "      <feOffset dx=\"{}\" dy=\"{}\" result=\"offsetblur\"></feOffset>\n",
-            svg_round(*self.dropdown_offset.as_ref().unwrap()),
-            svg_round(*self.dropdown_offset.as_ref().unwrap())
+            svg_round(*self.dropdown_offset.as_ref().unwrap(), self.precision),
+            svg_round(*self.dropdown_offset.as_ref().unwrap(), self.precision)
         ));
         fmt_str.push_str(&format!(
             "      <feFlood flood-color=\"{}\"></feFlood>\n",

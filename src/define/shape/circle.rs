@@ -5,15 +5,16 @@ use crate::tools::precision::svg_round;
 #[derive(Debug, Clone)]
 pub struct Circle {
     pub radius: f64,
+    pub precision: usize,
 }
 
 impl Circle {
     pub fn new(radius: f64) -> Self {
-        Circle { radius }
+        Circle { radius, precision: 0 }
     }
 
     pub fn format(&self, shape_id: String) -> String {
-        format!("    <circle id=\"{}\" r=\"{}\" />\n", shape_id, svg_round(self.radius))
+        format!("    <circle id=\"{}\" r=\"{}\" />\n", shape_id, svg_round(self.radius, self.precision))
     }
 
     pub fn unique(&self) -> String {

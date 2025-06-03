@@ -6,17 +6,18 @@ use crate::tools::precision::svg_round;
 pub struct Ellipse {
     pub radius_x: f64,
     pub radius_y: f64,
+    pub precision: usize,
 }
 
 impl Ellipse {
     pub fn new(radius_x: f64, radius_y: f64) -> Self {
-        Ellipse { radius_x, radius_y }
+        Ellipse { radius_x, radius_y, precision: 0 }
     }
 
     pub fn format(&self, shape_id: String) -> String {
         format!(
             "    <ellipse id=\"{}\" rx=\"{}\" ry=\"{}\" />\n",
-            shape_id, svg_round(self.radius_x), svg_round(self.radius_y)
+            shape_id, svg_round(self.radius_x, self.precision), svg_round(self.radius_y, self.precision)
         )
     }
 
