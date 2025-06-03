@@ -12,6 +12,7 @@ pub struct Arrow {
     pub handle_base: f64,
     pub head_base: f64,
     pub head_height: f64,
+    pub precision: usize,
 }
 
 impl Arrow {
@@ -30,6 +31,7 @@ impl Arrow {
             handle_base,
             head_base,
             head_height,
+            precision: 0,
         }
     }
 
@@ -231,13 +233,13 @@ impl Arrow {
         
         format!("    <polygon id=\"{}\"\n{}", shape_id, {
             let mut shape_str = "          points=\"\n".to_string();
-            shape_str.push_str(&format!("            {},{}\n", svg_round(handle_bottom_left.0), svg_round(handle_bottom_left.1)));
-            shape_str.push_str(&format!("            {},{}\n", svg_round(handle_bottom_right.0), svg_round(handle_bottom_right.1)));
-            shape_str.push_str(&format!("            {},{}\n", svg_round(q.0), svg_round(q.1)));
-            shape_str.push_str(&format!("            {},{}\n", svg_round(r.0), svg_round(r.1)));
-            shape_str.push_str(&format!("            {},{}\n", svg_round(s.0), svg_round(s.1)));
-            shape_str.push_str(&format!("            {},{}\n", svg_round(handle_top_right.0), svg_round(handle_top_right.1)));
-            shape_str.push_str(&format!("            {},{}\n", svg_round(handle_top_left.0), svg_round(handle_top_left.1)));
+            shape_str.push_str(&format!("            {},{}\n", svg_round(handle_bottom_left.0, self.precision), svg_round(handle_bottom_left.1, self.precision)));
+            shape_str.push_str(&format!("            {},{}\n", svg_round(handle_bottom_right.0, self.precision), svg_round(handle_bottom_right.1, self.precision)));
+            shape_str.push_str(&format!("            {},{}\n", svg_round(q.0, self.precision), svg_round(q.1, self.precision)));
+            shape_str.push_str(&format!("            {},{}\n", svg_round(r.0, self.precision), svg_round(r.1, self.precision)));
+            shape_str.push_str(&format!("            {},{}\n", svg_round(s.0, self.precision), svg_round(s.1, self.precision)));
+            shape_str.push_str(&format!("            {},{}\n", svg_round(handle_top_right.0, self.precision), svg_round(handle_top_right.1, self.precision)));
+            shape_str.push_str(&format!("            {},{}\n", svg_round(handle_top_left.0, self.precision), svg_round(handle_top_left.1, self.precision)));
             shape_str.push_str(&format!("            \"/>\n"));
             shape_str
         })
