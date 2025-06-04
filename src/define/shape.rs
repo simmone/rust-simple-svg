@@ -46,21 +46,21 @@ pub enum Shape {
 }
 
 impl Shape {
-    pub fn set_precision(&self, precision: usize) -> String {
+    pub fn set_precision(&self, precision: usize) {
         match self {
-            Shape::Rect(rect) => rect.precision = precision;
-            Shape::Circle(circle) => circle.precision = precision;
-            Shape::Ellipse(ellipse) => ellipse.precision = precision;
-            Shape::Line(line) => line.precision = precision;
-            Shape::Polygon(polygon) => polygon.precision = precision;
-            Shape::Polyline(polyline) => polyline.precision = precision;
-            Shape::Filter(filter) => filter.precision = precision;
-            Shape::LinearGradient(linear_gradient) => linear_gradient.precision = precision;
-            Shape::RadialGradient(radial_gradient) => radial_gradient.precision = precision;
-            Shape::Path(path) => path.precision = precision;
-            Shape::Text(text) => text.precision = precision;
-            Shape::Marker(marker) => marker.precision = precision;
-            Shape::Arrow(arrow) => arrow.precision = precision;
+            Shape::Rect(rect) => rect.precision = precision,
+            Shape::Circle(circle) => circle.precision = precision,
+            Shape::Ellipse(ellipse) => ellipse.precision = precision,
+            Shape::Line(line) => line.precision = precision,
+            Shape::Polygon(polygon) => polygon.precision = precision,
+            Shape::Polyline(polyline) => polyline.precision = precision,
+            Shape::Filter(filter) => filter.precision = precision,
+            Shape::LinearGradient(linear_gradient) => linear_gradient.precision = precision,
+            Shape::RadialGradient(radial_gradient) => radial_gradient.precision = precision,
+            Shape::Path(path) => path.precision = precision,
+            Shape::Text(_text) => (),
+            Shape::Marker(marker) => marker.precision = precision,
+            Shape::Arrow(arrow) => arrow.precision = precision,
         }
     }
 
