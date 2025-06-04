@@ -5,11 +5,12 @@ use crate::tools::precision::svg_round;
 #[derive(Debug, Clone)]
 pub struct Polyline {
     pub points: Vec<(f64, f64)>,
+    pub precision: usize,
 }
 
 impl Polyline {
     pub fn new(points: Vec<(f64, f64)>) -> Self {
-        Polyline { points }
+        Polyline { points, precision: 0 }
     }
 
     pub fn format(&self, shape_id: String) -> String {
@@ -17,7 +18,7 @@ impl Polyline {
             let mut point_pairs = vec![];
 
             for point in &self.points {
-                point_pairs.push(format!("{},{}", svg_round(point.0), svg_round(point.1)));
+                point_pairs.push(format!("{},{}", svg_round(point.0, self.precision), svg_round(point.1, self.precision)));
             }
 
             point_pairs.join(" ")

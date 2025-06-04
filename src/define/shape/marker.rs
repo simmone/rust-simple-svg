@@ -10,6 +10,7 @@ pub struct Marker {
     pub size: f64,
     pub x: f64,
     pub path: String,
+    pub precision: usize,
 }
 
 #[derive(Debug, Clone)]
@@ -49,54 +50,63 @@ impl Marker {
                 size: 6.0,
                 x: 1.0,
                 path: "<path d=\"M0,0 L10,5 L0,10 z\"".to_string(),
+                precision: 0,
             },
             MarkerType::Triangle2 => Marker {
                 shape,
                 size: 6.0,
                 x: 1.0,
                 path: "<path d=\"M0,0 L15,5 L0,10 z\"".to_string(),
+                precision: 0,
             },
             MarkerType::Circle => Marker {
                 shape,
                 size: 6.0,
                 x: 5.0,
                 path: "<circle r=\"5\" cx=\"5\" cy=\"5\"".to_string(),
+                precision: 0,
             },
             MarkerType::Indent1 => Marker {
                 shape,
                 size: 6.0,
                 x: 4.0,
                 path: "<path d=\"M0,0 L10,5 L0,10 L5,5 z\"".to_string(),
+                precision: 0,
             },
             MarkerType::Indent2 => Marker {
                 shape,
                 size: 6.0,
                 x: 4.0,
                 path: "<path d=\"M0,0 L15,5 L0,10 L5,5 z\"".to_string(),
+                precision: 0,
             },
             MarkerType::Diamond1 => Marker {
                 shape,
                 size: 6.0,
                 x: 1.0,
                 path: "<path d=\"M3,0 L10,5 L3,10 L0,5 z\"".to_string(),
+                precision: 0,
             },
             MarkerType::Diamond2 => Marker {
                 shape,
                 size: 6.0,
                 x: 1.0,
                 path: "<path d=\"M3,0 L15,5 L3,10 L0,5 z\"".to_string(),
+                precision: 0,
             },
             MarkerType::Curve1 => Marker {
                 shape,
                 size: 6.0,
                 x: 2.0,
                 path: "<path d=\"M0,0 L10,5 L0,10 C0,10 5,5 0,0 z\"".to_string(),
+                precision: 0,
             },
             MarkerType::Curve2 => Marker {
                 shape,
                 size: 6.0,
                 x: 2.0,
                 path: "<path d=\"M0,0 L15,5 L0,10 C0,10 5,5 0,0 z\"".to_string(),
+                precision: 0,
             },
         }
     }
@@ -106,9 +116,9 @@ impl Marker {
 
         fmt_str.push_str(&format!("    <marker id=\"{}\" markerWidth=\"{}\" markerHeight=\"{}\" orient=\"auto-start-reverse\" viewBox=\"0 0 15 15\" refX=\"{}\" refY=\"5\" markerUnits=\"strokeWidth\">\n",
                                   shape_id,
-                                  svg_round(self.size),
-                                  svg_round(self.size),
-                                  svg_round(self.x)));
+                                  svg_round(self.size, self.precision),
+                                  svg_round(self.size, self.precision),
+                                  svg_round(self.x, self.precision)));
         fmt_str.push_str(&format!("      {} fill=\"context-stroke\" />\n", self.path));
         fmt_str.push_str(&format!("    </marker>\n"));
 
@@ -143,6 +153,7 @@ mod tests {
                 size: 6.00001,
                 x: 1.00001,
                 path: "path".to_string(),
+                precision: 0,
             };
         
         assert_eq!(

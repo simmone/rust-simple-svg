@@ -7,6 +7,7 @@ use std::fmt;
 #[derive(Debug, Clone)]
 pub struct Path {
     pub defs: Vec<String>,
+    pub precision: usize,
 }
 
 #[derive(Clone)]
@@ -30,73 +31,97 @@ impl fmt::Display for ArcDirection {
 
 impl Path {
     pub fn new() -> Self {
-        Path { defs: vec![] }
+        Path { defs: vec![], precision: 0 }
     }
 
     pub fn lineto_abs(&mut self, point: (f64, f64)) {
-        self.defs.push(format!("L{},{}", svg_round(point.0), svg_round(point.1)));
+        self.defs.push(format!("L{},{}", svg_round(point.0, self.precision), svg_round(point.1, self.precision)));
     }
 
     pub fn lineto_rel(&mut self, point: (f64, f64)) {
-        self.defs.push(format!("l{},{}", svg_round(point.0), svg_round(point.1)));
+        self.defs.push(format!("l{},{}", svg_round(point.0, self.precision), svg_round(point.1, self.precision)));
     }
 
     pub fn lineto_hor(&mut self, length: f64) {
-        self.defs.push(format!("h{}", svg_round(length)));
+        self.defs.push(format!("h{}", svg_round(length, self.precision)));
     }
 
     pub fn lineto_ver(&mut self, length: f64) {
-        self.defs.push(format!("v{}", svg_round(length)));
+        self.defs.push(format!("v{}", svg_round(length, self.precision)));
     }
 
     pub fn arc_abs(&mut self, point: (f64, f64), radius: (f64, f64), section: ArcDirection) {
         self.defs.push(format!(
             "A{},{} 0 {} {},{}",
-            svg_round(radius.0), svg_round(radius.1), section, svg_round(point.0), svg_round(point.1)
+            svg_round(radius.0, self.precision),
+            svg_round(radius.1, self.precision),
+            section,
+            svg_round(point.0, self.precision),
+            svg_round(point.1, self.precision)
         ));
     }
 
     pub fn arc_rel(&mut self, point: (f64, f64), radius: (f64, f64), section: ArcDirection) {
         self.defs.push(format!(
             "a{},{} 0 {} {},{}",
-            svg_round(radius.0), svg_round(radius.1), section, svg_round(point.0), svg_round(point.1)
+            svg_round(radius.0, self.precision),
+            svg_round(radius.1, self.precision),
+            section,
+            svg_round(point.0, self.precision),
+            svg_round(point.1, self.precision)
         ));
     }
 
     pub fn ccurve_abs(&mut self, point1: (f64, f64), point2: (f64, f64), point3: (f64, f64)) {
         self.defs.push(format!(
             "C{},{} {},{} {},{}",
-            svg_round(point1.0), svg_round(point1.1), svg_round(point2.0), svg_round(point2.1), svg_round(point3.0), svg_round(point3.1)
+            svg_round(point1.0, self.precision),
+            svg_round(point1.1, self.precision),
+            svg_round(point2.0, self.precision),
+            svg_round(point2.1, self.precision),
+            svg_round(point3.0, self.precision),
+            svg_round(point3.1, self.precision)
         ));
     }
 
     pub fn ccurve_rel(&mut self, point1: (f64, f64), point2: (f64, f64), point3: (f64, f64)) {
         self.defs.push(format!(
             "c{},{} {},{} {},{}",
-            svg_round(point1.0), svg_round(point1.1), svg_round(point2.0), svg_round(point2.1), svg_round(point3.0), svg_round(point3.1)
+            svg_round(point1.0, self.precision),
+            svg_round(point1.1, self.precision),
+            svg_round(point2.0, self.precision),
+            svg_round(point2.1, self.precision),
+            svg_round(point3.0, self.precision),
+            svg_round(point3.1, self.precision)
         ));
     }
 
     pub fn qcurve_abs(&mut self, point1: (f64, f64), point2: (f64, f64)) {
         self.defs.push(format!(
             "Q{},{} {},{}",
-            svg_round(point1.0), svg_round(point1.1), svg_round(point2.0), svg_round(point2.1)
+            svg_round(point1.0, self.precision),
+            svg_round(point1.1, self.precision),
+            svg_round(point2.0, self.precision),
+            svg_round(point2.1, self.precision)
         ));
     }
 
     pub fn qcurve_rel(&mut self, point1: (f64, f64), point2: (f64, f64)) {
         self.defs.push(format!(
             "q{},{} {},{}",
-            svg_round(point1.0), svg_round(point1.1), svg_round(point2.0), svg_round(point2.1)
+            svg_round(point1.0, self.precision),
+            svg_round(point1.1, self.precision),
+            svg_round(point2.0, self.precision),
+            svg_round(point2.1, self.precision)
         ));
     }
 
     pub fn moveto_abs(&mut self, point: (f64, f64)) {
-        self.defs.push(format!("M{},{}", svg_round(point.0), svg_round(point.1)));
+        self.defs.push(format!("M{},{}",svg_round(point.0, self.precision), svg_round(point.1, self.precision)));
     }
 
     pub fn moveto_rel(&mut self, point: (f64, f64)) {
-        self.defs.push(format!("m{},{}", svg_round(point.0), svg_round(point.1)));
+        self.defs.push(format!("m{},{}", svg_round(point.0, self.precision), svg_round(point.1, self.precision)));
     }
 
     pub fn raw(&mut self, raw_data: String) {
