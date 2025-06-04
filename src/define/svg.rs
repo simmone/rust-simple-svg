@@ -22,6 +22,7 @@ pub struct Svg {
     pub shape_define_map: HashMap<String, Shape>,
     pub group_define_map: HashMap<String, Group>,
     pub group_show_list: Vec<(String, (f64, f64))>,
+    pub precision: usize,
 }
 
 impl Svg {
@@ -37,10 +38,13 @@ impl Svg {
             shape_define_map: HashMap::new(),
             group_define_map: HashMap::new(),
             group_show_list: Vec::new(),
+            precision: 4,
         }
     }
 
     pub fn add_shape(&mut self, shape: Shape) -> String {
+        shape.set_precision(self.precision);
+
         if self.unique_shape_map.contains_key(&shape.unique()) {
             self.unique_shape_map
                 .get(&shape.unique())
