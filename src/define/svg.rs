@@ -42,7 +42,7 @@ impl Svg {
         }
     }
 
-    pub fn add_shape(&mut self, shape: Shape) -> String {
+    pub fn add_shape(&mut self, mut shape: Shape) -> String {
         shape.set_precision(self.precision);
 
         if self.unique_shape_map.contains_key(&shape.unique()) {

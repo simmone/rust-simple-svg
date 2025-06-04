@@ -46,7 +46,7 @@ pub enum Shape {
 }
 
 impl Shape {
-    pub fn set_precision(&self, precision: usize) {
+    pub fn set_precision(&mut self, precision: usize) {
         match self {
             Shape::Rect(rect) => rect.precision = precision,
             Shape::Circle(circle) => circle.precision = precision,
