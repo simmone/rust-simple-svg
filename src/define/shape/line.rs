@@ -8,6 +8,7 @@ pub struct Line {
     pub start_y: f64,
     pub end_x: f64,
     pub end_y: f64,
+    pub precision: usize,
 }
 
 impl Line {
@@ -17,13 +18,18 @@ impl Line {
             start_y: start.1,
             end_x: end.0,
             end_y: end.1,
+            precision: 0,
         }
     }
 
     pub fn format(&self, shape_id: String) -> String {
         format!(
             "    <line id=\"{}\" x1=\"{}\" y1=\"{}\" x2=\"{}\" y2=\"{}\" />\n",
-            shape_id, svg_round(self.start_x), svg_round(self.start_y), svg_round(self.end_x), svg_round(self.end_y)
+            shape_id,
+            svg_round(self.start_x, self.precision), 
+            svg_round(self.start_y, self.precision),
+            svg_round(self.end_x, self.precision),
+            svg_round(self.end_y, self.precision)
         )
     }
 
