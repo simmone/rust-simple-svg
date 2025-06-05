@@ -115,7 +115,6 @@ fn recursive_points_test() {
 //fn fern_test() -> std::io::Result<()> {
 fn fern_test() {
     let mut svg = Svg::new(CANVAS_WIDTH, CANVAS_HEIGHT);
-    svg.precision = 4;
 
     let mut default_group = Group::new();
 

@@ -70,6 +70,12 @@ impl Svg {
     }
 
     pub fn add_name_group(&mut self, group_id: String, group: Group) -> String {
+        for widget in &group.widget_list {
+            if widget.style.is_some() {
+                widget.style.as_ref().unwrap().precision = self.precision;
+            }
+        }
+
         self.group_define_map.insert(group_id.clone(), group);
         group_id
     }

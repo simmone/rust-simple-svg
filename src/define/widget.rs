@@ -1,4 +1,5 @@
 use crate::define::sstyle::Sstyle;
+use crate::tools::precision::svg_round;
 
 #[derive(Default, Clone)]
 pub struct Widget {
@@ -9,6 +10,7 @@ pub struct Widget {
     pub marker_start_id: Option<String>,
     pub marker_mid_id: Option<String>,
     pub marker_end_id: Option<String>,
+    pub precision: usize,
 }
 
 impl Widget {
@@ -20,8 +22,8 @@ impl Widget {
         if self.at.is_some() && self.at.unwrap() != (0.0, 0.0) {
             format_items.push(format!(
                 "x=\"{}\" y=\"{}\"",
-                self.at.unwrap().0,
-                self.at.unwrap().1
+                svg_round(self.at.unwrap().0, self.precision),
+                svg_round(self.at.unwrap().1, self.precision)
             ));
         }
 
