@@ -65,10 +65,10 @@ pub fn svg_out(mut svg: Svg) -> String {
     if svg.view_box.is_some() {
         svg_out_str.push_str(&format!(
             "    viewBox=\"{} {} {} {}\"\n",
-            svg_round(svg.view_box.as_ref().unwrap().min_x, self.precision),
-            svg_round(svg.view_box.as_ref().unwrap().min_y, self.precision),
-            svg_round(svg.view_box.as_ref().unwrap().width, self.precision),
-            svg_round(svg.view_box.as_ref().unwrap().height, self.precision)
+            svg_round(svg.view_box.as_ref().unwrap().min_x, svg.precision),
+            svg_round(svg.view_box.as_ref().unwrap().min_y, svg.precision),
+            svg_round(svg.view_box.as_ref().unwrap().width, svg.precision),
+            svg_round(svg.view_box.as_ref().unwrap().height, svg.precision)
         ))
     }
 

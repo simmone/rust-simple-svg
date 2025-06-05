@@ -110,7 +110,7 @@ impl Sstyle {
         if self.fill_gradient.is_some() {
             transforms.push(format!(
                 "fill=\"url(#{})\"",
-                svg_round(self.fill_gradient.as_ref().unwrap(), self.precision)
+                self.fill_gradient.as_ref().unwrap(),
             ));
         } else {
             if self.fill.is_some() {
@@ -130,14 +130,14 @@ impl Sstyle {
         if self.fill_opacity.is_some() {
             transforms.push(format!(
                 "fill-opacity=\"{}\"",
-                svg_round(self.fill_opacity.as_ref().unwrap(), self.precision)
+                svg_round(*self.fill_opacity.as_ref().unwrap(), self.precision)
             ));
         }
 
         if self.stroke_width.is_some() {
             transforms.push(format!(
                 "stroke-width=\"{}\"",
-                svg_round(self.stroke_width.as_ref().unwrap(), self.precision)
+                svg_round(*self.stroke_width.as_ref().unwrap(), self.precision)
             ));
         }
 
@@ -162,7 +162,7 @@ impl Sstyle {
         if self.stroke_miterlimit.is_some() {
             transforms.push(format!(
                 "stroke-miterlimit=\"{}\"",
-                svg_round(self.stroke_miterlimit.as_ref().unwrap(), self.precision)
+                svg_round(*self.stroke_miterlimit.as_ref().unwrap(), self.precision)
             ));
         }
 
@@ -176,7 +176,7 @@ impl Sstyle {
         if self.stroke_dashoffset.is_some() {
             transforms.push(format!(
                 "stroke-dashoffset=\"{}\"",
-                svg_round(self.stroke_dashoffset.as_ref().unwrap(), self.precision)
+                svg_round(*self.stroke_dashoffset.as_ref().unwrap(), self.precision)
             ));
         }
 
@@ -198,12 +198,12 @@ impl Sstyle {
             }
 
             if self.rotate.is_some() {
-                translates.push(format!("rotate({})", svg_round(self.rotate.as_ref().unwrap(), self.precision)));
+                translates.push(format!("rotate({})", svg_round(*self.rotate.as_ref().unwrap(), self.precision)));
             }
 
             if self.scale_all.is_some() || self.scale_xy.is_some() {
                 if self.scale_all.is_some() {
-                    translates.push(format!("scale({})", svg_round(self.scale_all.as_ref().unwrap(), self.precision)));
+                    translates.push(format!("scale({})", svg_round(*self.scale_all.as_ref().unwrap(), self.precision)));
                 } else {
                     translates.push(format!(
                         "scale({} {})",
@@ -214,11 +214,11 @@ impl Sstyle {
             }
 
             if self.skew_x.is_some() {
-                translates.push(format!("skewX({})", svg_round(self.skew_x.as_ref().unwrap(), self.precision)));
+                translates.push(format!("skewX({})", svg_round(*self.skew_x.as_ref().unwrap(), self.precision)));
             }
 
             if self.skew_y.is_some() {
-                translates.push(format!("skewY({})", svg_round(self.skew_y.as_ref().unwrap(), self.precision)));
+                translates.push(format!("skewY({})", svg_round(*self.skew_y.as_ref().unwrap(), self.precision)));
             }
 
             transforms.push(format!("transform=\"{}\"", translates.join(" ")));
@@ -240,6 +240,7 @@ mod tests {
         sstyle.fill_gradient = Some("s1".to_string());
         sstyle.fill_opacity = Some(0.5);
 
+        sstyle.precision = 1;
         assert_eq!(
             sstyle.format(),
             "fill=\"url(#s1)\" fill-rule=\"nonzero\" fill-opacity=\"0.5\""
@@ -287,7 +288,8 @@ mod tests {
         sstyle.scale_all = Some(1.0);
         sstyle.skew_x = Some(2.0);
         sstyle.skew_y = Some(3.0);
-
+        
+        sstyle.precision = 1;
         assert_eq!(
             sstyle.format(),
             "fill=\"none\" transform=\"translate(0.1 0.2) rotate(30) scale(1) skewX(2) skewY(3)\""
