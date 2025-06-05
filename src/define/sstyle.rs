@@ -3,6 +3,8 @@
 
 use std::fmt;
 
+use crate::tools::precision::svg_round;
+
 #[derive(Clone)]
 pub enum FillRule {
     Nonzero,
@@ -75,6 +77,7 @@ pub struct Sstyle {
     pub skew_x: Option<f64>,
     pub skew_y: Option<f64>,
     pub fill_gradient: Option<String>,
+    pub precision: usize,
 }
 
 impl Sstyle {
@@ -97,6 +100,7 @@ impl Sstyle {
             skew_x: None,
             skew_y: None,
             fill_gradient: None,
+            precision: 0,
         }
     }
 
@@ -106,7 +110,7 @@ impl Sstyle {
         if self.fill_gradient.is_some() {
             transforms.push(format!(
                 "fill=\"url(#{})\"",
-                self.fill_gradient.as_ref().unwrap()
+                svg_round(self.fill_gradient.as_ref().unwrap(), self.precision)
             ));
         } else {
             if self.fill.is_some() {
@@ -126,14 +130,14 @@ impl Sstyle {
         if self.fill_opacity.is_some() {
             transforms.push(format!(
                 "fill-opacity=\"{}\"",
-                self.fill_opacity.as_ref().unwrap()
+                svg_round(self.fill_opacity.as_ref().unwrap(), self.precision)
             ));
         }
 
         if self.stroke_width.is_some() {
             transforms.push(format!(
                 "stroke-width=\"{}\"",
-                self.stroke_width.as_ref().unwrap()
+                svg_round(self.stroke_width.as_ref().unwrap(), self.precision)
             ));
         }
 
@@ -158,7 +162,7 @@ impl Sstyle {
         if self.stroke_miterlimit.is_some() {
             transforms.push(format!(
                 "stroke-miterlimit=\"{}\"",
-                self.stroke_miterlimit.as_ref().unwrap()
+                svg_round(self.stroke_miterlimit.as_ref().unwrap(), self.precision)
             ));
         }
 
@@ -172,7 +176,7 @@ impl Sstyle {
         if self.stroke_dashoffset.is_some() {
             transforms.push(format!(
                 "stroke-dashoffset=\"{}\"",
-                self.stroke_dashoffset.as_ref().unwrap()
+                svg_round(self.stroke_dashoffset.as_ref().unwrap(), self.precision)
             ));
         }
 
@@ -188,33 +192,33 @@ impl Sstyle {
             if self.translate.is_some() {
                 translates.push(format!(
                     "translate({} {})",
-                    self.translate.as_ref().unwrap().0,
-                    self.translate.as_ref().unwrap().1
+                    svg_round(self.translate.as_ref().unwrap().0, self.precision),
+                    svg_round(self.translate.as_ref().unwrap().1, self.precision)
                 ));
             }
 
             if self.rotate.is_some() {
-                translates.push(format!("rotate({})", self.rotate.as_ref().unwrap()));
+                translates.push(format!("rotate({})", svg_round(self.rotate.as_ref().unwrap(), self.precision)));
             }
 
             if self.scale_all.is_some() || self.scale_xy.is_some() {
                 if self.scale_all.is_some() {
-                    translates.push(format!("scale({})", self.scale_all.as_ref().unwrap()));
+                    translates.push(format!("scale({})", svg_round(self.scale_all.as_ref().unwrap(), self.precision)));
                 } else {
                     translates.push(format!(
                         "scale({} {})",
-                        self.scale_xy.as_ref().unwrap().0,
-                        self.scale_xy.as_ref().unwrap().1
+                        svg_round(self.scale_xy.as_ref().unwrap().0, self.precision),
+                        svg_round(self.scale_xy.as_ref().unwrap().1, self.precision)
                     ));
                 }
             }
 
             if self.skew_x.is_some() {
-                translates.push(format!("skewX({})", self.skew_x.as_ref().unwrap()));
+                translates.push(format!("skewX({})", svg_round(self.skew_x.as_ref().unwrap(), self.precision)));
             }
 
             if self.skew_y.is_some() {
-                translates.push(format!("skewY({})", self.skew_y.as_ref().unwrap()));
+                translates.push(format!("skewY({})", svg_round(self.skew_y.as_ref().unwrap(), self.precision)));
             }
 
             transforms.push(format!("transform=\"{}\"", translates.join(" ")));

@@ -6,6 +6,7 @@ use crate::define::shape::Shape;
 use crate::define::sstyle::Sstyle;
 use crate::define::viewbox::ViewBox;
 use crate::define::widget::Widget;
+use crate::tools::precision::svg_round;
 use std::collections::HashMap;
 
 pub static DEFAULT_GROUP_ID: &str = "g0";
@@ -178,7 +179,7 @@ impl Svg {
             svg_str.push_str(&format!("  <use xlink:href=\"#{group_id}\" "));
 
             if group_pos != (0.0, 0.0) {
-                svg_str.push_str(&format!("x=\"{}\" y=\"{}\" ", group_pos.0, group_pos.1));
+                svg_str.push_str(&format!("x=\"{}\" y=\"{}\" ", svg_round(group_pos.0, self.precision), svg_round(group_pos.1, self.precision)));
             }
 
             svg_str.push_str("/>\n");

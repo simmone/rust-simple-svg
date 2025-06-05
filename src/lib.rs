@@ -43,6 +43,8 @@ pub mod tools;
 pub mod gadget;
 #[doc(hidden)]
 pub use crate::gadget::table::Table;
+#[doc(hidden)]
+use crate::tools::precision::svg_round;
 
 use crate::define::svg::BACKGROUND_GROUP_ID;
 use crate::define::svg::DEFAULT_GROUP_ID;
@@ -56,17 +58,17 @@ pub fn svg_out(mut svg: Svg) -> String {
     svg_out_str.push_str("    xmlns:xlink=\"http://www.w3.org/1999/xlink\"\n");
     svg_out_str.push_str(&format!(
         "    width=\"{}\" height=\"{}\"\n",
-        svg.width.to_string(),
-        svg.height.to_string()
+        svg_round(svg.width, svg.precision),
+        svg_round(svg.height, svg.precision)
     ));
 
     if svg.view_box.is_some() {
         svg_out_str.push_str(&format!(
             "    viewBox=\"{} {} {} {}\"\n",
-            svg.view_box.as_ref().unwrap().min_x,
-            svg.view_box.as_ref().unwrap().min_y,
-            svg.view_box.as_ref().unwrap().width,
-            svg.view_box.as_ref().unwrap().height
+            svg_round(svg.view_box.as_ref().unwrap().min_x, self.precision),
+            svg_round(svg.view_box.as_ref().unwrap().min_y, self.precision),
+            svg_round(svg.view_box.as_ref().unwrap().width, self.precision),
+            svg_round(svg.view_box.as_ref().unwrap().height, self.precision)
         ))
     }
 
