@@ -37,7 +37,7 @@ pub use crate::define::sstyle::{FillRule, LineCap, LineJoin, Sstyle};
 pub use crate::define::svg::Svg;
 #[doc(hidden)]
 pub use crate::define::widget::Widget;
-
+#[doc(hidden)]
 pub mod tools;
 
 pub mod gadget;

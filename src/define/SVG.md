@@ -1,6 +1,24 @@
-### Svg: canvas, defined by width, height, background, view_box.
+### Svg: canvas, defined by width, height, background, view_box, precision.
 
 Create: Svg::new(width, height)
+
+#### Precision: control the number's decimal place
+
+As svg is xml text, so control number's decimal place is control the file size.
+
+Svg's precision is the decimal place of all the numbers, default is 4.
+
+For example, when precision is 4, so 4.0 convert to "4", 4.12345 convert to "4.1235".
+
+When your svg file has much float numbers, precision is important.
+
+Set precision: After svg created, set the precision parameter:
+
+```
+let svg = Svg::new(100.0, 100.0);
+
+svg.precision = 5;
+```
 
 #### Svg showcase: create a empty svg.
 

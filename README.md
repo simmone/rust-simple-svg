@@ -6,7 +6,7 @@ thanks to Joni's tutorial: [SVG Pocket Guide](http://svgpocketguide.com/)
 
 ## Getting Started
 
-This library's target is to generate combined shapes progmatically.
+This library's target is to generate combined shapes programlly.
 
 ## Usage
 
