@@ -170,8 +170,6 @@ fn fern_test() {
         width_sstyle.stroke = Some(COLOR.to_string());
         width_sstyle.stroke_width = Some(width.parse::<f64>().unwrap());
         
-        print!("{}\n", width);
-
         let mut width_group = Group::new();
 
         for point_pair in width_group_map.get(&width).unwrap() {
