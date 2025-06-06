@@ -5,6 +5,7 @@ use num::complex::Complex;
 use simple_svg::*;
 use std::collections::HashMap;
 use std::f64::consts::PI;
+use crate::tools::precision::svg_round;
 
 const CANVAS_WIDTH: f64 = 600.0;
 const CANVAS_HEIGHT: f64 = 600.0;
@@ -53,12 +54,13 @@ fn recursive_points(
     length: f64,
     deg: f64,
     width: f64,
+    precision: usize,
     lines: &mut Vec<(String, (f64, f64), (f64, f64))>,
 ) {
     if (CENTRAL_REDUCTION * length) >= MIN_LENGTH {
         let loop_end_point = get_end_point(loop_start_point, length, deg);
 
-        let truncted_width = format!("{:.2}", width);
+        let truncted_width = svg_round(width, precision);
 
         lines.push((
             truncted_width,
@@ -72,6 +74,7 @@ fn recursive_points(
             length * CENTRAL_REDUCTION,
             deg - BEND,
             width * STEP_WIDTH,
+            precision,
             lines,
         );
 
@@ -81,6 +84,7 @@ fn recursive_points(
             length * LATERAL_REDUCTION,
             deg + LATERAL_DEG - BEND,
             width * STEP_WIDTH,
+            precision,
             lines,
         );
 
@@ -90,6 +94,7 @@ fn recursive_points(
             length * LATERAL_REDUCTION,
             deg - LATERAL_DEG - BEND,
             width * STEP_WIDTH,
+            precision,
             lines,
         );
     }
@@ -104,6 +109,7 @@ fn recursive_points_test() {
         START_LENGTH,
         START_DEG,
         START_WIDTH,
+        4,
         &mut lines,
     );
 
@@ -124,6 +130,7 @@ fn fern_test() {
         START_LENGTH,
         START_DEG,
         START_WIDTH,
+        svg.precision,
         &mut lines,
     );
 
@@ -149,9 +156,11 @@ fn fern_test() {
     widths.sort_by(|a, b| {
         let a_num = a.parse::<f64>().unwrap();
         let b_num = b.parse::<f64>().unwrap();
+        
+        let pown = 10.0_f64.powf(svg.precision as f64);
 
-        let a_int = (a_num * 100.0).round() as usize;
-        let b_int = (b_num * 100.0).round() as usize;
+        let a_int = (a_num * pown).round() as usize;
+        let b_int = (b_num * pown).round() as usize;
 
         b_int.cmp(&a_int)
     });
@@ -160,6 +169,8 @@ fn fern_test() {
         let mut width_sstyle = Sstyle::new();
         width_sstyle.stroke = Some(COLOR.to_string());
         width_sstyle.stroke_width = Some(width.parse::<f64>().unwrap());
+        
+        print!("{}\n", width);
 
         let mut width_group = Group::new();
 
