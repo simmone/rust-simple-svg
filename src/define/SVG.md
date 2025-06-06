@@ -15,7 +15,9 @@ When your svg file has much float numbers, precision is important.
 Set precision: After svg created, set the precision parameter:
 
 ```
-let svg = Svg::new(100.0, 100.0);
+use simple_svg::*;
+
+let mut svg = Svg::new(100.0, 100.0);
 
 svg.precision = 5;
 ```

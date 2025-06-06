@@ -238,7 +238,7 @@ mod tests {
 
         sstyle.fill_rule = Some(FillRule::Nonzero);
         sstyle.fill_gradient = Some("s1".to_string());
-        sstyle.fill_opacity = Some(0.5);
+        sstyle.fill_opacity = Some(0.51);
 
         sstyle.precision = 1;
         assert_eq!(
@@ -253,8 +253,9 @@ mod tests {
 
         sstyle.fill = Some("red".to_string());
         sstyle.fill_rule = Some(FillRule::Nonzero);
-        sstyle.fill_opacity = Some(30.0);
+        sstyle.fill_opacity = Some(30.01);
 
+        sstyle.precision = 1;
         assert_eq!(
             sstyle.format(),
             "fill=\"red\" fill-rule=\"nonzero\" fill-opacity=\"30\""
@@ -265,14 +266,15 @@ mod tests {
     fn check_format_stroke() {
         let mut sstyle = Sstyle::new();
 
-        sstyle.stroke_width = Some(5.0);
+        sstyle.stroke_width = Some(5.01);
         sstyle.stroke = Some("#ABABAB".to_string());
         sstyle.stroke_linejoin = Some(LineJoin::Round);
         sstyle.stroke_linecap = Some(LineCap::Square);
-        sstyle.stroke_miterlimit = Some(2.0);
+        sstyle.stroke_miterlimit = Some(2.01);
         sstyle.stroke_dasharray = Some("40,10".to_string());
-        sstyle.stroke_dashoffset = Some(5.0);
+        sstyle.stroke_dashoffset = Some(5.01);
 
+        sstyle.precision = 1;
         assert_eq!(
             Sstyle::format(&sstyle),
             "fill=\"none\" stroke-width=\"5\" stroke=\"#ABABAB\" stroke-linejoin=\"round\" stroke-linecap=\"square\" stroke-miterlimit=\"2\" stroke-dasharray=\"40,10\" stroke-dashoffset=\"5\""
@@ -283,11 +285,11 @@ mod tests {
     fn check_format_transform1() {
         let mut sstyle = Sstyle::new();
 
-        sstyle.translate = Some((0.1, 0.2));
-        sstyle.rotate = Some(30.0);
-        sstyle.scale_all = Some(1.0);
-        sstyle.skew_x = Some(2.0);
-        sstyle.skew_y = Some(3.0);
+        sstyle.translate = Some((0.11, 0.21));
+        sstyle.rotate = Some(30.01);
+        sstyle.scale_all = Some(1.01);
+        sstyle.skew_x = Some(2.01);
+        sstyle.skew_y = Some(3.01);
         
         sstyle.precision = 1;
         assert_eq!(
@@ -296,7 +298,7 @@ mod tests {
         );
 
         sstyle.scale_all = None;
-        sstyle.scale_xy = Some((2.0, 3.0));
+        sstyle.scale_xy = Some((2.01, 3.01));
 
         assert_eq!(
             sstyle.format(),

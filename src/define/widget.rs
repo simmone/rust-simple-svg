@@ -114,6 +114,27 @@ mod tests {
             widget2.format(),
             "<use xlink:href=\"#s1\" x=\"100\" y=\"50\" />"
         );
+
+        let widget3 = Widget {
+            shape_id: "s1".to_string(),
+            at: Some((100.12345, 50.0)),
+            ..Default::default()
+        };
+        assert_eq!(
+            widget3.format(),
+            "<use xlink:href=\"#s1\" x=\"100\" y=\"50\" />"
+        );
+
+        let widget4= Widget {
+            shape_id: "s1".to_string(),
+            at: Some((100.12345, 50.0)),
+            precision: 3,
+            ..Default::default()
+        };
+        assert_eq!(
+            widget4.format(),
+            "<use xlink:href=\"#s1\" x=\"100.123\" y=\"50\" />"
+        );
     }
 
     #[test]
