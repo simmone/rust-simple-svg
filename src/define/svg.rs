@@ -78,6 +78,8 @@ impl Svg {
             }
         }
         
+        print!("{:?}\n", group.widget_list);
+        
         self.group_define_map.insert(group_id.clone(), group);
         group_id
     }

@@ -19,7 +19,6 @@ const CENTRAL_REDUCTION: f64 = 0.75;
 const LATERAL_REDUCTION: f64 = 0.35;
 const LATERAL_DEG: f64 = 80.0; // 80°
 const BEND: f64 = 5.0; // 5°
-const PRECISION: f64 = 0.0;
 
 fn make_polar(magnitude: f64, angle: f64) -> Complex<f64> {
     let complex_number = Complex::new(0.0, 1.0);
@@ -40,12 +39,12 @@ fn make_polar_test() {
     );
 }
 
-fn get_end_point(start_point: (f64, f64), length: f64, deg: f64, precision: f64) -> (f64, f64) {
+fn get_end_point(start_point: (f64, f64), length: f64, deg: f64) -> (f64, f64) {
     let end = make_polar(length, PI * 2.0 * (deg / 360.0));
 
     (
-        ((start_point.0 + end.re) * (10.0f64.powf(precision))).round() / (10.0f64.powf(precision)),
-        ((start_point.1 + end.im) * (10.0f64.powf(precision))).round() / (10.0f64.powf(precision)),
+        start_point.0 + end.re,
+        start_point.1 + end.im,
     )
 }
 
@@ -57,7 +56,7 @@ fn recursive_points(
     lines: &mut Vec<(String, (f64, f64), (f64, f64))>,
 ) {
     if (CENTRAL_REDUCTION * length) >= MIN_LENGTH {
-        let loop_end_point = get_end_point(loop_start_point, length, deg, PRECISION);
+        let loop_end_point = get_end_point(loop_start_point, length, deg);
 
         let truncted_width = format!("{:.2}", width);
 
