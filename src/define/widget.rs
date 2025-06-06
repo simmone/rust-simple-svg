@@ -1,7 +1,7 @@
 use crate::define::sstyle::Sstyle;
 use crate::tools::precision::svg_round;
 
-#[derive(Default, Clone)]
+#[derive(Default, Clone, Debug)]
 pub struct Widget {
     pub shape_id: String,
     pub at: Option<(f64, f64)>,

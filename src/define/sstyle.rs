@@ -5,7 +5,7 @@ use std::fmt;
 
 use crate::tools::precision::svg_round;
 
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 pub enum FillRule {
     Nonzero,
     Evenodd,
@@ -22,7 +22,7 @@ impl fmt::Display for FillRule {
     }
 }
 
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 pub enum LineCap {
     Butt,
     Round,
@@ -41,7 +41,7 @@ impl fmt::Display for LineCap {
     }
 }
 
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 pub enum LineJoin {
     Miter,
     Round,
@@ -58,7 +58,7 @@ impl fmt::Display for LineJoin {
     }
 }
 
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 pub struct Sstyle {
     pub fill: Option<String>,
     pub fill_rule: Option<FillRule>,

@@ -69,13 +69,15 @@ impl Svg {
         self.add_name_group(group_id, group)
     }
 
-    pub fn add_name_group(&mut self, group_id: String, group: Group) -> String {
-        for widget in &group.widget_list {
+    pub fn add_name_group(&mut self, group_id: String, mut group: Group) -> String {
+        for widget in &mut group.widget_list {
+            widget.precision = self.precision;
+
             if widget.style.is_some() {
-                widget.style.as_ref().unwrap().precision = self.precision;
+                widget.style.as_mut().unwrap().precision = self.precision;
             }
         }
-
+        
         self.group_define_map.insert(group_id.clone(), group);
         group_id
     }
