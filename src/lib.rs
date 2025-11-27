@@ -74,7 +74,7 @@ pub fn svg_out(mut svg: Svg) -> String {
 
     svg_out_str.push_str("    >\n");
 
-    if svg.background != None {
+    if svg.background.is_some() {
         svg.group_show_list
             .push((BACKGROUND_GROUP_ID.to_string(), (0.0, 0.0)));
     }
@@ -86,7 +86,7 @@ pub fn svg_out(mut svg: Svg) -> String {
             .unwrap()
             .widget_list;
 
-        if widget_list.len() > 0 {
+        if !widget_list.is_empty() {
             svg.group_show_list
                 .push((DEFAULT_GROUP_ID.to_string(), (0.0, 0.0)));
         }

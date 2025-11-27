@@ -122,11 +122,10 @@ impl Table {
                 .cell_font_size_map
                 .contains_key(&(axis_data.0, axis_data.1))
             {
-                font_real_size = self
+                font_real_size = *self
                     .cell_font_size_map
                     .get(&(axis_data.0, axis_data.1))
                     .unwrap()
-                    .clone();
             }
 
             let mut font_real_color = font_color.to_string();
