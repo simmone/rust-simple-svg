@@ -61,14 +61,11 @@ impl Table {
     }
 
     fn get_cells(matrix: &Vec<Vec<&str>>) -> Vec<(usize, usize, String)> {
-        let row_count = matrix.len();
-        let col_count = matrix[0].len();
-
         let mut axis_data_array = vec![];
 
-        for row in 0..row_count {
-            for col in 0..col_count {
-                axis_data_array.push((row, col, matrix[row][col].to_string()));
+        for (row_index, row) in matrix.iter().enumerate() {
+            for (element_index, element) in row.iter().enumerate() {
+                axis_data_array.push((row_index, element_index, element.to_string()));
             }
         }
 
