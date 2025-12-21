@@ -3,26 +3,18 @@
 use crate::define::widget::Widget;
 
 /// Group contains a widget list.
-#[derive(Clone)]
+#[derive(Clone, Default)]
 pub struct Group {
     pub widget_list: Vec<Widget>,
 }
 
 impl Group {
     pub fn new() -> Self {
-        Group {
-            widget_list: Vec::new(),
-        }
+        Default::default()
     }
 
     pub fn place_widget(&mut self, widget: Widget) {
         self.widget_list.push(widget);
-    }
-}
-
-impl Default for Group {
-    fn default() -> Self {
-        Group::new()
     }
 }
 

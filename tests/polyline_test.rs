@@ -19,7 +19,7 @@ fn polyline_format_test() {
     polyline_sstyle.stroke = Some("#BBC42A".to_string());
     polyline_sstyle.stroke_width = Some(5.0);
 
-    let mut group = Group();
+    let mut group = Group::default();
     group.place_widget(Widget {
         shape_id: polyline_id,
         style: Some(polyline_sstyle),

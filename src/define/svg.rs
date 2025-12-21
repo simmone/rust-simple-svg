@@ -94,7 +94,7 @@ impl Svg {
         let mut background_sstyle = Sstyle::new();
         background_sstyle.fill = Some(background);
 
-        let mut group = Group::new();
+        let mut group = Group::default();
         group.place_widget(Widget {
             shape_id: rect_id,
             style: Some(background_sstyle),

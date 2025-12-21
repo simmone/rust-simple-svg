@@ -173,7 +173,7 @@ impl Table {
             &self.font_color,
         );
 
-        let mut group = Group::new();
+        let mut group = Group::default();
 
         for cell in cells {
             let rect_id = svg.add_shape(Shape::Rect(Rect::new(cell.width, cell.height)));

@@ -22,6 +22,8 @@ line_sstyle.stroke_width = Some(5.0);
 
 let mut group = Group::new();
 
+assert_eq!(0, group.widget_list.len());
+
 group.place_widget(Widget {
     shape_id: line1_id,
     style: Some(line_sstyle.clone()),
