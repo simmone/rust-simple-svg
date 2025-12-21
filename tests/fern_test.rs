@@ -1,11 +1,11 @@
 use pretty_assertions::assert_eq;
 //use std::fs::File;
 //use std::io::prelude::*;
+use crate::tools::precision::svg_round;
 use num::complex::Complex;
 use simple_svg::*;
 use std::collections::HashMap;
 use std::f64::consts::PI;
-use crate::tools::precision::svg_round;
 
 const CANVAS_WIDTH: f64 = 600.0;
 const CANVAS_HEIGHT: f64 = 600.0;
@@ -43,10 +43,7 @@ fn make_polar_test() {
 fn get_end_point(start_point: (f64, f64), length: f64, deg: f64) -> (f64, f64) {
     let end = make_polar(length, PI * 2.0 * (deg / 360.0));
 
-    (
-        start_point.0 + end.re,
-        start_point.1 + end.im,
-    )
+    (start_point.0 + end.re, start_point.1 + end.im)
 }
 
 fn recursive_points(
@@ -156,7 +153,7 @@ fn fern_test() {
     widths.sort_by(|a, b| {
         let a_num = a.parse::<f64>().unwrap();
         let b_num = b.parse::<f64>().unwrap();
-        
+
         let pown = 10.0_f64.powf(svg.precision as f64);
 
         let a_int = (a_num * pown).round() as usize;
@@ -169,7 +166,7 @@ fn fern_test() {
         let mut width_sstyle = Sstyle::new();
         width_sstyle.stroke = Some(COLOR.to_string());
         width_sstyle.stroke_width = Some(width.parse::<f64>().unwrap());
-        
+
         let mut width_group = Group::new();
 
         for point_pair in width_group_map.get(&width).unwrap() {

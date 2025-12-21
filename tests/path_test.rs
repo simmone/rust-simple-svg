@@ -128,7 +128,11 @@ fn path_arc_format_test() {
 
     let mut arc1 = Path::new();
     arc1.moveto_abs((130.0, 45.0));
-    arc1.arc_abs((170.00001, 85.00001), (80.00001, 40.00001), ArcDirection::LeftBig);
+    arc1.arc_abs(
+        (170.00001, 85.00001),
+        (80.00001, 40.00001),
+        ArcDirection::LeftBig,
+    );
     let arc1_id = svg.add_shape(Shape::Path(arc1));
 
     let mut arc2 = Path::new();
@@ -359,7 +363,11 @@ fn path_ccurve_absolute_format_test() {
 
     let mut path = Path::new();
     path.moveto_abs((10.0, 60.0));
-    path.ccurve_abs((30.00001, 15.00001), (80.00001, 15.00001), (100.00001, 60.00001));
+    path.ccurve_abs(
+        (30.00001, 15.00001),
+        (80.00001, 15.00001),
+        (100.00001, 60.00001),
+    );
     path.ccurve_abs((120.0, 105.0), (170.0, 105.0), (190.0, 60.0));
     let ccurve_id = svg.add_shape(Shape::Path(path));
 
@@ -443,7 +451,11 @@ fn path_ccurve_relative_format_test() {
 
     let mut path = Path::new();
     path.moveto_abs((10.0, 60.0));
-    path.ccurve_rel((20.00001, -45.00001), (70.00001, -45.00001), (90.00001, 0.00001));
+    path.ccurve_rel(
+        (20.00001, -45.00001),
+        (70.00001, -45.00001),
+        (90.00001, 0.00001),
+    );
     path.ccurve_rel((20.0, 45.0), (70.0, 45.0), (90.0, 0.0));
 
     let ccurve_id = svg.add_shape(Shape::Path(path));

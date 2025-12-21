@@ -198,12 +198,18 @@ impl Sstyle {
             }
 
             if self.rotate.is_some() {
-                translates.push(format!("rotate({})", svg_round(*self.rotate.as_ref().unwrap(), self.precision)));
+                translates.push(format!(
+                    "rotate({})",
+                    svg_round(*self.rotate.as_ref().unwrap(), self.precision)
+                ));
             }
 
             if self.scale_all.is_some() || self.scale_xy.is_some() {
                 if self.scale_all.is_some() {
-                    translates.push(format!("scale({})", svg_round(*self.scale_all.as_ref().unwrap(), self.precision)));
+                    translates.push(format!(
+                        "scale({})",
+                        svg_round(*self.scale_all.as_ref().unwrap(), self.precision)
+                    ));
                 } else {
                     translates.push(format!(
                         "scale({} {})",
@@ -214,11 +220,17 @@ impl Sstyle {
             }
 
             if self.skew_x.is_some() {
-                translates.push(format!("skewX({})", svg_round(*self.skew_x.as_ref().unwrap(), self.precision)));
+                translates.push(format!(
+                    "skewX({})",
+                    svg_round(*self.skew_x.as_ref().unwrap(), self.precision)
+                ));
             }
 
             if self.skew_y.is_some() {
-                translates.push(format!("skewY({})", svg_round(*self.skew_y.as_ref().unwrap(), self.precision)));
+                translates.push(format!(
+                    "skewY({})",
+                    svg_round(*self.skew_y.as_ref().unwrap(), self.precision)
+                ));
             }
 
             transforms.push(format!("transform=\"{}\"", translates.join(" ")));
@@ -290,7 +302,7 @@ mod tests {
         sstyle.scale_all = Some(1.01);
         sstyle.skew_x = Some(2.01);
         sstyle.skew_y = Some(3.01);
-        
+
         sstyle.precision = 1;
         assert_eq!(
             sstyle.format(),

@@ -10,11 +10,18 @@ pub struct Circle {
 
 impl Circle {
     pub fn new(radius: f64) -> Self {
-        Circle { radius, precision: 0 }
+        Circle {
+            radius,
+            precision: 0,
+        }
     }
 
     pub fn format(&self, shape_id: String) -> String {
-        format!("    <circle id=\"{}\" r=\"{}\" />\n", shape_id, svg_round(self.radius, self.precision))
+        format!(
+            "    <circle id=\"{}\" r=\"{}\" />\n",
+            shape_id,
+            svg_round(self.radius, self.precision)
+        )
     }
 
     pub fn unique(&self) -> String {

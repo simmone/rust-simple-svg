@@ -66,19 +66,31 @@ impl LinearGradient {
             let mut option_items = vec![];
 
             if self.x1.is_some() {
-                option_items.push(format!("x1=\"{}\"", svg_round(*self.x1.as_ref().unwrap(), self.precision)));
+                option_items.push(format!(
+                    "x1=\"{}\"",
+                    svg_round(*self.x1.as_ref().unwrap(), self.precision)
+                ));
             }
 
             if self.y1.is_some() {
-                option_items.push(format!("y1=\"{}\"", svg_round(*self.y1.as_ref().unwrap(), self.precision)));
+                option_items.push(format!(
+                    "y1=\"{}\"",
+                    svg_round(*self.y1.as_ref().unwrap(), self.precision)
+                ));
             }
 
             if self.x2.is_some() {
-                option_items.push(format!("x2=\"{}\"", svg_round(*self.x2.as_ref().unwrap(), self.precision)));
+                option_items.push(format!(
+                    "x2=\"{}\"",
+                    svg_round(*self.x2.as_ref().unwrap(), self.precision)
+                ));
             }
 
             if self.y2.is_some() {
-                option_items.push(format!("y2=\"{}\"", svg_round(*self.y2.as_ref().unwrap(), self.precision)));
+                option_items.push(format!(
+                    "y2=\"{}\"",
+                    svg_round(*self.y2.as_ref().unwrap(), self.precision)
+                ));
             }
 
             if self.gradient_units.is_some() {
@@ -101,17 +113,21 @@ impl LinearGradient {
         for stop in self.stops.clone() {
             fmt_str.push_str(&format!(
                 "      <stop offset=\"{}%\" stop-color=\"{}\" ",
-                svg_round(stop.0, self.precision), stop.1
+                svg_round(stop.0, self.precision),
+                stop.1
             ));
 
             if svg_round(stop.2, self.precision) != "1" {
-                fmt_str.push_str(&format!("stop-opacity=\"{}\" ", svg_round(stop.2, self.precision)));
+                fmt_str.push_str(&format!(
+                    "stop-opacity=\"{}\" ",
+                    svg_round(stop.2, self.precision)
+                ));
             }
 
             fmt_str.push_str("/>\n");
         }
 
-        fmt_str.push_str(&format!("    </linearGradient>\n"));
+        fmt_str.push_str("    </linearGradient>\n");
 
         fmt_str
     }
@@ -164,23 +180,38 @@ impl RadialGradient {
             let mut option_items = vec![];
 
             if self.cx.is_some() {
-                option_items.push(format!("cx=\"{}\"", svg_round(*self.cx.as_ref().unwrap(), self.precision)));
+                option_items.push(format!(
+                    "cx=\"{}\"",
+                    svg_round(*self.cx.as_ref().unwrap(), self.precision)
+                ));
             }
 
             if self.cy.is_some() {
-                option_items.push(format!("cy=\"{}\"", svg_round(*self.cy.as_ref().unwrap(), self.precision)));
+                option_items.push(format!(
+                    "cy=\"{}\"",
+                    svg_round(*self.cy.as_ref().unwrap(), self.precision)
+                ));
             }
 
             if self.fx.is_some() {
-                option_items.push(format!("fx=\"{}\"", svg_round(*self.fx.as_ref().unwrap(), self.precision)));
+                option_items.push(format!(
+                    "fx=\"{}\"",
+                    svg_round(*self.fx.as_ref().unwrap(), self.precision)
+                ));
             }
 
             if self.fy.is_some() {
-                option_items.push(format!("fy=\"{}\"", svg_round(*self.fy.as_ref().unwrap(), self.precision)));
+                option_items.push(format!(
+                    "fy=\"{}\"",
+                    svg_round(*self.fy.as_ref().unwrap(), self.precision)
+                ));
             }
 
             if self.r.is_some() {
-                option_items.push(format!("r=\"{}\"", svg_round(*self.r.as_ref().unwrap(), self.precision)));
+                option_items.push(format!(
+                    "r=\"{}\"",
+                    svg_round(*self.r.as_ref().unwrap(), self.precision)
+                ));
             }
 
             if self.gradient_units.is_some() {
@@ -203,17 +234,21 @@ impl RadialGradient {
         for stop in self.stops.clone() {
             fmt_str.push_str(&format!(
                 "      <stop offset=\"{}%\" stop-color=\"{}\" ",
-                svg_round(stop.0, self.precision), stop.1
+                svg_round(stop.0, self.precision),
+                stop.1
             ));
 
             if svg_round(stop.2, self.precision) != "1" {
-                fmt_str.push_str(&format!("stop-opacity=\"{}\" ", svg_round(stop.2, self.precision)));
+                fmt_str.push_str(&format!(
+                    "stop-opacity=\"{}\" ",
+                    svg_round(stop.2, self.precision)
+                ));
             }
 
             fmt_str.push_str("/>\n");
         }
 
-        fmt_str.push_str(&format!("    </radialGradient>\n"));
+        fmt_str.push_str("    </radialGradient>\n");
 
         fmt_str
     }

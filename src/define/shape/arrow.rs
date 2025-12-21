@@ -1,7 +1,7 @@
 #![doc = include_str!("ARROW.md")]
 
-use std::f64::consts::PI;
 use crate::tools::precision::svg_round;
+use std::f64::consts::PI;
 
 #[derive(Debug, Clone)]
 pub struct Arrow {
@@ -39,21 +39,9 @@ impl Arrow {
         let total_base = self.handle_base + self.head_base;
         let pre_end_x = self.end_x;
         let pre_end_y = self.end_y;
-        let pre_toward_left = if self.start_x > pre_end_x {
-            true
-        } else {
-            false
-        };
-        let pre_toward_updown = if self.start_x == pre_end_x {
-            true
-        } else {
-            false
-        };
-        let pre_toward_up = if (self.start_x == pre_end_x) && (self.start_y > pre_end_y) {
-            true
-        } else {
-            false
-        };
+        let pre_toward_left = self.start_x > pre_end_x;
+        let pre_toward_updown = self.start_x == pre_end_x;
+        let pre_toward_up = (self.start_x == pre_end_x) && (self.start_y > pre_end_y);
         let pre_x_offset = pre_end_x - self.start_x;
         let pre_y_offset = pre_end_y - self.start_y;
         let pre_theta = (if pre_x_offset == 0.0 {
@@ -90,21 +78,9 @@ impl Arrow {
         );
         let new_end_x = pre_r.0;
         let new_end_y = pre_r.1;
-        let toward_left = if self.start_x > new_end_x {
-            true
-        } else {
-            false
-        };
-        let toward_updown = if self.start_x == new_end_x {
-            true
-        } else {
-            false
-        };
-        let toward_up = if (self.start_x == new_end_x) && (self.start_y > new_end_y) {
-            true
-        } else {
-            false
-        };
+        let toward_left = self.start_x > new_end_x;
+        let toward_updown = self.start_x == new_end_x;
+        let toward_up = (self.start_x == new_end_x) && (self.start_y > new_end_y);
         let x_offset = new_end_x - self.start_x;
         let y_offset = new_end_y - self.start_y;
         let theta = (if x_offset == 0.0 {
@@ -230,17 +206,45 @@ impl Arrow {
                 new_end_y - toward_updown_head_delta0
             },
         );
-        
+
         format!("    <polygon id=\"{}\"\n{}", shape_id, {
             let mut shape_str = "          points=\"\n".to_string();
-            shape_str.push_str(&format!("            {},{}\n", svg_round(handle_bottom_left.0, self.precision), svg_round(handle_bottom_left.1, self.precision)));
-            shape_str.push_str(&format!("            {},{}\n", svg_round(handle_bottom_right.0, self.precision), svg_round(handle_bottom_right.1, self.precision)));
-            shape_str.push_str(&format!("            {},{}\n", svg_round(q.0, self.precision), svg_round(q.1, self.precision)));
-            shape_str.push_str(&format!("            {},{}\n", svg_round(r.0, self.precision), svg_round(r.1, self.precision)));
-            shape_str.push_str(&format!("            {},{}\n", svg_round(s.0, self.precision), svg_round(s.1, self.precision)));
-            shape_str.push_str(&format!("            {},{}\n", svg_round(handle_top_right.0, self.precision), svg_round(handle_top_right.1, self.precision)));
-            shape_str.push_str(&format!("            {},{}\n", svg_round(handle_top_left.0, self.precision), svg_round(handle_top_left.1, self.precision)));
-            shape_str.push_str(&format!("            \"/>\n"));
+            shape_str.push_str(&format!(
+                "            {},{}\n",
+                svg_round(handle_bottom_left.0, self.precision),
+                svg_round(handle_bottom_left.1, self.precision)
+            ));
+            shape_str.push_str(&format!(
+                "            {},{}\n",
+                svg_round(handle_bottom_right.0, self.precision),
+                svg_round(handle_bottom_right.1, self.precision)
+            ));
+            shape_str.push_str(&format!(
+                "            {},{}\n",
+                svg_round(q.0, self.precision),
+                svg_round(q.1, self.precision)
+            ));
+            shape_str.push_str(&format!(
+                "            {},{}\n",
+                svg_round(r.0, self.precision),
+                svg_round(r.1, self.precision)
+            ));
+            shape_str.push_str(&format!(
+                "            {},{}\n",
+                svg_round(s.0, self.precision),
+                svg_round(s.1, self.precision)
+            ));
+            shape_str.push_str(&format!(
+                "            {},{}\n",
+                svg_round(handle_top_right.0, self.precision),
+                svg_round(handle_top_right.1, self.precision)
+            ));
+            shape_str.push_str(&format!(
+                "            {},{}\n",
+                svg_round(handle_top_left.0, self.precision),
+                svg_round(handle_top_left.1, self.precision)
+            ));
+            shape_str.push_str("            \"/>\n");
             shape_str
         })
     }

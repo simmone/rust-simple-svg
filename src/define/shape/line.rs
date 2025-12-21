@@ -26,7 +26,7 @@ impl Line {
         format!(
             "    <line id=\"{}\" x1=\"{}\" y1=\"{}\" x2=\"{}\" y2=\"{}\" />\n",
             shape_id,
-            svg_round(self.start_x, self.precision), 
+            svg_round(self.start_x, self.precision),
             svg_round(self.start_y, self.precision),
             svg_round(self.end_x, self.precision),
             svg_round(self.end_y, self.precision)

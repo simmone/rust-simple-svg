@@ -2,7 +2,7 @@
 
 use crate::tools::precision::svg_round;
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Default)]
 pub struct Filter {
     pub blur: Option<f64>,
     pub dropdown_offset: Option<f64>,
@@ -37,16 +37,12 @@ impl Filter {
             "      <feFlood flood-color=\"{}\"></feFlood>\n",
             self.dropdown_color.as_ref().unwrap()
         ));
-        fmt_str.push_str(&format!(
-            "      <feComposite in2=\"offsetblur\" operator=\"in\"></feComposite>\n"
-        ));
-        fmt_str.push_str(&format!("      <feMerge>\n"));
-        fmt_str.push_str(&format!("        <feMergeNode></feMergeNode>\n"));
-        fmt_str.push_str(&format!(
-            "        <feMergeNode in=\"SourceGraphic\"></feMergeNode>\n"
-        ));
-        fmt_str.push_str(&format!("      </feMerge>\n"));
-        fmt_str.push_str(&format!("    </filter>\n"));
+        fmt_str.push_str("      <feComposite in2=\"offsetblur\" operator=\"in\"></feComposite>\n");
+        fmt_str.push_str("      <feMerge>\n");
+        fmt_str.push_str("        <feMergeNode></feMergeNode>\n");
+        fmt_str.push_str("        <feMergeNode in=\"SourceGraphic\"></feMergeNode>\n");
+        fmt_str.push_str("      </feMerge>\n");
+        fmt_str.push_str("    </filter>\n");
 
         fmt_str
     }

@@ -145,26 +145,24 @@ mod tests {
 
         assert_eq!(marker.size, 10.0);
     }
-    
+
     #[test]
     fn marker_format() {
         let marker = Marker {
-                shape: MarkerType::Triangle1,
-                size: 6.00001,
-                x: 1.00001,
-                path: "path".to_string(),
-                precision: 0,
-            };
-        
-        assert_eq!(
-            marker.format("s1".to_string()),
-            {
-                let mut fmt_str = String::new();
-                fmt_str.push_str(&format!("    <marker id=\"s1\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto-start-reverse\" viewBox=\"0 0 15 15\" refX=\"1\" refY=\"5\" markerUnits=\"strokeWidth\">\n"));
+            shape: MarkerType::Triangle1,
+            size: 6.00001,
+            x: 1.00001,
+            path: "path".to_string(),
+            precision: 0,
+        };
 
-                fmt_str.push_str(&format!("      path fill=\"context-stroke\" />\n"));
-                fmt_str.push_str(&format!("    </marker>\n"));
-                fmt_str
-            });
+        assert_eq!(marker.format("s1".to_string()), {
+            let mut fmt_str = String::new();
+            fmt_str.push_str(&format!("    <marker id=\"s1\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto-start-reverse\" viewBox=\"0 0 15 15\" refX=\"1\" refY=\"5\" markerUnits=\"strokeWidth\">\n"));
+
+            fmt_str.push_str(&format!("      path fill=\"context-stroke\" />\n"));
+            fmt_str.push_str(&format!("    </marker>\n"));
+            fmt_str
+        });
     }
 }

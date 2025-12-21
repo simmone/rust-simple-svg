@@ -24,7 +24,11 @@ impl Rect {
 
     pub fn format(&self, shape_id: String) -> String {
         format!("    <rect id=\"{}\" {} />\n", shape_id, {
-            let mut shape_str = format!("width=\"{}\" height=\"{}\"", svg_round(self.width, self.precision), svg_round(self.height, self.precision));
+            let mut shape_str = format!(
+                "width=\"{}\" height=\"{}\"",
+                svg_round(self.width, self.precision),
+                svg_round(self.height, self.precision)
+            );
 
             if self.radius_x.is_some() && self.radius_y.is_some() {
                 shape_str.push_str(&format!(

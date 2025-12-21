@@ -11,13 +11,19 @@ pub struct Ellipse {
 
 impl Ellipse {
     pub fn new(radius_x: f64, radius_y: f64) -> Self {
-        Ellipse { radius_x, radius_y, precision: 0 }
+        Ellipse {
+            radius_x,
+            radius_y,
+            precision: 0,
+        }
     }
 
     pub fn format(&self, shape_id: String) -> String {
         format!(
             "    <ellipse id=\"{}\" rx=\"{}\" ry=\"{}\" />\n",
-            shape_id, svg_round(self.radius_x, self.precision), svg_round(self.radius_y, self.precision)
+            shape_id,
+            svg_round(self.radius_x, self.precision),
+            svg_round(self.radius_y, self.precision)
         )
     }
 

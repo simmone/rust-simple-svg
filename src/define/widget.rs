@@ -125,7 +125,7 @@ mod tests {
             "<use xlink:href=\"#s1\" x=\"100\" y=\"50\" />"
         );
 
-        let widget4= Widget {
+        let widget4 = Widget {
             shape_id: "s1".to_string(),
             at: Some((100.12345, 50.0)),
             precision: 3,

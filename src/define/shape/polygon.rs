@@ -10,7 +10,10 @@ pub struct Polygon {
 
 impl Polygon {
     pub fn new(points: Vec<(f64, f64)>) -> Self {
-        Polygon { points, precision: 0 }
+        Polygon {
+            points,
+            precision: 0,
+        }
     }
 
     pub fn format(&self, shape_id: String) -> String {
@@ -18,7 +21,11 @@ impl Polygon {
             let mut point_pairs = vec![];
 
             for point in &self.points {
-                point_pairs.push(format!("{},{}", svg_round(point.0, self.precision), svg_round(point.1, self.precision)));
+                point_pairs.push(format!(
+                    "{},{}",
+                    svg_round(point.0, self.precision),
+                    svg_round(point.1, self.precision)
+                ));
             }
 
             point_pairs.join(" ")

@@ -77,7 +77,7 @@ impl Svg {
                 widget.style.as_mut().unwrap().precision = self.precision;
             }
         }
-        
+
         self.group_define_map.insert(group_id.clone(), group);
         group_id
     }
@@ -187,7 +187,11 @@ impl Svg {
             svg_str.push_str(&format!("  <use xlink:href=\"#{group_id}\" "));
 
             if group_pos != (0.0, 0.0) {
-                svg_str.push_str(&format!("x=\"{}\" y=\"{}\" ", svg_round(group_pos.0, self.precision), svg_round(group_pos.1, self.precision)));
+                svg_str.push_str(&format!(
+                    "x=\"{}\" y=\"{}\" ",
+                    svg_round(group_pos.0, self.precision),
+                    svg_round(group_pos.1, self.precision)
+                ));
             }
 
             svg_str.push_str("/>\n");

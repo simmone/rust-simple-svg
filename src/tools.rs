@@ -1,7 +1,7 @@
 pub mod precision {
     pub fn svg_round(n: f64, precision: usize) -> String {
         let pown = 10.0_f64.powf(precision as f64);
-        let roundn = (n * pown).round()/pown;
+        let roundn = (n * pown).round() / pown;
         if roundn == roundn.round() {
             format!("{}", roundn.round())
         } else {
