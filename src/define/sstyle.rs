@@ -58,7 +58,7 @@ impl fmt::Display for LineJoin {
     }
 }
 
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Default)]
 pub struct Sstyle {
     pub fill: Option<String>,
     pub fill_rule: Option<FillRule>,
@@ -82,26 +82,7 @@ pub struct Sstyle {
 
 impl Sstyle {
     pub fn new() -> Self {
-        Sstyle {
-            fill: None,
-            fill_rule: None,
-            fill_opacity: None,
-            stroke: None,
-            stroke_width: None,
-            stroke_linecap: None,
-            stroke_linejoin: None,
-            stroke_miterlimit: None,
-            stroke_dasharray: None,
-            stroke_dashoffset: None,
-            translate: None,
-            rotate: None,
-            scale_all: None,
-            scale_xy: None,
-            skew_x: None,
-            skew_y: None,
-            fill_gradient: None,
-            precision: 0,
-        }
+        Default::default()
     }
 
     pub fn format(&self) -> String {
@@ -112,12 +93,10 @@ impl Sstyle {
                 "fill=\"url(#{})\"",
                 self.fill_gradient.as_ref().unwrap(),
             ));
+        } else if self.fill.is_some() {
+            transforms.push(format!("fill=\"{}\"", self.fill.as_ref().unwrap()));
         } else {
-            if self.fill.is_some() {
-                transforms.push(format!("fill=\"{}\"", self.fill.as_ref().unwrap()));
-            } else {
-                transforms.push("fill=\"none\"".to_string());
-            }
+            transforms.push("fill=\"none\"".to_string());
         }
 
         if self.fill_rule.is_some() {

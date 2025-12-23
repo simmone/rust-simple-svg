@@ -120,7 +120,7 @@ impl Marker {
                                   svg_round(self.size, self.precision),
                                   svg_round(self.x, self.precision)));
         fmt_str.push_str(&format!("      {} fill=\"context-stroke\" />\n", self.path));
-        fmt_str.push_str(&format!("    </marker>\n"));
+        fmt_str.push_str("    </marker>\n");
 
         fmt_str
     }

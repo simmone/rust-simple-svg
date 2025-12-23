@@ -4,7 +4,7 @@ use crate::tools::precision::svg_round;
 
 use std::fmt;
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Default)]
 pub struct Path {
     pub defs: Vec<String>,
     pub precision: usize,
@@ -31,10 +31,7 @@ impl fmt::Display for ArcDirection {
 
 impl Path {
     pub fn new() -> Self {
-        Path {
-            defs: vec![],
-            precision: 0,
-        }
+        Default::default()
     }
 
     pub fn lineto_abs(&mut self, point: (f64, f64)) {
@@ -158,13 +155,13 @@ impl Path {
 
         fmt_str.push_str(&format!("    <path id=\"{}\"\n", shape_id));
 
-        fmt_str.push_str(&format!("          d=\"\n"));
+        fmt_str.push_str("          d=\"\n");
 
         for def in self.defs.clone() {
             fmt_str.push_str(&format!("             {}\n", def));
         }
 
-        fmt_str.push_str(&format!("            \"/>\n"));
+        fmt_str.push_str("            \"/>\n");
 
         fmt_str
     }

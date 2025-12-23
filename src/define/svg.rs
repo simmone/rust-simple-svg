@@ -112,18 +112,18 @@ impl Svg {
         let group = self.group_define_map.get(&group_id);
 
         let mut group_str = String::new();
-        if group.is_some() {
-            for widget in &group.unwrap().widget_list {
+        if let Some(group) = group {
+            for widget in group.widget_list.clone() {
                 group_str.push_str(&prefix);
                 group_str.push_str(&widget.format());
-                group_str.push_str("\n");
+                group_str.push('\n');
             }
         }
 
         group_str
     }
 
-    pub fn sort_id(ids: &mut Vec<String>) {
+    pub fn sort_id(ids: &mut [String]) {
         ids.sort_by(|a, b| {
             let va: Vec<&str> = a.split(char::is_alphabetic).collect();
             let vb: Vec<&str> = b.split(char::is_alphabetic).collect();
@@ -199,9 +199,9 @@ impl Svg {
 
         // show default group
         let default_group = self.group_define_map.get(DEFAULT_GROUP_ID);
-        if default_group.is_some() {
-            if default_group.unwrap().widget_list.len() > 0 {
-                svg_str.push_str("\n");
+        if let Some(default_group) = default_group {
+            if default_group.widget_list.len() > 0 {
+                svg_str.push('\n');
                 svg_str.push_str(
                     &self.show_group_widgets(DEFAULT_GROUP_ID.to_string(), "  ".to_string()),
                 );
