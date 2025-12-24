@@ -10,7 +10,7 @@ use crate::define::sstyle::Sstyle;
 use crate::define::svg::Svg;
 use crate::define::widget::Widget;
 
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, PartialEq, Default)]
 pub struct Cell {
     pub start_point: (f64, f64),
     pub width: f64,
@@ -23,6 +23,7 @@ pub struct Cell {
     pub margin_left: f64,
 }
 
+#[derive(Default)]
 pub struct Table {
     pub cells: Vec<Cell>,
     pub col_width: f64,

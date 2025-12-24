@@ -137,7 +137,7 @@ impl Svg {
         let mut svg_str = String::new();
 
         // defs
-        if self.shape_define_map.len() > 0 {
+        if !self.shape_define_map.is_empty() {
             svg_str.push_str("  <defs>\n");
 
             let mut shape_ids: Vec<String> = self.shape_define_map.clone().into_keys().collect();
@@ -145,7 +145,7 @@ impl Svg {
             for shape_id in shape_ids {
                 let shape = self.shape_define_map.get(&shape_id).unwrap();
 
-                svg_str.push_str(&format!("{}", shape.format(shape_id.to_string())));
+                svg_str.push_str(&shape.format(shape_id.to_string()));
             }
 
             svg_str.push_str("  </defs>\n");
@@ -162,7 +162,7 @@ impl Svg {
         Svg::sort_id(&mut group_ids);
 
         for group_id in group_ids {
-            svg_str.push_str("\n");
+            svg_str.push('\n');
             svg_str.push_str(&format!("  <symbol id=\"{}\">\n", group_id));
             svg_str.push_str(&self.show_group_widgets(group_id, "    ".to_string()));
             svg_str.push_str("  </symbol>\n");
@@ -173,11 +173,11 @@ impl Svg {
             .group_show_list
             .clone()
             .into_iter()
-            .filter(|group_show| group_show.0 != DEFAULT_GROUP_ID.to_string())
+            .filter(|group_show| group_show.0 != DEFAULT_GROUP_ID)
             .collect();
 
-        if group_shows.len() > 0 {
-            svg_str.push_str("\n");
+        if !group_shows.is_empty() {
+            svg_str.push('\n');
         }
 
         for group_show in group_shows {
@@ -200,7 +200,7 @@ impl Svg {
         // show default group
         let default_group = self.group_define_map.get(DEFAULT_GROUP_ID);
         if let Some(default_group) = default_group {
-            if default_group.widget_list.len() > 0 {
+            if !default_group.widget_list.is_empty() {
                 svg_str.push('\n');
                 svg_str.push_str(
                     &self.show_group_widgets(DEFAULT_GROUP_ID.to_string(), "  ".to_string()),
