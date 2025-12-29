@@ -73,17 +73,7 @@ impl Table {
         axis_data_array
     }
 
-    fn matrix_to_cells(
-        &self,
-        matrix: &Vec<Vec<&str>>,
-        col_width: f64,
-        row_height: f64,
-        color: &str,
-        cell_margin_top: f64,
-        cell_margin_left: f64,
-        font_size: f64,
-        font_color: &str,
-    ) -> Vec<Cell> {
+    fn matrix_to_cells(&self, matrix: &Vec<Vec<&str>>) -> Vec<Cell> {
         let axis_data_array = Table::get_cells(matrix);
 
         let mut cells = vec![];
@@ -95,27 +85,27 @@ impl Table {
             let col_index = axis_data.1;
             let text = axis_data.2.clone();
 
-            let mut col_real_width = col_width;
+            let mut col_real_width = self.col_width;
             if self.col_width_map.contains_key(&col_index) {
                 col_real_width = *self.col_width_map.get(&col_index).unwrap()
             }
 
-            let mut row_real_height = row_height;
+            let mut row_real_height = self.row_height;
             if self.row_height_map.contains_key(&row_index) {
                 row_real_height = *self.row_height_map.get(&row_index).unwrap();
             }
 
-            let mut cell_real_margin_top = cell_margin_top;
+            let mut cell_real_margin_top = self.cell_margin_top;
             if self.row_margin_top_map.contains_key(&row_index) {
                 cell_real_margin_top = *self.row_margin_top_map.get(&row_index).unwrap();
             }
 
-            let mut cell_real_margin_left = cell_margin_left;
+            let mut cell_real_margin_left = self.cell_margin_left;
             if self.col_margin_left_map.contains_key(&col_index) {
                 cell_real_margin_left = *self.col_margin_left_map.get(&col_index).unwrap();
             }
 
-            let mut font_real_size = font_size;
+            let mut font_real_size = self.font_size;
             if self
                 .cell_font_size_map
                 .contains_key(&(axis_data.0, axis_data.1))
@@ -126,7 +116,7 @@ impl Table {
                     .unwrap()
             }
 
-            let mut font_real_color = font_color.to_string();
+            let mut font_real_color = self.font_color.to_string();
             if self
                 .cell_font_color_map
                 .contains_key(&(axis_data.0, axis_data.1))
@@ -142,7 +132,7 @@ impl Table {
                 start_point: loop_point,
                 width: col_real_width,
                 height: row_real_height,
-                color: color.to_string(),
+                color: self.color.to_string(),
                 text,
                 font_size: font_real_size,
                 font_color: font_real_color,
@@ -163,16 +153,7 @@ impl Table {
     }
 
     pub fn to_group(&self, svg: &mut Svg, matrix: &Vec<Vec<&str>>) -> Group {
-        let cells = self.matrix_to_cells(
-            matrix,
-            self.col_width,
-            self.row_height,
-            &self.color,
-            self.cell_margin_top,
-            self.cell_margin_left,
-            self.font_size,
-            &self.font_color,
-        );
+        let cells = self.matrix_to_cells(matrix);
 
         let mut group = Group::default();
 
@@ -271,19 +252,16 @@ mod tests {
 
     #[test]
     fn check_matrix_to_cells() {
-        let table = Table::new();
+        let mut table = Table::new();
+        table.col_width = 5.0;
+        table.row_height = 5.0;
+        table.color = "black".to_string();
+        table.cell_margin_top = 1.0;
+        table.cell_margin_left = 1.0;
+        table.font_size = 10.0;
+        table.font_color = "red".to_string();
 
-        let cells = Table::matrix_to_cells(
-            &table,
-            &vec![vec!["1", "2"], vec!["3", "4"]],
-            5.0,
-            5.0,
-            "black",
-            1.0,
-            1.0,
-            10.0,
-            "red",
-        );
+        let cells = Table::matrix_to_cells(&table, &vec![vec!["1", "2"], vec!["3", "4"]]);
 
         assert_eq!(cells.len(), 4);
 
