@@ -23,7 +23,6 @@ pub struct Cell {
     pub margin_left: f64,
 }
 
-#[derive(Default)]
 pub struct Table {
     pub cells: Vec<Cell>,
     pub col_width: f64,
