@@ -65,10 +65,10 @@ impl LinearGradient {
         fmt_str.push_str(&format!("    <linearGradient id=\"{}\" {}>\n", shape_id, {
             let mut option_items = vec![];
 
-            if self.x1.is_some() {
+            if let Some(x1) = &self.x1 {
                 option_items.push(format!(
                     "x1=\"{}\"",
-                    svg_round(*self.x1.as_ref().unwrap(), self.precision)
+                    svg_round(*x1, self.precision)
                 ));
             }
 
