@@ -72,38 +72,38 @@ impl LinearGradient {
                 ));
             }
 
-            if self.y1.is_some() {
+            if let Some(y1) = &self.y1 {
                 option_items.push(format!(
                     "y1=\"{}\"",
-                    svg_round(*self.y1.as_ref().unwrap(), self.precision)
+                    svg_round(*y1, self.precision)
                 ));
             }
 
-            if self.x2.is_some() {
+            if let Some(x2) = &self.x2 {
                 option_items.push(format!(
                     "x2=\"{}\"",
-                    svg_round(*self.x2.as_ref().unwrap(), self.precision)
+                    svg_round(*x2, self.precision)
                 ));
             }
 
-            if self.y2.is_some() {
+            if let Some(y2) = &self.y2 {
                 option_items.push(format!(
                     "y2=\"{}\"",
-                    svg_round(*self.y2.as_ref().unwrap(), self.precision)
+                    svg_round(*y2, self.precision)
                 ));
             }
 
-            if self.gradient_units.is_some() {
+            if let Some(gradient_units) = &self.gradient_units {
                 option_items.push(format!(
                     "gradientUnits=\"{}\"",
-                    self.gradient_units.as_ref().unwrap()
+                    *gradient_units
                 ));
             }
 
-            if self.spread_method.is_some() {
+            if let Some(spread_method) = &self.spread_method {
                 option_items.push(format!(
                     "spreadMethod=\"{}\"",
-                    self.spread_method.as_ref().unwrap()
+                    *spread_method
                 ));
             }
 
