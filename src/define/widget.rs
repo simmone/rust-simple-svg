@@ -27,15 +27,12 @@ impl Widget {
             ));
         }
 
-        if self.style.is_some() {
-            format_items.push(self.style.as_ref().unwrap().format());
+        if let Some(style) = &self.style {
+            format_items.push(style.format());
         }
 
-        if self.filter_id.is_some() {
-            format_items.push(format!(
-                "filter=\"url(#{})\"",
-                self.filter_id.clone().unwrap()
-            ));
+        if let Some(filter_id) = &self.filter_id {
+            format_items.push(format!("filter=\"url(#{})\"", filter_id));
         }
 
         if self.marker_start_id.is_some() {
