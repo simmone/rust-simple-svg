@@ -73,8 +73,8 @@ impl Svg {
         for widget in &mut group.widget_list {
             widget.precision = self.precision;
 
-            if widget.style.is_some() {
-                widget.style.as_mut().unwrap().precision = self.precision;
+            if let Some(style) = &mut widget.style {
+                style.precision = self.precision;
             }
         }
 

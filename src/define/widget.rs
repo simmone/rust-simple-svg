@@ -19,12 +19,14 @@ impl Widget {
 
         format_items.push(format!("<use xlink:href=\"#{}\"", self.shape_id));
 
-        if self.at.is_some() && self.at.unwrap() != (0.0, 0.0) {
-            format_items.push(format!(
-                "x=\"{}\" y=\"{}\"",
-                svg_round(self.at.unwrap().0, self.precision),
-                svg_round(self.at.unwrap().1, self.precision)
-            ));
+        if let Some(at) = self.at {
+            if at != (0.0, 0.0) {
+                format_items.push(format!(
+                    "x=\"{}\" y=\"{}\"",
+                    svg_round(at.0, self.precision),
+                    svg_round(at.1, self.precision)
+                ));
+            }
         }
 
         if let Some(style) = &self.style {
