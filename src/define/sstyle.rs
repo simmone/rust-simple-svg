@@ -183,32 +183,32 @@ impl Sstyle {
                 ));
             }
 
-            if self.scale_all.is_some() || self.scale_xy.is_some() {
-                if self.scale_all.is_some() {
-                    translates.push(format!(
-                        "scale({})",
-                        svg_round(*self.scale_all.as_ref().unwrap(), self.precision)
-                    ));
-                } else {
-                    translates.push(format!(
-                        "scale({} {})",
-                        svg_round(self.scale_xy.as_ref().unwrap().0, self.precision),
-                        svg_round(self.scale_xy.as_ref().unwrap().1, self.precision)
-                    ));
-                }
-            }
-
-            if self.skew_x.is_some() {
+            if let Some(scale_all) = self.scale_all {
                 translates.push(format!(
-                    "skewX({})",
-                    svg_round(*self.skew_x.as_ref().unwrap(), self.precision)
+                    "scale({})",
+                    svg_round(scale_all, self.precision)
                 ));
             }
 
-            if self.skew_y.is_some() {
+            if let Some(scale_xy) = self.scale_xy {
+                translates.push(format!(
+                    "scale({} {})",
+                    svg_round(scale_xy.0, self.precision),
+                    svg_round(scale_xy.1, self.precision)
+                ));
+            }
+
+            if let Some(skew_x) = self.skew_x {
+                translates.push(format!(
+                    "skewX({})",
+                    svg_round(skew_x, self.precision)
+                ));
+            }
+
+            if let Some(skew_y) = self.skew_y {
                 translates.push(format!(
                     "skewY({})",
-                    svg_round(*self.skew_y.as_ref().unwrap(), self.precision)
+                    svg_round(skew_y, self.precision)
                 ));
             }
 
