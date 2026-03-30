@@ -146,10 +146,7 @@ impl Sstyle {
         }
 
         if let Some(stroke_dasharray) = &self.stroke_dasharray {
-            transforms.push(format!(
-                "stroke-dasharray=\"{}\"",
-                stroke_dasharray
-            ));
+            transforms.push(format!("stroke-dasharray=\"{}\"", stroke_dasharray));
         }
 
         if let Some(stroke_dashoffset) = self.stroke_dashoffset {
@@ -170,17 +167,11 @@ impl Sstyle {
         }
 
         if let Some(rotate) = self.rotate {
-            translates.push(format!(
-                "rotate({})",
-                svg_round(rotate, self.precision)
-            ));
+            translates.push(format!("rotate({})", svg_round(rotate, self.precision)));
         }
 
         if let Some(scale_all) = self.scale_all {
-            translates.push(format!(
-                "scale({})",
-                svg_round(scale_all, self.precision)
-            ));
+            translates.push(format!("scale({})", svg_round(scale_all, self.precision)));
         }
 
         if let Some(scale_xy) = self.scale_xy {
@@ -192,17 +183,11 @@ impl Sstyle {
         }
 
         if let Some(skew_x) = self.skew_x {
-            translates.push(format!(
-                "skewX({})",
-                svg_round(skew_x, self.precision)
-            ));
+            translates.push(format!("skewX({})", svg_round(skew_x, self.precision)));
         }
 
         if let Some(skew_y) = self.skew_y {
-            translates.push(format!(
-                "skewY({})",
-                svg_round(skew_y, self.precision)
-            ));
+            translates.push(format!("skewY({})", svg_round(skew_y, self.precision)));
         }
 
         if !translates.is_empty() {

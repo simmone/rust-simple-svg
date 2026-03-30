@@ -30,11 +30,11 @@ impl Rect {
                 svg_round(self.height, self.precision)
             );
 
-            if self.radius_x.is_some() && self.radius_y.is_some() {
+            if let Some(radius_x) = self.radius_x && let Some(radius_y) = self.radius_y {
                 shape_str.push_str(&format!(
                     " rx=\"{}\" ry=\"{}\"",
-                    svg_round(self.radius_x.unwrap(), self.precision),
-                    svg_round(self.radius_y.unwrap(), self.precision),
+                    svg_round(radius_x, self.precision),
+                    svg_round(radius_y, self.precision),
                 ));
             }
 

@@ -66,45 +66,27 @@ impl LinearGradient {
             let mut option_items = vec![];
 
             if let Some(x1) = &self.x1 {
-                option_items.push(format!(
-                    "x1=\"{}\"",
-                    svg_round(*x1, self.precision)
-                ));
+                option_items.push(format!("x1=\"{}\"", svg_round(*x1, self.precision)));
             }
 
             if let Some(y1) = &self.y1 {
-                option_items.push(format!(
-                    "y1=\"{}\"",
-                    svg_round(*y1, self.precision)
-                ));
+                option_items.push(format!("y1=\"{}\"", svg_round(*y1, self.precision)));
             }
 
             if let Some(x2) = &self.x2 {
-                option_items.push(format!(
-                    "x2=\"{}\"",
-                    svg_round(*x2, self.precision)
-                ));
+                option_items.push(format!("x2=\"{}\"", svg_round(*x2, self.precision)));
             }
 
             if let Some(y2) = &self.y2 {
-                option_items.push(format!(
-                    "y2=\"{}\"",
-                    svg_round(*y2, self.precision)
-                ));
+                option_items.push(format!("y2=\"{}\"", svg_round(*y2, self.precision)));
             }
 
             if let Some(gradient_units) = &self.gradient_units {
-                option_items.push(format!(
-                    "gradientUnits=\"{}\"",
-                    *gradient_units
-                ));
+                option_items.push(format!("gradientUnits=\"{}\"", *gradient_units));
             }
 
             if let Some(spread_method) = &self.spread_method {
-                option_items.push(format!(
-                    "spreadMethod=\"{}\"",
-                    *spread_method
-                ));
+                option_items.push(format!("spreadMethod=\"{}\"", *spread_method));
             }
 
             option_items.join(" ")
@@ -179,53 +161,32 @@ impl RadialGradient {
         fmt_str.push_str(&format!("    <radialGradient id=\"{}\" {}>\n", shape_id, {
             let mut option_items = vec![];
 
-            if self.cx.is_some() {
-                option_items.push(format!(
-                    "cx=\"{}\"",
-                    svg_round(*self.cx.as_ref().unwrap(), self.precision)
-                ));
+            if let Some(cx) = self.cx {
+                option_items.push(format!("cx=\"{}\"", svg_round(cx, self.precision)));
             }
 
-            if self.cy.is_some() {
-                option_items.push(format!(
-                    "cy=\"{}\"",
-                    svg_round(*self.cy.as_ref().unwrap(), self.precision)
-                ));
+            if let Some(cy) = self.cy {
+                option_items.push(format!("cy=\"{}\"", svg_round(cy, self.precision)));
             }
 
-            if self.fx.is_some() {
-                option_items.push(format!(
-                    "fx=\"{}\"",
-                    svg_round(*self.fx.as_ref().unwrap(), self.precision)
-                ));
+            if let Some(fx) = self.fx {
+                option_items.push(format!("fx=\"{}\"", svg_round(fx, self.precision)));
             }
 
-            if self.fy.is_some() {
-                option_items.push(format!(
-                    "fy=\"{}\"",
-                    svg_round(*self.fy.as_ref().unwrap(), self.precision)
-                ));
+            if let Some(fy) = self.fy {
+                option_items.push(format!("fy=\"{}\"", svg_round(fy, self.precision)));
             }
 
-            if self.r.is_some() {
-                option_items.push(format!(
-                    "r=\"{}\"",
-                    svg_round(*self.r.as_ref().unwrap(), self.precision)
-                ));
+            if let Some(r) = self.r {
+                option_items.push(format!("r=\"{}\"", svg_round(r, self.precision)));
             }
 
-            if self.gradient_units.is_some() {
-                option_items.push(format!(
-                    "gradientUnits=\"{}\"",
-                    self.gradient_units.as_ref().unwrap()
-                ));
+            if let Some(gradient_units) = &self.gradient_units {
+                option_items.push(format!("gradientUnits=\"{}\"", gradient_units));
             }
 
-            if self.spread_method.is_some() {
-                option_items.push(format!(
-                    "spreadMethod=\"{}\"",
-                    self.spread_method.as_ref().unwrap()
-                ));
+            if let Some(spread_method) = &self.spread_method {
+                option_items.push(format!("spreadMethod=\"{}\"", spread_method));
             }
 
             option_items.join(" ")
