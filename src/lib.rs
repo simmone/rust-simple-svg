@@ -4,6 +4,8 @@ pub mod define;
 #[doc(hidden)]
 pub use crate::define::group::Group;
 #[doc(hidden)]
+pub use crate::define::shape::Shape;
+#[doc(hidden)]
 pub use crate::define::shape::arrow::Arrow;
 #[doc(hidden)]
 pub use crate::define::shape::circle::Circle;
@@ -29,8 +31,6 @@ pub use crate::define::shape::polyline::Polyline;
 pub use crate::define::shape::rect::Rect;
 #[doc(hidden)]
 pub use crate::define::shape::text::{Text, TextDecoration};
-#[doc(hidden)]
-pub use crate::define::shape::Shape;
 #[doc(hidden)]
 pub use crate::define::sstyle::{FillRule, LineCap, LineJoin, Sstyle};
 #[doc(hidden)]

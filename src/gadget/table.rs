@@ -3,9 +3,9 @@
 use std::collections::HashMap;
 
 use crate::define::group::Group;
+use crate::define::shape::Shape;
 use crate::define::shape::rect::Rect;
 use crate::define::shape::text::Text;
-use crate::define::shape::Shape;
 use crate::define::sstyle::Sstyle;
 use crate::define::svg::Svg;
 use crate::define::widget::Widget;

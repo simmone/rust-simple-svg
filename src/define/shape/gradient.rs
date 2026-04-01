@@ -117,13 +117,8 @@ impl LinearGradient {
     pub fn unique(&self) -> String {
         format!(
             "LinearGradient/stops/{:?}/x1/{:?}/y1/{:?}/x2/{:?}/y2/{:?}/gradient_units/{:?}/spread_method/{:?}",
-            self.stops,
-            self.x1,
-            self.y1,
-            self.x2,
-            self.y2,
-            self.gradient_units,
-            self.spread_method)
+            self.stops, self.x1, self.y1, self.x2, self.y2, self.gradient_units, self.spread_method
+        )
     }
 }
 
@@ -224,7 +219,8 @@ impl RadialGradient {
             self.fy,
             self.r,
             self.gradient_units,
-            self.spread_method)
+            self.spread_method
+        )
     }
 }
 

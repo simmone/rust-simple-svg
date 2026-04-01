@@ -1,8 +1,8 @@
 #![doc = include_str!("SVG.md")]
 
 use crate::define::group::Group;
-use crate::define::shape::rect::Rect;
 use crate::define::shape::Shape;
+use crate::define::shape::rect::Rect;
 use crate::define::sstyle::Sstyle;
 use crate::define::viewbox::ViewBox;
 use crate::define::widget::Widget;

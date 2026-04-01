@@ -96,26 +96,20 @@ impl Text {
             {
                 let mut options_str = String::new();
 
-                if self.dx.is_some() {
-                    options_str.push_str(&format!(" dx=\"{}\"", self.dx.as_ref().unwrap()));
+                if let Some(dx) = self.dx {
+                    options_str.push_str(&format!(" dx=\"{}\"", dx));
                 }
 
-                if self.dy.is_some() {
-                    options_str.push_str(&format!(" dy=\"{}\"", self.dy.as_ref().unwrap()));
+                if let Some(dy) = self.dy {
+                    options_str.push_str(&format!(" dy=\"{}\"", dy));
                 }
 
-                if self.font_size.is_some() {
-                    options_str.push_str(&format!(
-                        " font-size=\"{}\"",
-                        self.font_size.as_ref().unwrap()
-                    ));
+                if let Some(font_size) = self.font_size {
+                    options_str.push_str(&format!(" font-size=\"{}\"", font_size));
                 }
 
-                if self.font_family.is_some() {
-                    options_str.push_str(&format!(
-                        " font-family=\"{}\"",
-                        self.font_family.as_ref().unwrap()
-                    ));
+                if let Some(font_family) = &self.font_family {
+                    options_str.push_str(&format!(" font-family=\"{}\"", font_family));
                 }
 
                 if self.rotate.is_some() {
@@ -195,20 +189,22 @@ impl Text {
     }
 
     pub fn unique(&self) -> String {
-        format!("Polyline/text/{}/font_size/{:?}/font_family/{:?}/dx/{:?}/dy/{:?}/rotate/{:?}/text_length/{:?}/kerning/{:?}/letter_space/{:?}/word_space/{:?}/text_decoration/{:?}/path/{:?}/path_start_offset/{:?}",
-                self.text,
-                self.font_size,
-                self.font_family,
-                self.dx,
-                self.dy,
-                self.rotate,
-                self.text_length,
-                self.kerning,
-                self.letter_space,
-                self.word_space,
-                self.text_decoration,
-                self.path,
-                self.path_start_offset)
+        format!(
+            "Polyline/text/{}/font_size/{:?}/font_family/{:?}/dx/{:?}/dy/{:?}/rotate/{:?}/text_length/{:?}/kerning/{:?}/letter_space/{:?}/word_space/{:?}/text_decoration/{:?}/path/{:?}/path_start_offset/{:?}",
+            self.text,
+            self.font_size,
+            self.font_family,
+            self.dx,
+            self.dy,
+            self.rotate,
+            self.text_length,
+            self.kerning,
+            self.letter_space,
+            self.word_space,
+            self.text_decoration,
+            self.path,
+            self.path_start_offset
+        )
     }
 }
 
@@ -236,12 +232,14 @@ mod tests {
 
         assert_eq!(
             text.format("s1".to_string()),
-            "    <text id=\"s1\" dx=\"2\" dy=\"3\" font-size=\"1\" font-family=\"Arial\" rotate=\"4 5 6 7\" textLength=\"8\" kerning=\"auto\" letter-space=\"normal\" word-space=\"inherit\" text-decoration=\"underline\">hello world</text>\n");
+            "    <text id=\"s1\" dx=\"2\" dy=\"3\" font-size=\"1\" font-family=\"Arial\" rotate=\"4 5 6 7\" textLength=\"8\" kerning=\"auto\" letter-space=\"normal\" word-space=\"inherit\" text-decoration=\"underline\">hello world</text>\n"
+        );
 
         text.path = Some("9.0, 10.0".to_string());
         text.path_start_offset = Some(11.0);
         assert_eq!(
             text.format("s1".to_string()),
-            "    <text id=\"s1\" dx=\"2\" dy=\"3\" font-size=\"1\" font-family=\"Arial\" rotate=\"4 5 6 7\" textLength=\"8\" kerning=\"auto\" letter-space=\"normal\" word-space=\"inherit\" text-decoration=\"underline\">\n      <textPath xlink:href=\"#9.0, 10.0\" startOffset=\"11%\">hello world</textPath>\n    </text>\n");
+            "    <text id=\"s1\" dx=\"2\" dy=\"3\" font-size=\"1\" font-family=\"Arial\" rotate=\"4 5 6 7\" textLength=\"8\" kerning=\"auto\" letter-space=\"normal\" word-space=\"inherit\" text-decoration=\"underline\">\n      <textPath xlink:href=\"#9.0, 10.0\" startOffset=\"11%\">hello world</textPath>\n    </text>\n"
+        );
     }
 }

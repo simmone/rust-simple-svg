@@ -104,7 +104,7 @@ let svg_str = svg_out(svg);
 
 println!("{}", svg_str);
 
-let contents = include_str!("../showcase/example/five_circles.svg");
+let contents = include_str!("showcase/example/five_circles.svg");
 
 assert_eq!(svg_str, contents);
 ```

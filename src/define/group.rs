@@ -22,8 +22,8 @@ impl Group {
 mod tests {
     use super::*;
 
-    use crate::define::shape::rect::Rect;
     use crate::define::shape::Shape;
+    use crate::define::shape::rect::Rect;
     use crate::define::sstyle::Sstyle;
     use crate::define::svg::Svg;
 

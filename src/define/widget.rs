@@ -146,6 +146,9 @@ mod tests {
             marker_end_id: Some("s5".to_string()),
             ..Default::default()
         };
-        assert_eq!(widget.format(), "<use xlink:href=\"#s1\" filter=\"url(#s2)\" marker-start=\"url(#s3)\" marker-mid=\"url(#s4)\" marker-end=\"url(#s5)\" />");
+        assert_eq!(
+            widget.format(),
+            "<use xlink:href=\"#s1\" filter=\"url(#s2)\" marker-start=\"url(#s3)\" marker-mid=\"url(#s4)\" marker-end=\"url(#s5)\" />"
+        );
     }
 }
