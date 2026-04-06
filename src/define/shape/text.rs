@@ -112,11 +112,11 @@ impl Text {
                     options_str.push_str(&format!(" font-family=\"{}\"", font_family));
                 }
 
-                if self.rotate.is_some() {
+                if let Some(rotate) = &self.rotate {
                     options_str.push_str(&format!(" rotate=\"{}\"", {
                         let mut rotate_items = vec![];
 
-                        for degree in self.rotate.as_ref().unwrap() {
+                        for degree in rotate {
                             rotate_items.push(format!("{}", degree));
                         }
 
@@ -124,55 +124,55 @@ impl Text {
                     }));
                 }
 
-                if self.text_length.is_some() {
+                if let Some(text_length) = self.text_length {
                     options_str.push_str(&format!(
                         " textLength=\"{}\"",
-                        self.text_length.as_ref().unwrap()
+                        text_length
                     ));
                 }
 
-                if self.kerning.is_some() {
+                if let Some(kerning) = &self.kerning {
                     options_str
-                        .push_str(&format!(" kerning=\"{}\"", self.kerning.as_ref().unwrap()));
+                        .push_str(&format!(" kerning=\"{}\"", kerning));
                 }
 
-                if self.letter_space.is_some() {
+                if let Some(letter_space) = &self.letter_space {
                     options_str.push_str(&format!(
                         " letter-space=\"{}\"",
-                        self.letter_space.as_ref().unwrap()
+                        letter_space
                     ));
                 }
 
-                if self.word_space.is_some() {
+                if let Some(word_space) = &self.word_space {
                     options_str.push_str(&format!(
                         " word-space=\"{}\"",
-                        self.word_space.as_ref().unwrap()
+                        word_space
                     ));
                 }
 
-                if self.text_decoration.is_some() {
+                if let Some(text_decoration) = &self.text_decoration {
                     options_str.push_str(&format!(
                         " text-decoration=\"{}\"",
-                        self.text_decoration.as_ref().unwrap()
+                        text_decoration
                     ));
                 }
 
                 options_str
             },
             {
-                if self.path.is_some() {
+                if let Some(path) = &self.path {
                     let mut text_str = String::new();
 
                     text_str.push_str("\n      <textPath ");
 
                     let mut options = vec![];
 
-                    options.push(format!("xlink:href=\"#{}\"", self.path.as_ref().unwrap()));
+                    options.push(format!("xlink:href=\"#{}\"", path));
 
                     if self.path_start_offset.is_some() {
                         options.push(format!(
                             "startOffset=\"{}%\"",
-                            self.path_start_offset.as_ref().unwrap()
+                            path
                         ));
                     }
 
