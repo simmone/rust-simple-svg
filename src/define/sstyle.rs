@@ -88,60 +88,60 @@ impl Sstyle {
     pub fn format(&self) -> String {
         let mut transforms = vec![];
 
-        if self.fill_gradient.is_some() {
+        if let Some(fill_gradient) = &self.fill_gradient {
             transforms.push(format!(
                 "fill=\"url(#{})\"",
-                self.fill_gradient.as_ref().unwrap(),
+                fill_gradient
             ));
-        } else if self.fill.is_some() {
-            transforms.push(format!("fill=\"{}\"", self.fill.as_ref().unwrap()));
+        } else if let Some(fill) = &self.fill {
+            transforms.push(format!("fill=\"{}\"", fill));
         } else {
             transforms.push("fill=\"none\"".to_string());
         }
 
-        if self.fill_rule.is_some() {
+        if let Some(fill_rule) = &self.fill_rule {
             transforms.push(format!(
                 "fill-rule=\"{}\"",
-                self.fill_rule.as_ref().unwrap()
+                fill_rule
             ));
         }
 
-        if self.fill_opacity.is_some() {
+        if let Some(fill_opacity) = self.fill_opacity {
             transforms.push(format!(
                 "fill-opacity=\"{}\"",
-                svg_round(*self.fill_opacity.as_ref().unwrap(), self.precision)
+                svg_round(fill_opacity, self.precision)
             ));
         }
 
-        if self.stroke_width.is_some() {
+        if let Some(stroke_width) = self.stroke_width {
             transforms.push(format!(
                 "stroke-width=\"{}\"",
-                svg_round(*self.stroke_width.as_ref().unwrap(), self.precision)
+                svg_round(stroke_width, self.precision)
             ));
         }
 
-        if self.stroke.is_some() {
-            transforms.push(format!("stroke=\"{}\"", self.stroke.as_ref().unwrap()));
+        if let Some(stroke) = &self.stroke {
+            transforms.push(format!("stroke=\"{}\"", stroke));
         }
 
-        if self.stroke_linejoin.is_some() {
+        if let Some(stroke_linejoin) = &self.stroke_linejoin {
             transforms.push(format!(
                 "stroke-linejoin=\"{}\"",
-                self.stroke_linejoin.as_ref().unwrap()
+                stroke_linejoin
             ));
         }
 
-        if self.stroke_linecap.is_some() {
+        if let Some(stroke_linecap)= &self.stroke_linecap {
             transforms.push(format!(
                 "stroke-linecap=\"{}\"",
-                self.stroke_linecap.as_ref().unwrap()
+                stroke_linecap
             ));
         }
 
-        if self.stroke_miterlimit.is_some() {
+        if let Some(stroke_miterlimit) = self.stroke_miterlimit {
             transforms.push(format!(
                 "stroke-miterlimit=\"{}\"",
-                svg_round(*self.stroke_miterlimit.as_ref().unwrap(), self.precision)
+                svg_round(stroke_miterlimit, self.precision)
             ));
         }
 
