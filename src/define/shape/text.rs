@@ -169,10 +169,10 @@ impl Text {
 
                     options.push(format!("xlink:href=\"#{}\"", path));
 
-                    if self.path_start_offset.is_some() {
+                    if let Some(path_start_offset) = self.path_start_offset {
                         options.push(format!(
                             "startOffset=\"{}%\"",
-                            path
+                            path_start_offset
                         ));
                     }
 

@@ -199,13 +199,12 @@ impl Svg {
 
         // show default group
         let default_group = self.group_define_map.get(DEFAULT_GROUP_ID);
-        if let Some(default_group) = default_group {
-            if !default_group.widget_list.is_empty() {
+        if let Some(default_group) = default_group 
+            && !default_group.widget_list.is_empty() {
                 svg_str.push('\n');
                 svg_str.push_str(
                     &self.show_group_widgets(DEFAULT_GROUP_ID.to_string(), "  ".to_string()),
                 );
-            }
         }
 
         svg_str

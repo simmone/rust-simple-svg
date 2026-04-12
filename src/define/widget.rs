@@ -19,14 +19,13 @@ impl Widget {
 
         format_items.push(format!("<use xlink:href=\"#{}\"", self.shape_id));
 
-        if let Some(at) = self.at {
-            if at != (0.0, 0.0) {
+        if let Some(at) = self.at
+            && at != (0.0, 0.0) {
                 format_items.push(format!(
                     "x=\"{}\" y=\"{}\"",
                     svg_round(at.0, self.precision),
                     svg_round(at.1, self.precision)
                 ));
-            }
         }
 
         if let Some(style) = &self.style {
